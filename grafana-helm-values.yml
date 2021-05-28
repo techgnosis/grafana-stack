@@ -1,0 +1,46 @@
+grafana:
+  enabled: true
+  adminPassword: admin
+  ingress:
+    enabled: true
+    hosts:
+    - grafana.laptop
+    tls:
+    - secretName: grafana-tls
+      hosts:
+      - grafana.laptop
+
+promtail:
+  enabled: false
+
+prometheus:
+  enabled: true
+  alertmanager:
+    enabled: false
+  server:
+    ingress:
+      enabled: true
+      hosts:
+      - prometheus.laptop
+      tls:
+      - secretName: prometheus-tls
+        hosts:
+        - prometheus.laptop
+    persistentVolume:
+      enabled: false
+  
+
+loki:
+  ingress:
+    enabled: true
+    hosts:
+    - host: loki.laptop
+      paths:
+      - /
+    tls:
+    - secretName: loki-tls
+      hosts:
+      - loki.laptop
+  persistence:
+    enabled: false
+    size: 5Gi

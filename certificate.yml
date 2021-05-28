@@ -1,0 +1,36 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: grafana-tls
+spec:
+  dnsNames:
+  - grafana.laptop
+  issuerRef:
+    kind: ClusterIssuer
+    name: mkcert
+  secretName: grafana-tls
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: loki-tls
+spec:
+  dnsNames:
+  - loki.laptop
+  issuerRef:
+    kind: ClusterIssuer
+    name: mkcert
+  secretName: loki-tls
+---
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: prometheus-tls
+spec:
+  dnsNames:
+  - prometheus.laptop
+  issuerRef:
+    kind: ClusterIssuer
+    name: mkcert
+  secretName: prometheus-tls
