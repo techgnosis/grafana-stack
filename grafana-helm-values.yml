@@ -18,13 +18,13 @@ prometheus:
   kubeStateMetrics:
     enabled: false
   nodeExporter:
-    enabled: true
+    enabled: false
   alertmanager:
     enabled: false
   pushGateway:
     enabled: false
   server:
-    enabled: false
+    enabled: true
     ingress:
       enabled: true
       hosts:

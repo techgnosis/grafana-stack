@@ -5,54 +5,9 @@ metadata:
 data:
   agent-config.yml: |
     server:
-      log_level: debug
+      log_level: info
       http_listen_port: 12345
-    
-    prometheus:
-      wal_directory: /tmp/wal
-      global:
-        scrape_interval: 5s
-      configs:
-        - name: default
-          scrape_configs:
-            - job_name: kubernetes-pods
-              bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
-              kubernetes_sd_configs:
-                - role: pod
-              relabel_configs:
-                - action: replace
-                  source_labels:
-                    - __meta_kubernetes_namespace
-                  target_label: namespace
-                - action: replace
-                  source_labels:
-                    - __meta_kubernetes_pod_name
-                  target_label: pod
-                - action: replace
-                  source_labels:
-                    - __meta_kubernetes_pod_container_name
-                  target_label: container
-              tls_config:
-                  ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-                  insecure_skip_verify: false
-          remote_write:
-            - url: http://grafana-stack-promtheus-server:9009/api/prom/push
-    
-    loki:
-      configs:
-      - name: default
-        positions:
-          filename: /tmp/positions.yaml
-        scrape_configs:
-          - job_name: varlogs
-            static_configs:
-              - targets: [localhost]
-                labels:
-                  job: varlogs
-                  __path__: /var/log/*log
-        clients:
-          - url: http://grafana-stack-loki:3100/loki/api/v1/push
-    
+        
     tempo:
       configs:
       - name: default
@@ -66,24 +21,3 @@ data:
         batch:
           timeout: 5s
           send_batch_size: 100
-        scrape_configs:
-          - job_name: kubernetes-pods
-            bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
-            kubernetes_sd_configs:
-              - role: pod
-            relabel_configs:
-              - action: replace
-                source_labels:
-                  - __meta_kubernetes_namespace
-                target_label: namespace
-              - action: replace
-                source_labels:
-                  - __meta_kubernetes_pod_name
-                target_label: pod
-              - action: replace
-                source_labels:
-                  - __meta_kubernetes_pod_container_name
-                target_label: container
-            tls_config:
-                ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-                insecure_skip_verify: false

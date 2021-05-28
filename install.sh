@@ -2,10 +2,6 @@
 
 set -euo pipefail
 
-# need Grafana ingress
-# Prometheus will scrape app
-# promtail will push logs to Loki internally
-
 kapp deploy -a grafana-labs-env \
 --into-ns grafana-labs \
 -f namespace.yml \
@@ -23,4 +19,10 @@ helm upgrade --install tempo tempo \
 --repo https://grafana.github.io/helm-charts \
 --version 0.7.1 \
 --namespace grafana-labs
+
+# agent
+kapp deploy -a grafana-agent \
+--into-ns grafana-labs \
+-f agent-ds.yml \
+-f agent-cm.yml
 
