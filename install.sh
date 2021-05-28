@@ -11,7 +11,7 @@ kapp deploy -a grafana-labs-env \
 -f namespace.yml \
 -f certificate.yml
 
-# grafana, promtheus, loki
+# grafana, promtheus, loki, promtail
 helm upgrade --install grafana-stack loki-stack \
 --repo https://grafana.github.io/helm-charts \
 --version 2.4.1 \
@@ -24,7 +24,3 @@ helm upgrade --install tempo tempo \
 --version 0.7.1 \
 --namespace grafana-labs
 
-kapp deploy -a grafana-agent \
---into-ns grafana-labs \
--f agent-ds.yml \
--f agent-cm.yml
