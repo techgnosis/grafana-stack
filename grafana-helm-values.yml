@@ -15,9 +15,16 @@ promtail:
 
 prometheus:
   enabled: true
+  kubeStateMetrics:
+    enabled: false
+  nodeExporter:
+    enabled: true
   alertmanager:
     enabled: false
+  pushGateway:
+    enabled: false
   server:
+    enabled: false
     ingress:
       enabled: true
       hosts:
