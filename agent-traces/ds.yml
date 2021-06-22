@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: grafana-agent-traces
+  namespace: grafana-agent-traces
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
@@ -36,7 +37,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: grafana-agent-traces
-  namespace: default
+  namespace: grafana-agent-traces
 ---
 apiVersion: v1
 kind: Service
@@ -44,6 +45,7 @@ metadata:
   labels:
     name: grafana-agent-traces
   name: grafana-agent-traces
+  namespace: grafana-agent-traces
 spec:
   ports:
   - name: jaeger-default
@@ -57,6 +59,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: grafana-agent-traces
+  namespace: grafana-agent-traces
 spec:
   minReadySeconds: 10
   selector:
@@ -75,7 +78,7 @@ spec:
         - /bin/agent
         envFrom:
         - secretRef:
-            name: grafana-cloud-tempo-creds
+            name: tempo-creds
         env:
         - name: HOSTNAME
           valueFrom:

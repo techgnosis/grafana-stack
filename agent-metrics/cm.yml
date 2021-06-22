@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: grafana-agent-prometheus-config
+  namespace: grafana-agent-metrics
 data:
   agent.yaml: |
     prometheus:
@@ -9,10 +10,7 @@ data:
           - name: all-pods
             host_filter: true
             remote_write:
-              - basic_auth:
-                    username: ${PROMETHEUS_USERNAME}
-                    password: ${PROMETHEUS_PASSWORD}
-                url: ${PROMETHEUS_URL}
+              - url: ${PROMETHEUS_URL}
             scrape_configs:
               - job_name: kubernetes-pods
                 kubernetes_sd_configs:

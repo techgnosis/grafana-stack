@@ -2,12 +2,12 @@
 
 set -euo pipefail
 
-kapp deploy -a grafana-agent-tempo \
--f <(kubectl create secret generic grafana-cloud-tempo-creds \
---from-literal=TEMPO_USERNAME=${TEMPO_USERNAME} \
---from-literal=TEMPO_PASSWORD=${TEMPO_PASSWORD} \
+kapp deploy -a grafana-agent-traces \
+-f <(kubectl create secret generic tempo-creds \
+-n grafana-agent-traces \
 --from-literal=TEMPO_ENDPOINT=${TEMPO_ENDPOINT} \
 --dry-run=client \
 -o yaml) \
 -f cm.yml \
--f ds.yml
+-f ds.yml \
+-f namespace.yml

@@ -4,6 +4,8 @@ set -euo pipefail
 
 kapp deploy \
 -a tns \
+--into-ns=tns \
+-f namespace.yml \
 -f app-dep.yml \
 -f app-svc.yml \
 -f db-dep.yml \

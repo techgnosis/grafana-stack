@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: grafana-agent-loki
+  namespace: grafana-agent-logs
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
@@ -36,12 +37,13 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: grafana-agent-loki
-  namespace: default
+  namespace: grafana-agent-logs
 ---
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: grafana-agent-loki
+  namespace: grafana-agent-logs
 spec:
   minReadySeconds: 10
   selector:
@@ -60,7 +62,7 @@ spec:
         - /bin/agent
         envFrom:
         - secretRef:
-            name: grafana-cloud-loki-creds
+            name: loki-creds
         env:
         - name: HOSTNAME
           valueFrom:
