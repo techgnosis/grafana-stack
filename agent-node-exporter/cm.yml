@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-agent-node-exporter-config
+data:
+  agent.yml: |
+    server:
+      log_level: info
+      http_listen_port: 12345
+
+    prometheus:
+      wal_directory: /tmp/agent
+      global:
+        scrape_interval: 15s
+        remote_write:
+        - url: ${GRAFANA_PROMETHEUS_URL}
+          basic_auth:
+            username: ${GRAFANA_USERNAME}
+            password: ${GRAFANA_PASSWORD}
+
+    integrations:
+      node_exporter:
+        enabled: true
+        rootfs_path: /host/root
+        sysfs_path: /host/sys
+        procfs_path: /host/proc

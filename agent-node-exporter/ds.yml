@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: grafana-agent-node-exporter
+spec:
+  selector:
+    matchLabels:
+      name: grafana-agent-node-exporter
+  template:
+    metadata:
+      labels:
+        name: grafana-agent-node-exporter
+    spec:
+      containers:
+      - image: grafana/agent:v0.15.0
+        name: agent
+        envFrom:
+        - secretRef:
+            name: grafana-cloud-prometheus-creds
+        args:
+        - -config.file=/etc/agent/agent.yml
+        - -config.expand-env
+        securityContext:
+          capabilities:
+            add: ["SYS_TIME"]
+          priviliged: true
+          runAsUser: 0
+        volumeMounts:
+        - name: rootfs
+          mountPath: /host/root
+          readOnly: true
+        - name: sysfs
+          mountPath: /host/sys
+          readOnly: true
+        - name: procfs
+          mountPath: /host/proc
+          readOnly: true
+        - name: grafana-agent-node-exporter-config
+          mountPath: /etc/agent/agent.yml
+          subPath: agent.yml
+      hostPID: true
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      volumes:
+      - name: rootfs
+        hostPath:
+          path: /
+      - name: sysfs
+        hostPath:
+          path: /sys
+      - name: procfs
+        hostPath:
+          path: /proc
+      - name: grafana-agent-node-exporter-config
+        configMap:
+          name: grafana-agent-node-exporter-config

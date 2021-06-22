@@ -1,0 +1,103 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: grafana-agent-traces
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: grafana-agent-traces
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - nodes
+  - nodes/proxy
+  - services
+  - endpoints
+  - pods
+  verbs:
+  - get
+  - list
+  - watch
+- nonResourceURLs:
+  - /metrics
+  verbs:
+  - get
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: grafana-agent-traces
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: grafana-agent-traces
+subjects:
+- kind: ServiceAccount
+  name: grafana-agent-traces
+  namespace: default
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: grafana-agent-traces
+  name: grafana-agent-traces
+spec:
+  ports:
+  - name: jaeger-default
+    port: 6831
+    protocol: TCP
+    targetPort: 6831
+  selector:
+    name: grafana-agent-traces
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: grafana-agent-traces
+spec:
+  minReadySeconds: 10
+  selector:
+    matchLabels:
+      name: grafana-agent-traces
+  template:
+    metadata:
+      labels:
+        name: grafana-agent-traces
+    spec:
+      containers:
+      - args:
+        - -config.file=/etc/agent/agent.yaml
+        - -config.expand-env
+        command:
+        - /bin/agent
+        envFrom:
+        - secretRef:
+            name: grafana-cloud-tempo-creds
+        env:
+        - name: HOSTNAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        image: grafana/agent:v0.15.0
+        imagePullPolicy: IfNotPresent
+        name: agent
+        ports:
+        - containerPort: 6831
+          name: jaeger-default
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /etc/agent
+          name: grafana-agent-traces
+      serviceAccount: grafana-agent-traces
+      tolerations:
+      - effect: NoSchedule
+        operator: Exists
+      volumes:
+      - configMap:
+          name: grafana-agent-traces
+        name: grafana-agent-traces
+  updateStrategy:
+    type: RollingUpdate
