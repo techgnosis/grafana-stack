@@ -9,5 +9,5 @@ kapp deploy -a grafana-agent-traces \
 --dry-run=client \
 -o yaml) \
 -f cm.yml \
--f ds.yml \
+-f deployment.yml \
 -f namespace.yml

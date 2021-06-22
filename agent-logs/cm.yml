@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: grafana-agent-loki-config
+  name: grafana-agent-logs-config
   namespace: grafana-agent-logs
 data:
   agent.yaml: |

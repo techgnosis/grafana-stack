@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: grafana-agent-traces
-  namespace: grafana-agent-traces
+  name: grafana-agent-prometheus
+  namespace: grafana-agent-metrics
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
 metadata:
-  name: grafana-agent-traces
+  name: grafana-agent-prometheus
 rules:
 - apiGroups:
   - ""
@@ -29,46 +29,30 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
 metadata:
-  name: grafana-agent-traces
+  name: grafana-agent-prometheus
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: grafana-agent-traces
+  name: grafana-agent-prometheus
 subjects:
 - kind: ServiceAccount
-  name: grafana-agent-traces
-  namespace: grafana-agent-traces
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    name: grafana-agent-traces
-  name: grafana-agent-traces
-  namespace: grafana-agent-traces
-spec:
-  ports:
-  - name: jaeger-default
-    port: 6831
-    protocol: TCP
-    targetPort: 6831
-  selector:
-    name: grafana-agent-traces
+  name: grafana-agent-prometheus
+  namespace: grafana-agent-metrics
 ---
 apiVersion: apps/v1
-kind: DaemonSet
+kind: Deployment
 metadata:
-  name: grafana-agent-traces
-  namespace: grafana-agent-traces
+  name: grafana-agent-metrics
+  namespace: grafana-agent-metrics
 spec:
   minReadySeconds: 10
   selector:
     matchLabels:
-      name: grafana-agent-traces
+      name: grafana-agent-metrics
   template:
     metadata:
       labels:
-        name: grafana-agent-traces
+        name: grafana-agent-metrics
     spec:
       containers:
       - args:
@@ -78,7 +62,7 @@ spec:
         - /bin/agent
         envFrom:
         - secretRef:
-            name: tempo-creds
+            name: prometheus-creds
         env:
         - name: HOSTNAME
           valueFrom:
@@ -88,19 +72,32 @@ spec:
         imagePullPolicy: IfNotPresent
         name: agent
         ports:
-        - containerPort: 6831
-          name: jaeger-default
-          protocol: TCP
+        - containerPort: 8080
+          name: http-metrics
+        securityContext:
+          privileged: true
+          runAsUser: 0
         volumeMounts:
         - mountPath: /etc/agent
-          name: grafana-agent-traces
-      serviceAccount: grafana-agent-traces
+          name: grafana-agent-prometheus-config
+        - mountPath: /var/log
+          name: varlog
+        - mountPath: /var/lib/docker/containers
+          name: varlibdockercontainers
+          readOnly: true
+      serviceAccount: grafana-agent-prometheus
       tolerations:
       - effect: NoSchedule
         operator: Exists
       volumes:
       - configMap:
-          name: grafana-agent-traces
-        name: grafana-agent-traces
+          name: grafana-agent-prometheus-config
+        name: grafana-agent-prometheus-config
+      - hostPath:
+          path: /var/log
+        name: varlog
+      - hostPath:
+          path: /var/lib/docker/containers
+        name: varlibdockercontainers
   updateStrategy:
     type: RollingUpdate
