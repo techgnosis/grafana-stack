@@ -1,0 +1,12 @@
+ingress:
+  enabled: true
+  hosts:
+  - host: loki.lab.home
+    paths:
+    - /
+  tls:
+  - secretName: loki-tls
+    hosts:
+    - loki.lab.home
+persistence:
+  enabled: true

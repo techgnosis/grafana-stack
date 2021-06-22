@@ -4,14 +4,14 @@ grafana:
   ingress:
     enabled: true
     hosts:
-    - grafana.laptop
+    - grafana.lab.home
     tls:
     - secretName: grafana-tls
       hosts:
-      - grafana.laptop
+      - grafana.lab.home
 
 promtail:
-  enabled: true
+  enabled: false
 
 prometheus:
   enabled: true
@@ -28,26 +28,25 @@ prometheus:
     ingress:
       enabled: true
       hosts:
-      - prometheus.laptop
+      - prometheus.lab.home
       tls:
       - secretName: prometheus-tls
         hosts:
-        - prometheus.laptop
+        - prometheus.lab.home
     persistentVolume:
-      enabled: false
+      enabled: true
   
 
 loki:
   ingress:
     enabled: true
     hosts:
-    - host: loki.laptop
+    - host: loki.lab.home
       paths:
       - /
     tls:
     - secretName: loki-tls
       hosts:
-      - loki.laptop
+      - loki.lab.home
   persistence:
-    enabled: false
-    size: 5Gi
+    enabled: true

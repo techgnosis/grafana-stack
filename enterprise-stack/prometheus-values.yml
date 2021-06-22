@@ -1,0 +1,20 @@
+kubeStateMetrics:
+  enabled: false
+nodeExporter:
+  enabled: false
+alertmanager:
+  enabled: false
+pushgateway:
+  enabled: false
+server:
+  enabled: true
+  ingress:
+    enabled: true
+    hosts:
+    - prometheus.lab.home
+    tls:
+    - secretName: prometheus-tls
+      hosts:
+      - prometheus.lab.home
+  persistentVolume:
+    enabled: true

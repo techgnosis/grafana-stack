@@ -4,7 +4,7 @@ metadata:
   name: grafana-tls
 spec:
   dnsNames:
-  - grafana.laptop
+  - grafana.lab.home
   issuerRef:
     kind: ClusterIssuer
     name: mkcert
@@ -16,7 +16,7 @@ metadata:
   name: loki-tls
 spec:
   dnsNames:
-  - loki.laptop
+  - loki.lab.home
   issuerRef:
     kind: ClusterIssuer
     name: mkcert
@@ -29,7 +29,7 @@ metadata:
   name: prometheus-tls
 spec:
   dnsNames:
-  - prometheus.laptop
+  - prometheus.lab.home
   issuerRef:
     kind: ClusterIssuer
     name: mkcert
