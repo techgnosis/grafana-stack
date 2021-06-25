@@ -3,9 +3,11 @@
 set -euo pipefail
 
 kapp deploy -a grafana-agent-metrics \
--f <(kubectl create secret generic prometheus-creds \
+-f <(kubectl create secret generic gem-creds \
 -n grafana-agent-metrics \
---from-literal=PROMETHEUS_URL=${PROMETHEUS_URL} \
+--from-literal=GEM_URL=${GEM_URL} \
+--from-literal=GEM_USERNAME=${GEM_USERNAME} \
+--from-literal=GEM_PASSWORD=${GEM_PASSWORD} \
 --dry-run=client \
 -o yaml) \
 -f cm.yml \

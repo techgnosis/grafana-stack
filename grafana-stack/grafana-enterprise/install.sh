@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # grafana
-helm upgrade --install grafana grafana \
+helm upgrade --install grafana-enterprise grafana \
 --repo https://grafana.github.io/helm-charts \
 --version 6.13.5 \
 --namespace grafana-labs \

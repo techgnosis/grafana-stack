@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: grafana-agent-prometheus-config
+  name: grafana-agent-metrics-config
   namespace: grafana-agent-metrics
 data:
   agent.yaml: |
@@ -10,7 +10,10 @@ data:
           - host_filter: false
             name: agent
             remote_write:
-              - url: ${PROMETHEUS_URL}
+              - url: ${GEM_URL}
+                basic_auth:
+                  username: ${GEM_USERNAME}
+                  password: ${GEM_PASSWORD}
             scrape_configs:
               - bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
                 job_name: default/kubernetes

@@ -7,5 +7,5 @@ helm upgrade --install gem enterprise-metrics \
 --version 1.3.4 \
 --namespace grafana-labs \
 --values gem-values.yml \
---set-file 'license.contents=./license.jwt' \
+--set-file 'license.contents=../licenses/gem-license.jwt' \
 --wait
