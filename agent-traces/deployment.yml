@@ -48,10 +48,10 @@ metadata:
   namespace: grafana-agent-traces
 spec:
   ports:
-  - name: jaeger-default
-    port: 6831
+  - name: jaeger-http
+    port: 14268
     protocol: TCP
-    targetPort: 6831
+    targetPort: 14268
   selector:
     name: grafana-agent-traces
 ---
@@ -88,8 +88,8 @@ spec:
         imagePullPolicy: IfNotPresent
         name: agent
         ports:
-        - containerPort: 6831
-          name: jaeger-default
+        - containerPort: 14268
+          name: jaeger-http
           protocol: TCP
         volumeMounts:
         - mountPath: /etc/agent

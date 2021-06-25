@@ -11,6 +11,8 @@ spec:
     metadata:
       labels:
         name: app
+      annotations:
+        prometheus.io.scrape: "true"
     spec:
       containers:
       - name: app
@@ -24,9 +26,9 @@ spec:
           containerPort: 80
         env:
         - name: JAEGER_AGENT_HOST
-          value: tempo.grafana-labs.svc.cluster.local
+          value: grafana-agent-traces.grafana-agent-traces.svc.cluster.local
         - name: JAEGER_AGENT_PORT
-          value: "6831"
+          value: "14268"
         - name: JAEGER_TAGS
           value: cluster=docker,namespace=default
         - name: JAEGER_SAMPLER_TYPE

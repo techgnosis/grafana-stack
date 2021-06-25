@@ -14,7 +14,7 @@ data:
           receivers:
             jaeger:
               protocols:
-                thrift_compact: null
+                thrift_http: null
           remote_write:
             - endpoint: ${TEMPO_ENDPOINT}
               retry_on_failure:
