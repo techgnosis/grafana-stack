@@ -1,0 +1,10 @@
+ingress:
+  enabled: true
+  hosts:
+  - gem.lab.home
+  tls:
+  - secretName: gem-tls
+    hosts:
+    - gem.lab.home
+persistentVolume:
+  enabled: true

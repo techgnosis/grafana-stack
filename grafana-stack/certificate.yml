@@ -38,6 +38,18 @@ spec:
 apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
+  name: gem-tls
+spec:
+  dnsNames:
+  - gem.lab.home
+  issuerRef:
+    kind: ClusterIssuer
+    name: mkcert
+  secretName: gem-tls
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
   name: tempo-query-tls
 spec:
   dnsNames:
@@ -46,3 +58,15 @@ spec:
     kind: ClusterIssuer
     name: mkcert
   secretName: tempo-query-tls
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: cortex-tls
+spec:
+  dnsNames:
+  - cortex.lab.home
+  issuerRef:
+    kind: ClusterIssuer
+    name: mkcert
+  secretName: cortex-tls

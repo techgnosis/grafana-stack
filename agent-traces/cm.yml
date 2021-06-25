@@ -5,24 +5,18 @@ metadata:
   namespace: grafana-agent-traces
 data:
   agent.yaml: |
-    server:
-        http_listen_port: 8080
-        log_level: info
     tempo:
-        configs:
-          - name: jaeger-only
-            batch:
-                send_batch_size: 1000
-                timeout: 5s
-            receivers:
-              jaeger:
-                protocols:
-                  grpc: null
-                  thrift_binary: null
-                  thrift_compact: null
-                  thrift_http: null
-            remote_write:
-              - endpoint: ${TEMPO_ENDPOINT}
-                retry_on_failure:
-                    enabled: false
+      configs:
+        - name: jaeger-only
+          batch:
+              send_batch_size: 1000
+              timeout: 5s
+          receivers:
+            jaeger:
+              protocols:
+                thrift_compact: null
+          remote_write:
+            - endpoint: ${TEMPO_ENDPOINT}
+              retry_on_failure:
+                  enabled: false
   strategies.json: '{"default_strategy": {"param": 0.001, "type": "probabilistic"}}'
