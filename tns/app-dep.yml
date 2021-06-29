@@ -16,14 +16,13 @@ spec:
     spec:
       containers:
       - name: app
-        image: grafana/tns-app:latest
+        image: grafana/tns-app:9c1ab38
         imagePullPolicy: IfNotPresent
         args:
         - -log.level=debug
         - http://db
         ports:
-        - name: http-metrics
-          containerPort: 80
+        - containerPort: 80
         env:
         - name: JAEGER_AGENT_HOST
           value: jaeger

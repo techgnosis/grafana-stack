@@ -2,8 +2,6 @@
 
 set -euo pipefail
 
-kapp deploy -a grafana-labs-env \
+kapp deploy -a grafana-labs-namespace \
 --into-ns grafana-labs \
--f namespace.yml \
--f certificate.yml \
--f tempo-query-ingress.yml
+-f namespace.yml

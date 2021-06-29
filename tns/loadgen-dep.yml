@@ -16,14 +16,11 @@ spec:
     spec:
       containers:
       - name: loadgen
-        image: grafana/tns-loadgen:latest
+        image: grafana/tns-loadgen:9c1ab38
         imagePullPolicy: IfNotPresent
         args:
         - -log.level=debug
         - http://app
-        ports:
-        - name: http-metrics
-          containerPort: 80
         env:
         - name: JAEGER_AGENT_HOST
           value: jaeger

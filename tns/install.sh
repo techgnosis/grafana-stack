@@ -11,6 +11,5 @@ kapp deploy \
 -f db-dep.yml \
 -f db-svc.yml \
 -f loadgen-dep.yml \
--f loadgen-svc.yml \
 -f certificate.yml \
 -f ingress.yml

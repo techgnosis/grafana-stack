@@ -7,16 +7,13 @@ data:
   agent.yaml: |
     tempo:
       configs:
-        - name: jaeger-only
-          batch:
-              send_batch_size: 1000
-              timeout: 5s
-          receivers:
-            jaeger:
-              protocols:
-                thrift_http: null
-          remote_write:
-            - endpoint: ${TEMPO_ENDPOINT}
-              retry_on_failure:
-                  enabled: false
-  strategies.json: '{"default_strategy": {"param": 0.001, "type": "probabilistic"}}'
+      - name: jaeger-only
+        batch:
+            send_batch_size: 1000
+            timeout: 5s
+        receivers:
+          jaeger:
+            protocols:
+              thrift_http: null
+        remote_write:
+          - endpoint: ${TEMPO_ENDPOINT}
