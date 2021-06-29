@@ -1,14 +1,2 @@
-#ingress:
-#  enabled: true
-#  annotations:
-#    kubernetes.io/ingress.class: traefik
-#  hosts:
-#  - host: gem.lab.home
-#    paths:
-#    - /
-#  tls:
-#  - secretName: gem-tls
-#    hosts:
-#    - gem.lab.home
 persistentVolume:
   enabled: true

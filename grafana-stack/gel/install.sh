@@ -3,13 +3,14 @@
 set -euo pipefail
 
 kapp deploy -a gel \
--f <(kubectl create secret generic gem-license \
+-f <(kubectl create secret generic ge-logs-license \
 -n grafana-labs \
---from-file=../licenses/gem-license.jwt \
+--from-file=license.jwt=../licenses/gel-license.jwt \
 --dry-run=client \
 -o yaml) \
 -f cm.yml \
--f compactor-deployment.yml \
+-f compactor.yml \
 -f minio.yml \
 -f services.yml \
--f statefulset.yml
+-f gel.yml \
+-f tokengen.yml

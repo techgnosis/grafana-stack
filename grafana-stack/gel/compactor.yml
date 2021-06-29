@@ -14,8 +14,6 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: compactor
   name: compactor
   namespace: grafana-labs
 spec:
@@ -30,11 +28,12 @@ spec:
       containers:
         - args:
             - -config.file=/etc/ge-logs/config.yaml
+            - -target=compactor
           image: grafana/enterprise-logs:v1.0.0
           imagePullPolicy: IfNotPresent
           name: compactor
           ports:
-            - containerPort: 80
+            - containerPort: 3100
               name: http
             - containerPort: 9095
               name: grpc
@@ -43,7 +42,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /ready
-              port: 80
+              port: 3100
             initialDelaySeconds: 15
             timeoutSeconds: 1
           volumeMounts:
@@ -53,10 +52,6 @@ spec:
               name: ge-logs-config
             - mountPath: /etc/ge-logs/license
               name: ge-logs-license
-      imagePullSecrets:
-        - name: gcr
-      securityContext:
-        runAsUser: 0
       terminationGracePeriodSeconds: 300
       volumes:
         - name: ge-logs-config

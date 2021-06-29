@@ -2,7 +2,6 @@
 
 set -euo pipefail
 
-# loki
 helm upgrade --install loki loki \
 --repo https://grafana.github.io/helm-charts \
 --version 2.5.1 \

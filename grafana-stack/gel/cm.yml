@@ -10,7 +10,10 @@ data:
 
     target: all
 
-    cluster_name: gel
+    server:
+      http_listen_port: 3100
+
+    cluster_name: enterprise-logs-test-fixture
 
     license:
       path: /etc/ge-logs/license/license.jwt

@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  labels:
-    name: ge-logs-discovery
   name: ge-logs-discovery
   namespace: grafana-labs
 spec:
   clusterIP: None
+  selector:
+    name: ge-logs
   ports:
     - name: ge-logs-grpc
       port: 9095
@@ -15,22 +15,16 @@ spec:
       port: 7946
       targetPort: gossip
   publishNotReadyAddresses: true
-  selector:
-    name: ge-logs
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  labels:
-    name: ge-logs
   name: ge-logs
   namespace: grafana-labs
 spec:
-  ports:
-    - name: ge-logs-http
-      port: 8100
-      targetPort: http
   selector:
     name: ge-logs
-  sessionAffinity: None
-  type: LoadBalancer
+  ports:
+    - name: ge-logs-http
+      port: 3100
