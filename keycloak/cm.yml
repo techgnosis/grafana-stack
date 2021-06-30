@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: keycloak
+  namespace: keycloak
+data:
+  # KEYCLOAK_USER and KEYCLOAK_PASSWORD are for logging into the web UI
+  KEYCLOAK_USER: admin
+  KEYCLOAK_PASSWORD: admin
+  # DB_USER AND DB_PASSWORD must match POSTGRES_USER and POSTGRES_PASSWORD
+  DB_USER: keycloak
+  DB_PASSWORD: keycloak
+  # There is a Service named 'postgres'
+  DB_ADDR: postgres
+  DB_PORT: "5432"
+  # DB_DATABASE must match POSTGRES_DB
+  DB_DATABASE: keycloak
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres
+  namespace: keycloak
+data:
+  # POSTGRES_DB must match DB_DATABASE
+  POSTGRES_DB: keycloak
+  # POSTGRES_USER and POSTGRES_PASSWORD must match DB_USER and DB_PASSWORD
+  POSTGRES_USER: keycloak
+  POSTGRES_PASSWORD: keycloak

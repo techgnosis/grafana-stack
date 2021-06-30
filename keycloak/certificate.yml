@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: keycloak-tls
+  namespace: keycloak
+spec:
+  dnsNames:
+  - keycloak.lab.home
+  issuerRef:
+    kind: ClusterIssuer
+    name: mkcert
+  secretName: keycloak-tls
