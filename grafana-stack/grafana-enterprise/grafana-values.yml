@@ -1,7 +1,6 @@
 grafana.ini:
   server:
     root_url: https://grafana.lab.home/
-
   auth.ldap:
     enabled: false
     config_file: /etc/grafana/ldap.toml
