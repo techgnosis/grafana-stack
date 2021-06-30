@@ -14,7 +14,7 @@ grafana.ini:
     allow_sign_up: true
     oauth_auto_login: false
     allowed_domains: grafana.lab.home
-    scopes: email profile
+    scopes: email
     empty_scopes: false
     tls_skip_verify_insecure: true
     client_id: grafana
