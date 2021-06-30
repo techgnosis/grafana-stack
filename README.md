@@ -6,13 +6,7 @@ Notes:
 The following items need to be done manually:
 1. Applying the Grafana Enterprise license to Grafana Enterprise
 1. Setting up the GEM data source
-1. Setting up the GEL data source
-
-
-The following items are in this repo but do not work yet:
-1. Grafana Agent for pushing spans to Tempo
-
 
 TODO:
 1. Replace Loki with GEL
-1. Script out using grafana-cli to download GEM and GEL plugins
+1. Figure out how to use Grafana Agent for pushing spans to Tempo
