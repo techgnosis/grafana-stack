@@ -8,17 +8,17 @@ grafana.ini:
     allow_sign_up: true
   auth.generic_oauth:
     enabled: true
-    api_url: https://keycloak.lab.home/auth/realms/grafana-home-lab/protocol/openid-connect/userinfo
-    auth_url: https://keycloak.lab.home/auth/realms/grafana-home-lab/protocol/openid-connect/auth
-    token_url: https://keycloak.lab.home/auth/realms/grafana-home-lab/protocol/openid-connect/token
+    api_url: https://keycloak.lab.home/auth/realms/grafana/protocol/openid-connect/userinfo
+    auth_url: https://keycloak.lab.home/auth/realms/grafana/protocol/openid-connect/auth
+    token_url: https://keycloak.lab.home/auth/realms/grafana/protocol/openid-connect/token
     allow_sign_up: true
     oauth_auto_login: false
     allowed_domains: grafana.lab.home
-    scopes: profile email roles web-origins
+    scopes: email profile
     empty_scopes: false
     tls_skip_verify_insecure: true
     client_id: grafana
-    client_secret: 8d154151-17b8-4dd6-8b65-9329e70343f2
+    client_secret: 894622f1-8e3e-42f9-95c6-865fe139bd97
 
 image:
   repository: grafana/grafana-enterprise
