@@ -9,8 +9,6 @@ kapp deploy -a gel \
 --dry-run=client \
 -o yaml) \
 -f cm.yml \
--f compactor.yml \
--f minio.yml \
 -f services.yml \
 -f gel.yml \
 -f tokengen.yml

@@ -6,7 +6,7 @@ metadata:
   name: ge-logs
   namespace: grafana-labs
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       name: ge-logs
