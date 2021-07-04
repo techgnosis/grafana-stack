@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-kapp deploy -a grafana-agent-logs \
+kapp deploy -a grafana-agent \
 -f <(kubectl create secret generic loki-creds \
 -n grafana-labs \
 --from-literal=LOKI_HOSTNAME=${LOKI_HOSTNAME} \
@@ -21,5 +21,4 @@ kapp deploy -a grafana-agent-logs \
 --dry-run=client \
 -o yaml) \
 -f cm.yml \
--f ds.yml \
--f namespace.yml
+-f ds.yml

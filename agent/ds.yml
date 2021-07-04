@@ -43,7 +43,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: grafana-agent
-  namespace: grafana-agent
+  namespace: grafana-labs
 spec:
   minReadySeconds: 10
   selector:
@@ -63,6 +63,10 @@ spec:
         envFrom:
         - secretRef:
             name: loki-creds
+        - secretRef:
+            name: gem-creds
+        - secretRef:
+            name: tempo-creds
         env:
         - name: HOSTNAME
           valueFrom:
