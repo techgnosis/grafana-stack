@@ -10,7 +10,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 50Gi
+      storage: 500Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -39,7 +39,7 @@ spec:
             [
                 "sh",
                 "-c",
-                "mkdir -p /storage/grafana-logs-data && mkdir -p /storage/grafana-logs-admin",
+                "mkdir -p /storage/grafana-logs-data && mkdir -p /storage/grafana-logs-admin && mkdir -p /storage/enterprise-metrics-admin && mkdir -p /storage/enterprise-metrics-tsdb && mkdir -p /storage/enterprise-metrics-ruler",
             ]
           volumeMounts:
             - name: storage

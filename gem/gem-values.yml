@@ -1,2 +1,146 @@
 persistentVolume:
   enabled: true
+
+minio:
+  enabled: false
+
+admin_api:
+  extraArgs:
+    admin.client.backend-type: s3
+    admin.client.s3.endpoint: minio:9000
+    admin.client.s3.bucket-name: enterprise-metrics-admin
+    admin.client.s3.access-key-id: minio
+    admin.client.s3.secret-access-key: minio123
+    admin.client.s3.insecure: true
+
+alertmanager:
+  extraArgs:
+    admin.client.backend-type: s3
+    admin.client.s3.endpoint: minio:9000
+    admin.client.s3.bucket-name: enterprise-metrics-admin
+    admin.client.s3.access-key-id: minio
+    admin.client.s3.secret-access-key: minio123
+    admin.client.s3.insecure: true
+    alertmanager-storage.backend: s3
+    alertmanager-storage.s3.endpoint: minio:9000
+    alertmanager-storage.s3.bucket-name: enterprise-metrics-ruler
+    alertmanager-storage.s3.access-key-id: minio
+    alertmanager-storage.s3.secret-access-key: minio123
+    alertmanager-storage.s3.insecure: true
+
+compactor:
+  extraArgs:
+    admin.client.backend-type: s3
+    admin.client.s3.endpoint: minio:9000
+    admin.client.s3.bucket-name: enterprise-metrics-admin
+    admin.client.s3.access-key-id: minio
+    admin.client.s3.secret-access-key: minio123
+    admin.client.s3.insecure: true
+    blocks-storage.s3.endpoint: minio:9000
+    blocks-storage.s3.bucket-name: enterprise-metrics-tsdb
+    blocks-storage.s3.access-key-id: minio
+    blocks-storage.s3.secret-access-key: minio123
+    blocks-storage.s3.insecure: true
+
+ingester:
+  extraArgs:
+    admin.client.backend-type: s3
+    admin.client.s3.endpoint: minio:9000
+    admin.client.s3.bucket-name: enterprise-metrics-admin
+    admin.client.s3.access-key-id: minio
+    admin.client.s3.secret-access-key: minio123
+    admin.client.s3.insecure: true
+    blocks-storage.s3.endpoint: minio:9000
+    blocks-storage.s3.bucket-name: enterprise-metrics-tsdb
+    blocks-storage.s3.access-key-id: minio
+    blocks-storage.s3.secret-access-key: minio123
+    blocks-storage.s3.insecure: true
+
+ruler:
+  extraArgs:
+    admin.client.backend-type: s3
+    admin.client.s3.endpoint: minio:9000
+    admin.client.s3.bucket-name: enterprise-metrics-admin
+    admin.client.s3.access-key-id: minio
+    admin.client.s3.secret-access-key: minio123
+    admin.client.s3.insecure: true
+    blocks-storage.s3.endpoint: minio:9000
+    blocks-storage.s3.bucket-name: enterprise-metrics-tsdb
+    blocks-storage.s3.access-key-id: minio
+    blocks-storage.s3.secret-access-key: minio123
+    blocks-storage.s3.insecure: true
+    ruler.storage.type: s3
+    ruler.storage.s3.endpoint: minio:9000
+    ruler.storage.s3.buckets: enterprise-metrics-ruler
+    ruler.storage.s3.access-key-id: minio
+    ruler.storage.s3.secret-access-key: minio123
+    ruler.storage.s3.insecure: true
+    ruler.storage.s3.force-path-style: true
+
+
+
+
+
+distributor:
+  extraArgs:
+    admin.client.backend-type: s3
+    admin.client.s3.endpoint: minio:9000
+    admin.client.s3.bucket-name: enterprise-metrics-admin
+    admin.client.s3.access-key-id: minio
+    admin.client.s3.secret-access-key: minio123
+    admin.client.s3.insecure: true
+
+gateway:
+  extraArgs:
+    admin.client.backend-type: s3
+    admin.client.s3.endpoint: minio:9000
+    admin.client.s3.bucket-name: enterprise-metrics-admin
+    admin.client.s3.access-key-id: minio
+    admin.client.s3.secret-access-key: minio123
+    admin.client.s3.insecure: true
+
+querier:
+  extraArgs:
+    admin.client.backend-type: s3
+    admin.client.s3.endpoint: minio:9000
+    admin.client.s3.bucket-name: enterprise-metrics-admin
+    admin.client.s3.access-key-id: minio
+    admin.client.s3.secret-access-key: minio123
+    admin.client.s3.insecure: true
+    blocks-storage.s3.endpoint: minio:9000
+    blocks-storage.s3.bucket-name: enterprise-metrics-tsdb
+    blocks-storage.s3.access-key-id: minio
+    blocks-storage.s3.secret-access-key: minio123
+    blocks-storage.s3.insecure: true
+
+query_frontend:
+  extraArgs:
+    admin.client.backend-type: s3
+    admin.client.s3.endpoint: minio:9000
+    admin.client.s3.bucket-name: enterprise-metrics-admin
+    admin.client.s3.access-key-id: minio
+    admin.client.s3.secret-access-key: minio123
+    admin.client.s3.insecure: true
+
+store_gateway:
+  extraArgs:
+    admin.client.backend-type: s3
+    admin.client.s3.endpoint: minio:9000
+    admin.client.s3.bucket-name: enterprise-metrics-admin
+    admin.client.s3.access-key-id: minio
+    admin.client.s3.secret-access-key: minio123
+    admin.client.s3.insecure: true
+    blocks-storage.s3.endpoint: minio:9000
+    blocks-storage.s3.bucket-name: enterprise-metrics-tsdb
+    blocks-storage.s3.access-key-id: minio
+    blocks-storage.s3.secret-access-key: minio123
+    blocks-storage.s3.insecure: true
+
+tokengenJob:
+  extraArgs:
+    admin.client.backend-type: s3
+    admin.client.s3.endpoint: minio:9000
+    admin.client.s3.bucket-name: enterprise-metrics-admin
+    admin.client.s3.access-key-id: minio
+    admin.client.s3.secret-access-key: minio123
+    admin.client.s3.insecure: true
