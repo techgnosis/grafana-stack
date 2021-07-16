@@ -2,9 +2,6 @@
 
 set -euo pipefail
 
-kapp deploy -a gem-env \
--f certificate.yml
-
 helm upgrade --install gem enterprise-metrics \
 --repo https://grafana.github.io/helm-charts \
 --version 1.3.4 \
