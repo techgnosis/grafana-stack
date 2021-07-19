@@ -21,4 +21,5 @@ kapp deploy -a grafana-agent \
 --dry-run=client \
 -o yaml) \
 -f cm.yml \
--f ds.yml
+-f ds.yml \
+-f service.yml

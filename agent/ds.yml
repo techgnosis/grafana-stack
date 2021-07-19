@@ -78,6 +78,8 @@ spec:
         ports:
         - containerPort: 8080
           name: http-metrics
+        - containerPort: 9411
+          name: zipkin
         securityContext:
           privileged: true
           runAsUser: 0
