@@ -273,6 +273,10 @@ data:
             - job_name: pods-scraped-by-agent
               kubernetes_sd_configs:
                 - role: pod
+                  namespaces:
+                    names:
+                      - tns
+                      - sock-shop
               relabel_configs:
                 - action: keep
                   regex: "true"
