@@ -1,24 +1,25 @@
-Use this repo to install Grafana, Prometheus, Loki, Tempo, Grafana Agent, and a demo app called `tns` that logs, serves Prometheus metrics, and emits Jaeger spans
+Use this repo to install Grafana, Prometheus, Loki, Tempo, Grafana Agent, and a fully instrumented demo app called `tns`
 
-Notes:  
-* TNS sends spans via Jaeger Thrift HTTP on port 14268
-* sock-shop sends spans via Zipkin on port 9411
-* the Grafana Agent can only send to Tempo via OTLP on port 4317
 
+## Setup
 The following items need to be done manually:
 1. Applying the Grafana Enterprise license to Grafana Enterprise
 1. Setting up the GEM data source
 
-TODO:
+## TODO
 1. Replace Loki with GEL
-1. Figure out how to use Grafana Agent for pushing spans to Tempo
 
-# Grafana Enterprise
+## TNS
+* TNS sends spans via Jaeger Thrift HTTP on port 14268
+* sock-shop sends spans via Zipkin on port 9411
+* the Grafana Agent can only send to Tempo via OTLP on port 4317
+
+## Grafana Enterprise
 Run these commands from the Grafana Enterprise container to install the GEM and GEL plugins:  
 grafana-cli plugins install grafana-metrics-enterprise-app  
 grafana-cli plugins install grafana-enterprise-logs-app
 
-# GEM
+## GEM
 1. `install.sh`
 1. Inside the Grafana Enterprise container, run `grafana-cli plugins install grafana-metrics-enterprise-app`
 1. Restart Grafana Enterprise
@@ -34,7 +35,7 @@ grafana-cli plugins install grafana-enterprise-logs-app
     1. Put the connection info into `.envrc`
     1. Run `agent/install.sh` and restart the Pod if needed
 
-# Keycloak
+## Keycloak
 Realm:
 1. Make a new Realm called `grafana`
 1. In the realm settings click `OpenID Endpoint Configuration` and record the URL for `authorization_endpoint`, `token_endpoint`, and `userinfo_endpoint` for use in `grafana.ini`
