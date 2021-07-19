@@ -80,6 +80,8 @@ spec:
             name: zipkin
           - containerPort: 12345
             name: api
+          - containerPort: 14268
+            name: thrifthttp
         securityContext:
           privileged: true
           runAsUser: 0

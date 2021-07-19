@@ -97,14 +97,12 @@ data:
         procfs_path: /proc
     tempo:
       configs:
-      - name: jaeger-only
-        batch:
-            send_batch_size: 1000
-            timeout: 5s
+      - name: jaeger-and-zipkin
         receivers:
           zipkin:
           jaeger:
             protocols:
               thrift_http: null
         remote_write:
-          - endpoint: tempo:3100
+          - endpoint: tempo:4317
+            insecure: true
