@@ -3,6 +3,7 @@ persistence:
 
 tempo:
   receivers:
+    zipkin:
     jaeger:
       protocols:
         grpc:

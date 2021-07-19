@@ -324,4 +324,5 @@ data:
             protocols:
               thrift_http: null
         remote_write:
-          - endpoint: ${TEMPO_ENDPOINT}
+          - endpoint: tempo:9411
+            insecure: true
