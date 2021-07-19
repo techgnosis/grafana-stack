@@ -274,18 +274,14 @@ data:
               kubernetes_sd_configs:
                 - role: pod
               relabel_configs:
-                - action: drop
-                  regex: "false"
+                - action: keep
+                  regex: "true"
                   source_labels:
                     - __meta_kubernetes_pod_annotation_prometheus_io_scrape
                 - action: drop
                   regex: Succeeded|Failed
                   source_labels:
                     - __meta_kubernetes_pod_phase
-                - action: replace
-                  source_labels:
-                    - __meta_kubernetes_pod_annotation_prometheus_io_scheme
-                  target_label: __scheme__
                 - action: replace
                   source_labels:
                     - __meta_kubernetes_pod_annotation_prometheus_io_path
