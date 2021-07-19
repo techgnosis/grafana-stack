@@ -5,6 +5,8 @@ metadata:
   namespace: grafana-labs
 data:
   agent.yaml: |
+    server:
+      http_listen_port: 12345
     loki:
       configs:
         - name: loki-all-pods
@@ -324,5 +326,4 @@ data:
             protocols:
               thrift_http: null
         remote_write:
-          - endpoint: tempo:9411
-            insecure: true
+          - endpoint: tempo:3100

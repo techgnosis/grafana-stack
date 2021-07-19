@@ -12,8 +12,8 @@ spec:
       labels:
         name: app
       annotations:
-        prometheus.io.scrape: "true"
-        promtheus.io.port: "80"
+        prometheus.io/scrape: "true"
+        promtheus.io/port: "80"
     spec:
       containers:
       - name: app

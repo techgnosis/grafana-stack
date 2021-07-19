@@ -22,4 +22,5 @@ kapp deploy -a grafana-agent \
 -o yaml) \
 -f cm.yml \
 -f ds.yml \
--f service.yml
+-f service.yml \
+-f ingress.yml

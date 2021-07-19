@@ -76,10 +76,12 @@ spec:
         imagePullPolicy: IfNotPresent
         name: agent
         ports:
-        - containerPort: 8080
-          name: http-metrics
-        - containerPort: 9411
-          name: zipkin
+          - containerPort: 8080
+            name: http-metrics
+          - containerPort: 9411
+            name: zipkin
+          - containerPort: 12345
+            name: api
         securityContext:
           privileged: true
           runAsUser: 0

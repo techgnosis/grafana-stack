@@ -7,6 +7,8 @@ spec:
   ports:
     - name: zipkin
       port: 9411
+    - name: api
+      port: 12345
   type: ClusterIP
   selector:
     name: grafana-agent
