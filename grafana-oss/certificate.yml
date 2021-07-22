@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: grafana-oss-tls
+  namespace: grafana-labs
+spec:
+  dnsNames:
+  - grafana-oss.lab.home
+  issuerRef:
+    kind: ClusterIssuer
+    name: mkcert
+  secretName: grafana-oss-tls

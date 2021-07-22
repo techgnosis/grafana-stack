@@ -1,0 +1,30 @@
+grafana.ini:
+  server:
+    root_url: https://grafana-oss.lab.home/
+  auth.generic_oauth:
+    enabled: true
+    api_url: https://keycloak.lab.home/auth/realms/grafana/protocol/openid-connect/userinfo
+    auth_url: https://keycloak.lab.home/auth/realms/grafana/protocol/openid-connect/auth
+    token_url: https://keycloak.lab.home/auth/realms/grafana/protocol/openid-connect/token
+    allow_sign_up: true
+    oauth_auto_login: false
+    allowed_domains: grafana-oss.lab.home
+    scopes: email
+    empty_scopes: false
+    tls_skip_verify_insecure: true
+    client_id: grafana-oss-oauth
+    client_secret: b5589b1f-c420-4bfd-ab7f-6712a86ae883
+
+adminPassword: admin
+
+persistence:
+  enabled: true
+
+ingress:
+  enabled: true
+  hosts:
+  - grafana-oss.lab.home
+  tls:
+  - secretName: grafana-oss-tls
+    hosts:
+    - grafana-oss.lab.home
