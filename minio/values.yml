@@ -1,0 +1,27 @@
+accessKey: enterprise-logs
+buckets:
+  - name: enterprise-logs-tsdb
+    policy: none
+    purge: false
+  - name: enterprise-logs-admin
+    policy: none
+    purge: false
+  - name: enterprise-logs-ruler
+    policy: none
+    purge: false
+  - name: enterprise-metrics-tsdb
+    policy: none
+    purge: false
+  - name: enterprise-metrics-admin
+    policy: none
+    purge: false
+  - name: enterprise-metrics-ruler
+    policy: none
+    purge: false
+persistence:
+  size: 5Gi
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+secretKey: supersecret
