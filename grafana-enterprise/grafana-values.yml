@@ -53,3 +53,7 @@ extraConfigmapMounts:
   subPath: ldap.toml
   configMap: grafana-ldap
   readOnly: true
+- name: grafana-datasources
+  mountPath: /etc/grafana/provisioning/datasources
+  configMap: grafana-datasources
+  readOnly: true

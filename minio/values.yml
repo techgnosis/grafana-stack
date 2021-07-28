@@ -1,4 +1,3 @@
-accessKey: enterprise-logs
 buckets:
   - name: enterprise-logs-tsdb
     policy: none
@@ -19,9 +18,6 @@ buckets:
     policy: none
     purge: false
 persistence:
-  size: 5Gi
-resources:
-  requests:
-    cpu: 100m
-    memory: 128Mi
-secretKey: supersecret
+  size: 100Gi
+accessKey: minio
+secretKey: minio123

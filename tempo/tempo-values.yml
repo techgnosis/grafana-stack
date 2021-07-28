@@ -1,19 +1,5 @@
-ingester:
-  persistence:
-    enabled: true
-
-querier:
-  persistence:
-    enabled: true
-
-compactor:
+persistence:
   enabled: true
-  persistence:
-    enabled: true
-
-ruler:
-  persistence:
-    enabled: true
 
 tempo:
   receivers:

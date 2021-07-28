@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: grafana-ldap
-  namespace: grafana-labs
+  namespace: grafana-enterprise
 data:
   ldap.toml: |-
     # To troubleshoot and get more log info enable ldap debug logging in grafana.ini

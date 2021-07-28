@@ -2,7 +2,7 @@ apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
   name: grafana-tls
-  namespace: grafana-labs
+  namespace: grafana-enterprise
 spec:
   dnsNames:
   - grafana.lab.home
