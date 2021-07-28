@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-kapp deploy -a prometheus-cert \
+kapp deploy -a prometheus \
 -f certificate.yml
 
 helm upgrade --install prometheus prometheus \
