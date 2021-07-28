@@ -2,12 +2,12 @@
 
 set -euo pipefail
 
-kapp deploy -a prometheus-env \
+kapp deploy -a prometheus-cert \
 -f certificate.yml
 
 helm upgrade --install prometheus prometheus \
 --repo https://prometheus-community.github.io/helm-charts \
 --version 14.2.1 \
---namespace grafana-labs \
+--namespace prometheus \
 --values prometheus-values.yml \
 --wait

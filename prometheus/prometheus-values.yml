@@ -18,3 +18,7 @@ server:
       - prometheus.lab.home
   persistentVolume:
     enabled: true
+
+serverFiles:
+  prometheus.yml:
+    scrape_configs: []
