@@ -1,7 +1,8 @@
 config:
   auth_enabled: false
-  cluster_name: 'gem'
+  cluster_name: gem
 
+  # the Helm templates depend on this 'storage' block existing
   storage:
     engine: blocks
 
@@ -62,7 +63,6 @@ config:
 
   alertmanager:
     enable_api: true
-    external_url: /alertmanager
     sharding_enabled: true
     sharding_ring:
       kvstore:
@@ -79,3 +79,9 @@ config:
       ring:
         kvstore:
           store: memberlist
+
+  store_gateway:
+    sharding_enabled: true
+    sharding_ring:
+      kvstore:
+        store: memberlist

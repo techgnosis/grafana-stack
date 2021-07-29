@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: grafana-agent
-  namespace: grafana-labs
+  namespace: agent
 spec:
   rules:
     - host: grafana-agent.lab.home

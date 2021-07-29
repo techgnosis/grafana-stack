@@ -1,0 +1,5 @@
+persistentVolume:
+  enabled: true
+
+minio:
+  enabled: true
