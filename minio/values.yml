@@ -17,6 +17,9 @@ buckets:
   - name: enterprise-metrics-ruler
     policy: none
     purge: false
+  - name: enterprise-metrics-alertmanager
+    policy: none
+    purge: false
 persistence:
   size: 100Gi
 accessKey: minio
