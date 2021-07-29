@@ -1,0 +1,81 @@
+config:
+  auth_enabled: false
+  cluster_name: 'gem'
+
+  storage:
+    engine: blocks
+
+  server:
+    grpc_listen_port: 9095
+    http_listen_port: 8080
+
+  admin_client:
+    storage:
+      type: s3
+      s3:
+        endpoint: minio.minio.svc.cluster.local:9000
+        bucket_name: enterprise-metrics-admin
+        access_key_id: minio
+        secret_access_key: minio123
+        insecure: true
+
+  ruler_storage:
+    backend: s3
+    s3:
+      endpoint: minio.minio.svc.cluster.local:9000
+      bucket_name: enterprise-metrics-ruler
+      access_key_id: minio
+      secret_access_key: minio123
+      insecure: true
+
+  alertmanager_storage:
+    backend: s3
+    s3:
+      endpoint: minio.minio.svc.cluster.local:9000
+      bucket_name: enterprise-metrics-alertmanager
+      access_key_id: minio
+      secret_access_key: minio123
+      insecure: true
+
+  blocks_storage:
+    backend: s3
+    s3:
+      endpoint: minio.minio.svc.cluster.local:9000
+      bucket_name: enterprise-metrics-tsdb
+      access_key_id: minio
+      secret_access_key: minio123
+      insecure: true
+
+  compactor:
+    sharding_enabled: true
+    sharding_ring:
+      kvstore:
+        store: memberlist
+
+  ruler:
+    enable_api: true
+    enable_sharding: true
+    ring:
+      kvstore:
+        store: memberlist
+
+
+  alertmanager:
+    enable_api: true
+    external_url: /alertmanager
+    sharding_enabled: true
+    sharding_ring:
+      kvstore:
+        store: memberlist
+
+
+  distributor:
+    ring:
+      kvstore:
+        store: memberlist
+
+  ingester:
+    lifecycler:
+      ring:
+        kvstore:
+          store: memberlist
