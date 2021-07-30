@@ -1,6 +1,8 @@
 config:
   auth_enabled: false
   cluster_name: gem
+  license:
+    path: /license/license.jwt
 
   # the Helm templates depend on this 'storage' block existing
   storage:
@@ -85,3 +87,6 @@ config:
     sharding_ring:
       kvstore:
         store: memberlist
+
+  tenant_federation:
+    enabled: false
