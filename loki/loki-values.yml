@@ -1,2 +1,9 @@
 persistence:
   enabled: true
+
+ingress:
+  enabled: true
+  hosts:
+    - host: loki.lab.home
+      paths:
+        - /
