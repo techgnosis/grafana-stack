@@ -67,8 +67,6 @@ spec:
             name: gem-creds
         - secretRef:
             name: tempo-creds
-        - secretRef:
-            name: prometheus-creds
         env:
         - name: HOSTNAME
           valueFrom:
