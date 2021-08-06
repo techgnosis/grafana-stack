@@ -3,8 +3,9 @@
 set -euo pipefail
 
 helm upgrade --install gel /home/james/code/helm-charts/charts/enterprise-logs \
---version 1.1.0 \
---namespace grafana-labs \
+--version 0.1.0 \
+--namespace gel \
+--wait \
 --values gel-values.yml \
---set-file 'license.contents=../licenses/gel-license.jwt' \
---wait
+--set-file 'lokidistributed.loki.config=./config.yaml' \
+--set-file 'license.contents=../licenses/gel-license.jwt'
