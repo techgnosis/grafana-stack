@@ -65,8 +65,8 @@ storage_config:
     s3forcepathstyle: true
     insecure: true
   boltdb_shipper:
-    active_index_directory: /data/boltdb-shipper-active
-    cache_location: /data/boltdb-shipper-cache
+    active_index_directory: /var/loki/index
+    cache_location: /var/loki/cache
     shared_store: s3
 
 schema_config:
@@ -80,5 +80,5 @@ schema_config:
         period: 24h
 
 compactor:
-  working_directory: /data/boltdb-shipper-compactor
+  working_directory: /var/boltdb-shipper-compactor
   shared_store: s3
