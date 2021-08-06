@@ -1,2 +1,6 @@
 minio:
   enabled: false
+
+lokidistributed:
+  gateway:
+    enabled: false

@@ -27,7 +27,7 @@ memberlist:
   abort_if_cluster_join_fails: false
   bind_port: 7946
   join_members:
-    - ge-logs-discovery
+    - gel-lokidistributed-memberlist
 
 admin_client:
   storage:
