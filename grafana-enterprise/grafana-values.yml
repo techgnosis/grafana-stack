@@ -57,3 +57,8 @@ extraConfigmapMounts:
   mountPath: /etc/grafana/provisioning/datasources
   configMap: grafana-datasources
   readOnly: true
+- name: grafana-enterprise-license
+  mountPath: /var/lib/grafana/license.jwt
+  subPath: license.jwt
+  configMap: license
+  readOnly: true
