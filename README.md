@@ -3,7 +3,6 @@ Use this repo to install Grafana, Prometheus, Loki, Tempo, Grafana Agent, and a 
 
 ## Setup
 The following items need to be done manually:
-1. Applying the Grafana Enterprise license to Grafana Enterprise
 1. Setting up the GEM data source
 
 ## TODO
