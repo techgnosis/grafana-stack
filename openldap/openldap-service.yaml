@@ -1,12 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  labels:
-    app: ldap
-  name: ldap-service
+  name: openldap
   namespace: openldap
 spec:
   ports:
     - port: 389
   selector:
-    app: ldap
+    app: openldap

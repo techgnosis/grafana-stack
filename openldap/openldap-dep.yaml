@@ -1,22 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ldap
-  labels:
-    app: ldap
+  name: openldap
   namespace: openldap
 spec:
   selector:
     matchLabels:
-      app: ldap
+      app: openldap
   replicas: 1
   template:
     metadata:
       labels:
-        app: ldap
+        app: openldap
     spec:
       containers:
-        - name: ldap
+        - name: openldap
           image: osixia/openldap:1.5.0
           imagePullPolicy: Always
           volumeMounts:
@@ -51,7 +49,7 @@ spec:
             - name: LDAP_BACKEND
               value: "mdb"
             - name: LDAP_TLS
-              value: "true"
+              value: "false"
             - name: LDAP_TLS_CRT_FILENAME
               value: "ldap.crt"
             - name: LDAP_TLS_KEY_FILENAME
