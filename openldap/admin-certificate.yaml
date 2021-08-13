@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: openldapadmin-tls
+  namespace: openldap
+spec:
+  dnsNames:
+  - openldapadmin.lab.home
+  issuerRef:
+    kind: ClusterIssuer
+    name: mkcert
+  secretName: openldapadmin-tls

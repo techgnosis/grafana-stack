@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: openldapadmin
+  namespace: openldap
+spec:
+  tls:
+  - hosts:
+      - openldapadmin.lab.home
+    secretName: openldapadmin-tls
+  rules:
+  - host: openldapadmin.lab.home
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: openldapadmin
+            port:
+              number: 80
