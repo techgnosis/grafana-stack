@@ -1,44 +1,84 @@
-dn: cn=developer,dc=example,dc=org
-changetype: add
-objectclass: inetOrgPerson
-cn: developer
-givenname: developer
-sn: Developer
-mail: developer@gmail.com
-userpassword: developer_pass
+# Frontend team
 
-dn: cn=maintainer,dc=example,dc=org
+dn: cn=jmalone,dc=example,dc=org
 changetype: add
 objectclass: inetOrgPerson
-cn: maintainer
-givenname: maintainer
-sn: Maintainer
-mail: maintainer@gmail.com
-userpassword: maintainer_pass
+cn: jmalone
+givenname: Janet
+sn: Malone
+mail: jmalone@example.org
+userpassword: jmalone
 
-dn: cn=admin_gh,dc=example,dc=org
+dn: cn=aalvarez,dc=example,dc=org
 changetype: add
 objectclass: inetOrgPerson
-cn: admin_gh
-givenname: admin_gh
-sn: AdminGithub
-mail: admin_gh@gmail.com
-userpassword: admin_gh_pass
+cn: aalvarez
+givenname: Anthony
+sn: Alvarez
+mail: aalvarez@example.org
+userpassword: aalvarez
+
+# Backend team
+
+dn: cn=ebarrett,dc=example,dc=org
+changetype: add
+objectclass: inetOrgPerson
+cn: ebarrett
+givenname: Elizabeth
+sn: Barrett
+mail: ebarrett@example.org
+userpassword: ebarrett
+
+dn: cn=dwebster,dc=example,dc=org
+changetype: add
+objectclass: inetOrgPerson
+cn: dwebster
+givenname: Dominick
+sn: Webster
+mail: dwebster@example.org
+userpassword: dwebster
+
+# Admins
+
+dn: cn=bterry,dc=example,dc=org
+changetype: add
+objectclass: inetOrgPerson
+cn: bterry
+givenname: Bryan
+sn: Terry
+mail: bterry@example.org
+userpassword: bterry
+
+
+# Groups
 
 dn: ou=Groups,dc=example,dc=org
 changetype: add
 objectclass: organizationalUnit
 ou: Groups
 
+# Admins
+
 dn: cn=Admins,ou=Groups,dc=example,dc=org
 changetype: add
 cn: Admins
 objectclass: groupOfUniqueNames
-uniqueMember: cn=admin_gh,dc=example,dc=org
+uniqueMember: cn=bterry,dc=example,dc=org
 
-dn: cn=Maintaners,ou=Groups,dc=example,dc=org
+# Frontend team
+
+dn: cn=Frontend,ou=Groups,dc=example,dc=org
 changetype: add
-cn: Maintainers
+cn: Frontend
 objectclass: groupOfUniqueNames
-uniqueMember: cn=maintainer,dc=example,dc=org
-uniqueMember: cn=developer,dc=example,dc=org
+uniqueMember: cn=jmalone,dc=example,dc=org
+uniqueMember: cn=aalvarez,dc=example,dc=org
+
+# Backend team
+
+dn: cn=Backend,ou=Groups,dc=example,dc=org
+changetype: add
+cn: Backend
+objectclass: groupOfUniqueNames
+uniqueMember: cn=ebarrett,dc=example,dc=org
+uniqueMember: cn=dwebster,dc=example,dc=org
