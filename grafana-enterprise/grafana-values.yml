@@ -2,11 +2,11 @@ grafana.ini:
   server:
     root_url: https://grafana.lab.home/
   auth.ldap:
-    enabled: false
+    enabled: true
     config_file: /etc/grafana/ldap.toml
     allow_sign_up: true
   auth.generic_oauth:
-    enabled: true
+    enabled: false
     api_url: https://keycloak.lab.home/auth/realms/grafana/protocol/openid-connect/userinfo
     auth_url: https://keycloak.lab.home/auth/realms/grafana/protocol/openid-connect/auth
     token_url: https://keycloak.lab.home/auth/realms/grafana/protocol/openid-connect/token

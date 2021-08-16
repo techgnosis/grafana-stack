@@ -4,54 +4,44 @@ metadata:
   name: grafana-ldap
   namespace: grafana-enterprise
 data:
-  ldap.toml: |-
-    # To troubleshoot and get more log info enable ldap debug logging in grafana.ini
-    # [log]
-    # filters = ldap:debug
-
+  ldap.toml: |-  
     [[servers]]
-    host = "ldap.forumsys.com"
+    host = "openldap.openldap.svc.cluster.local"
     port = 389
     use_ssl = false
     start_tls = false
-    ssl_skip_verify = false
+    ssl_skip_verify = true
     
 
     # Search user bind dn
-    bind_dn = "cn=read-only-admin,dc=example,dc=com"
+    bind_dn = "cn=admin,dc=example,dc=org"
     # Search user bind password
     # If the password contains # or ; you have to wrap it with triple quotes. Ex """#password;"""
-    bind_password = 'password'
+    bind_password = 'admin'
 
     # User search filter, for example "(cn=%s)" or "(sAMAccountName=%s)" or "(uid=%s)"
-    search_filter = "(uid=%s)"
+    search_filter = "(cn=%s)"
 
     # An array of base dns to search through
-    search_base_dns = ["dc=example,dc=com"]
-
-    ## For Posix or LDAP setups that does not support member_of attribute you can define the below settings
-    ## Please check grafana LDAP docs for examples
-    group_search_filter = "(&(objectClass=groupOfUniqueNames)(uniqueMember=uid=%s,dc=example,dc=com))"
-    group_search_base_dns = ["dc=example,dc=com"]
-    group_search_filter_user_attribute = "uid"
+    search_base_dns = ["dc=example,dc=org"]
 
     # Specify names of the ldap attributes your ldap uses
     [servers.attributes]
     name = "givenName"
     surname = "sn"
-    username = "uid"
+    username = "cn"
     member_of = "DN"
     email =  "mail"
 
     # Map ldap groups to grafana org roles
     [[servers.group_mappings]]
-    group_dn = "ou=mathematicians,dc=example,dc=com"
+    group_dn = "cn=Admins,ou=Groups,dc=example,dc=org"
     org_role = "Admin"
     grafana_admin = true
     org_id = 1
 
     [[servers.group_mappings]]
-    group_dn = "ou=scientists,dc=example,dc=com"
+    group_dn = "cn=Maintainers,ou=Groups,dc=example,dc=org"
     org_role = "Editor"
 
     [[servers.group_mappings]]
