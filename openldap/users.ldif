@@ -4,7 +4,6 @@ objectclass: inetOrgPerson
 cn: developer
 givenname: developer
 sn: Developer
-displayname: Developer User
 mail: developer@gmail.com
 userpassword: developer_pass
 
@@ -14,7 +13,6 @@ objectclass: inetOrgPerson
 cn: maintainer
 givenname: maintainer
 sn: Maintainer
-displayname: Maintainer User
 mail: maintainer@gmail.com
 userpassword: maintainer_pass
 
@@ -24,7 +22,6 @@ objectclass: inetOrgPerson
 cn: admin_gh
 givenname: admin_gh
 sn: AdminGithub
-displayname: Admin Github User
 mail: admin_gh@gmail.com
 userpassword: admin_gh_pass
 
