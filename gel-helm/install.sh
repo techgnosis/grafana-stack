@@ -7,5 +7,4 @@ helm upgrade --install gel /home/james/code/helm-charts/charts/enterprise-logs \
 --namespace gel \
 --wait \
 --values gel-values.yml \
---set-file 'lokidistributed.loki.config=./config.yaml' \
 --set-file 'license.contents=../licenses/gel-license.jwt'

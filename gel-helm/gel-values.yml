@@ -1,11 +1,2 @@
 minio:
-  enabled: false
-
-lokidistributed:
-  compactor:
-    enabled: true
-  ingester:
-    persistence:
-      enabled: false
-  gateway:
-    enabled: false
+  enabled: true

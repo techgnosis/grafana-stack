@@ -1,84 +1,85 @@
-auth_enabled: false
+config:
+  auth_enabled: false
 
-auth:
-  type: enterprise
+  auth:
+    type: enterprise
 
-server:
-  http_listen_port: 3100
-  grpc_listen_port: 9095
+  server:
+    http_listen_port: 3100
+    grpc_listen_port: 9095
 
-cluster_name: enterprise-logs-test-fixture
+  cluster_name: enterprise-logs-test-fixture
 
-license:
-  path: /license/license.jwt
+  license:
+    path: /license/license.jwt
 
-distributor:
-  ring:
-    kvstore:
-      store: memberlist
-
-ingester:
-  lifecycler:
+  distributor:
     ring:
       kvstore:
         store: memberlist
 
-memberlist:
-  abort_if_cluster_join_fails: false
-  bind_port: 7946
-  join_members:
-    - gel-lokidistributed-memberlist
+  ingester:
+    lifecycler:
+      ring:
+        kvstore:
+          store: memberlist
 
-admin_client:
-  storage:
-    type: s3
-    s3:
-      endpoint: minio.minio.svc.cluster.local:9000
-      bucket_name: enterprise-logs-admin
-      access_key_id: minio
-      secret_access_key: minio123
-      insecure: true
+  memberlist:
+    abort_if_cluster_join_fails: false
+    bind_port: 7946
+    join_members:
+      - gel-lokidistributed-memberlist
+
+  admin_client:
+    storage:
+      type: s3
+      s3:
+        endpoint: minio.minio.svc.cluster.local:9000
+        bucket_name: enterprise-logs-admin
+        access_key_id: minio
+        secret_access_key: minio123
+        insecure: true
 
 
-ruler:
-  ring:
-    kvstore:
-      store: memberlist
-  storage:
-    type: s3
-    s3:
+  ruler:
+    ring:
+      kvstore:
+        store: memberlist
+    storage:
+      type: s3
+      s3:
+        endpoint: minio.minio.svc.cluster.local:9000
+        bucketnames: enterprise-logs-data
+        access_key_id: minio
+        secret_access_key: minio123
+        s3forcepathstyle: true
+        insecure: true
+
+
+
+  storage_config:
+    aws:
       endpoint: minio.minio.svc.cluster.local:9000
       bucketnames: enterprise-logs-data
       access_key_id: minio
       secret_access_key: minio123
       s3forcepathstyle: true
       insecure: true
+    boltdb_shipper:
+      active_index_directory: /var/loki/index
+      cache_location: /var/loki/cache
+      shared_store: s3
 
+  schema_config:
+    configs:
+      - from: 2021-01-01
+        store: boltdb-shipper
+        object_store: aws
+        schema: v11
+        index:
+          prefix: index_
+          period: 24h
 
-
-storage_config:
-  aws:
-    endpoint: minio.minio.svc.cluster.local:9000
-    bucketnames: enterprise-logs-data
-    access_key_id: minio
-    secret_access_key: minio123
-    s3forcepathstyle: true
-    insecure: true
-  boltdb_shipper:
-    active_index_directory: /var/loki/index
-    cache_location: /var/loki/cache
+  compactor:
+    working_directory: /var/boltdb-shipper-compactor
     shared_store: s3
-
-schema_config:
-  configs:
-    - from: 2021-01-01
-      store: boltdb-shipper
-      object_store: aws
-      schema: v11
-      index:
-        prefix: index_
-        period: 24h
-
-compactor:
-  working_directory: /var/boltdb-shipper-compactor
-  shared_store: s3
