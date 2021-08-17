@@ -38,6 +38,38 @@ sn: Webster
 mail: dwebster@example.org
 userpassword: dwebster
 
+# Managers (Viewers)
+
+dn: cn=jray,dc=example,dc=org
+changetype: add
+objectclass: inetOrgPerson
+cn: jray
+givenname: Juanita
+sn: Ray
+mail: jray@example.org
+userpassword: jray
+
+dn: cn=hlloyd,dc=example,dc=org
+changetype: add
+objectclass: inetOrgPerson
+cn: hlloyd
+givenname: Herbert
+sn: Lloyd
+mail: hlloyd@example.org
+userpassword: hlloyd
+
+# Users to show exceeded license
+
+dn: cn=pharmon,dc=example,dc=org
+changetype: add
+objectclass: inetOrgPerson
+cn: pharmon
+givenname: Preston
+sn: Harmon
+mail: pharmon@example.org
+userpassword: pharmon
+
+
 # Admins
 
 dn: cn=bterry,dc=example,dc=org
@@ -73,6 +105,7 @@ cn: Frontend
 objectclass: groupOfUniqueNames
 uniqueMember: cn=jmalone,dc=example,dc=org
 uniqueMember: cn=aalvarez,dc=example,dc=org
+uniqueMember: cn=pharmon,dc=example,dc=org
 
 # Backend team
 
@@ -82,3 +115,12 @@ cn: Backend
 objectclass: groupOfUniqueNames
 uniqueMember: cn=ebarrett,dc=example,dc=org
 uniqueMember: cn=dwebster,dc=example,dc=org
+
+# Managers team
+
+dn: cn=Managers,ou=Groups,dc=example,dc=org
+changetype: add
+cn: Managers
+objectclass: groupOfUniqueNames
+uniqueMember: cn=jray,dc=example,dc=org
+uniqueMember: cn=hlloyd,dc=example,dc=org
