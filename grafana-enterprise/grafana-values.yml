@@ -40,6 +40,10 @@ adminPassword: admin
 persistence:
   enabled: true
 
+plugins:
+  - grafana-metrics-enterprise-app
+  - grafana-enterprise-logs-app
+
 ingress:
   enabled: true
   hosts:

@@ -13,14 +13,8 @@ The following items need to be done manually:
 * sock-shop sends spans via Zipkin on port 9411
 * the Grafana Agent can only send to Tempo via OTLP on port 4317
 
-## Grafana Enterprise
-Run these commands from the Grafana Enterprise container to install the GEM and GEL plugins:  
-grafana-cli plugins install grafana-metrics-enterprise-app  
-grafana-cli plugins install grafana-enterprise-logs-app
-
 ## GEM
 1. `install.sh`
-1. Inside the Grafana Enterprise container, run `grafana-cli plugins install grafana-metrics-enterprise-app`
 1. Restart Grafana Enterprise
 1. Pull the token out of the `tokengen` job in K8s
 1. In the Grafana Plugins section:
