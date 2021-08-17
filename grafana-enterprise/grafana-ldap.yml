@@ -37,7 +37,6 @@ data:
     [[servers.group_mappings]]
     group_dn = "cn=Admins,ou=Groups,dc=example,dc=org"
     org_role = "Admin"
-    grafana_admin = true
     org_id = 1
 
     [[servers.group_mappings]]
