@@ -5,7 +5,7 @@ grafana.ini:
     enabled: true
     config_file: /etc/grafana/ldap.toml
     allow_sign_up: true
-    sync_cron: "* * * * * *"
+    sync_cron: "* */10 * * * *"
     active_sync_enabled: true
   auth.generic_oauth:
     enabled: false
