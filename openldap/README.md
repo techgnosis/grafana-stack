@@ -7,4 +7,5 @@ Click the `Import` button
 Upload `users.ldif`
 
 
-Note - Team Sync does not create users in Grafana. Users still need to login for the first time to get their Grafana user created. Once that user is created, their Team membership is synced every X minutes.
+# Notes
+* Team Sync does not create users in Grafana. Users still need to login for the first time to get their Grafana user created. When they login for the first time, they are placed into the correct Team based on the Team Sync settings. Once that user is created, their Team membership status is synced every X minutes.
