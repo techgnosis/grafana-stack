@@ -37,8 +37,10 @@ data: # use the deletes.yaml if you end up with an old provisioned datasource th
         uid: gem
         access: proxy
         orgId: 1
-        url: http://gem-enterprise-metrics-gateway.gem.svc.cluster.local:8080/api/v1/push
-        basicAuth: false
+        url: ${GEM_READ_URL}
+        basicAuth: true
+        basicAuthUser: ${GEM_READ_USERNAME}
+        basicAuthPassword: ${GEM_READ_PASSWORD}
         isDefault: false
         version: 1
         editable: false
@@ -51,8 +53,10 @@ data: # use the deletes.yaml if you end up with an old provisioned datasource th
         uid: gel
         access: proxy
         orgId: 1
-        url: http://enterprise-logs-test-fixture-gateway.gel.svc.cluster.local:3100
-        basicAuth: false
+        url: ${GEL_READ_URL}
+        basicAuth: true
+        basicAuthUser: ${GEL_READ_USERNAME}
+        basicAuthPassword: ${GEL_READ_PASSWORD}
         isDefault: false
         version: 1
         editable: false

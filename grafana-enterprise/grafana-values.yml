@@ -37,6 +37,8 @@ image:
 
 adminPassword: admin
 
+envFromSecret: datasource-creds
+
 persistence:
   enabled: true
 

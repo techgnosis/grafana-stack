@@ -10,6 +10,16 @@ kapp deploy -a grafana-enterprise \
 --namespace grafana-enterprise \
 --from-file=license.jwt=../licenses/ge-license.jwt \
 --dry-run=client \
+-o yaml) \
+-f <(kubectl create secret generic datasource-creds \
+-n grafana-enterprise \
+--from-literal=GEM_READ_URL=${GEM_READ_URL} \
+--from-literal=GEM_READ_USERNAME=${GEM_READ_USERNAME} \
+--from-literal=GEM_READ_PASSWORD=${GEM_READ_PASSWORD} \
+--from-literal=GEL_READ_URL=${GEL_READ_URL} \
+--from-literal=GEL_READ_USERNAME=${GEL_READ_USERNAME} \
+--from-literal=GEL_READ_PASSWORD=${GEL_READ_PASSWORD} \
+--dry-run=client \
 -o yaml)
 
 helm upgrade --install grafana-enterprise grafana \
