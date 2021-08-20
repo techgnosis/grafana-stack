@@ -1,5 +1,5 @@
 config:
-  auth_enabled: false
+  auth_enabled: true
   cluster_name: gem
   license:
     path: /license/license.jwt
@@ -11,6 +11,8 @@ config:
   instrumentation:
     enabled: false
 
+  auth:
+    type: enterprise
 
   server:
     grpc_listen_port: 9095
