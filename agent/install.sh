@@ -5,16 +5,16 @@ set -euo pipefail
 kapp deploy -a grafana-agent \
 -f <(kubectl create secret generic gel-creds \
 -n agent \
---from-literal=GEL_WRITE_URL=${GEL_WRITE_URL} \
---from-literal=GEL_WRITE_USERNAME=${GEL_WRITE_USERNAME} \
---from-literal=GEL_WRITE_PASSWORD=${GEL_WRITE_PASSWORD} \
+--from-literal=GEL_URL_AGENT=${GEL_URL_AGENT} \
+--from-literal=GEL_USERNAME_AGENT=${GEL_USERNAME_AGENT} \
+--from-literal=GEL_PASSWORD_AGENT=${GEL_PASSWORD_AGENT} \
 --dry-run=client \
 -o yaml) \
 -f <(kubectl create secret generic gem-creds \
 -n agent \
---from-literal=GEM_WRITE_URL=${GEM_WRITE_URL} \
---from-literal=GEM_WRITE_USERNAME=${GEM_WRITE_USERNAME} \
---from-literal=GEM_WRITE_PASSWORD=${GEM_WRITE_PASSWORD} \
+--from-literal=GEM_URL_AGENT=${GEM_URL_AGENT} \
+--from-literal=GEM_USERNAME_AGENT=${GEM_USERNAME_AGENT} \
+--from-literal=GEM_PASSWORD_AGENT=${GEM_PASSWORD_AGENT} \
 --dry-run=client \
 -o yaml) \
 -f <(kubectl create secret generic tempo-creds \

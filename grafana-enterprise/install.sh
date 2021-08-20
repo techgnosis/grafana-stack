@@ -13,12 +13,12 @@ kapp deploy -a grafana-enterprise \
 -o yaml) \
 -f <(kubectl create secret generic datasource-creds \
 -n grafana-enterprise \
---from-literal=GEM_READ_URL=${GEM_READ_URL} \
---from-literal=GEM_READ_USERNAME=${GEM_READ_USERNAME} \
---from-literal=GEM_READ_PASSWORD=${GEM_READ_PASSWORD} \
---from-literal=GEL_READ_URL=${GEL_READ_URL} \
---from-literal=GEL_READ_USERNAME=${GEL_READ_USERNAME} \
---from-literal=GEL_READ_PASSWORD=${GEL_READ_PASSWORD} \
+--from-literal=GEM_URL_GRAFANA=${GEM_URL_GRAFANA} \
+--from-literal=GEM_USERNAME_GRAFANA=${GEM_USERNAME_GRAFANA} \
+--from-literal=GEM_PASSWORD_GRAFANA=${GEM_PASSWORD_GRAFANA} \
+--from-literal=GEL_URL_GRAFANA=${GEL_URL_GRAFANA} \
+--from-literal=GEL_USERNAME_GRAFANA=${GEL_USERNAME_GRAFANA} \
+--from-literal=GEL_PASSWORD_GRAFANA=${GEL_PASSWORD_GRAFANA} \
 --dry-run=client \
 -o yaml)
 
