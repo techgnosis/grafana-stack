@@ -1,2 +1,6 @@
 minio:
-  enabled: false
+  enabled: true
+
+loki-distributed:
+  ingester:
+    affinity: "" # you have to have at least two ingesters and I only have one K8s node
