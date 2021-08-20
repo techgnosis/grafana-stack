@@ -3,7 +3,14 @@ kind: ConfigMap
 metadata:
   name: grafana-datasources
   namespace: grafana-enterprise
-data:
+data: # use the deletes.yaml if you end up with an old provisioned datasource that you can't delete from the UI
+  deletes.yaml: |
+    apiVersion: 1
+    deleteDatasources:
+      - name: "Prometheus"
+        orgId: 1
+      - name: "Loki"
+        orgId: 1
   tempo.yaml: |
     apiVersion: 1
     datasources:
