@@ -12,7 +12,10 @@ data:
       configs:
         - name: agent
           clients:
-            - url: ${LOKI_HOSTNAME}
+            - url: ${GEL_URL}
+              basic_auth:
+                  username: ${GEL_USERNAME}
+                  password: ${GEL_PASSWORD}
           scrape_configs:
             - job_name: logs-read-by-promtail
               kubernetes_sd_configs:

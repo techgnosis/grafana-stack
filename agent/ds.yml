@@ -62,7 +62,7 @@ spec:
         - /bin/agent
         envFrom:
         - secretRef:
-            name: loki-creds
+            name: gel-creds
         - secretRef:
             name: gem-creds
         - secretRef:

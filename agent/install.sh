@@ -3,9 +3,11 @@
 set -euo pipefail
 
 kapp deploy -a grafana-agent \
--f <(kubectl create secret generic loki-creds \
+-f <(kubectl create secret generic gel-creds \
 -n agent \
---from-literal=LOKI_HOSTNAME=${LOKI_HOSTNAME} \
+--from-literal=GEL_URL=${GEL_URL} \
+--from-literal=GEL_USERNAME=${GEL_USERNAME} \
+--from-literal=GEL_PASSWORD=${GEL_PASSWORD} \
 --dry-run=client \
 -o yaml) \
 -f <(kubectl create secret generic gem-creds \
