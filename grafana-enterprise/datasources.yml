@@ -25,31 +25,26 @@ data:
   prometheus.yaml: |
     apiVersion: 1
     datasources:
-      - name: Prometheus
+      - name: GEM
         type: prometheus
-        uid: prometheus
+        uid: gem
         access: proxy
         orgId: 1
-        url: http://prometheus-server.prometheus.svc.cluster.local:80
+        url: http://gem-enterprise-metrics-gateway.gem.svc.cluster.local:8080/api/v1/push
         basicAuth: false
         isDefault: false
         version: 1
         editable: false
         apiVersion: 1
-        jsonData:
-          timeInterval: 1s
-          exemplarTraceIdDestinations:
-          - name: traceID
-            datasourceUid: tempo
   loki.yaml: |
     apiVersion: 1
     datasources:
-      - name: Loki
+      - name: GEL
         type: loki
-        uid: loki
+        uid: gel
         access: proxy
         orgId: 1
-        url: http://loki.loki.svc.cluster.local:3100
+        url: http://enterprise-logs-test-fixture-gateway.gel.svc.cluster.local:3100
         basicAuth: false
         isDefault: false
         version: 1
