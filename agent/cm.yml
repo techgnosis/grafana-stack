@@ -12,10 +12,10 @@ data:
       configs:
         - name: agent
           clients:
-            - url: ${GEL_URL}
+            - url: ${GEL_WRITE_URL}
               basic_auth:
-                  username: ${GEL_USERNAME}
-                  password: ${GEL_PASSWORD}
+                  username: ${GEL_WRITE_USERNAME}
+                  password: ${GEL_WRITE_PASSWORD}
           scrape_configs:
             - job_name: logs-read-by-promtail
               kubernetes_sd_configs:
@@ -49,10 +49,10 @@ data:
         - name: agent
           host_filter: false
           remote_write:
-            - url: ${GEM_URL}
+            - url: ${GEM_WRITE_URL}
               basic_auth:
-                username: ${GEM_USERNAME}
-                password: ${GEM_PASSWORD}
+                username: ${GEM_WRITE_USERNAME}
+                password: ${GEM_WRITE_PASSWORD}
           scrape_configs:
             - job_name: pods-scraped-by-agent
               kubernetes_sd_configs:
