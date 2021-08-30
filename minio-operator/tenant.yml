@@ -1,0 +1,55 @@
+## Secret to be used as MinIO Root Credentials
+apiVersion: v1
+kind: Secret
+metadata:
+  name: minio-creds-secret
+type: Opaque
+data:
+  ## Access Key for MinIO Tenant, base64 encoded (echo -n 'minio' | base64)
+  accesskey: bWluaW8=
+  ## Secret Key for MinIO Tenant, base64 encoded (echo -n 'minio123' | base64)
+  secretkey: bWluaW8xMjM=
+---
+apiVersion: v1
+data:
+  ## Tenant credentials, base64 encoded (cat config.env | base64)
+  ## export MINIO_ROOT_USER="minio"
+  ## export MINIO_ROOT_PASSWORD="minio123"
+  config.env: ZXhwb3J0IE1JTklPX1JPT1RfVVNFUj0ibWluaW8iCmV4cG9ydCBNSU5JT19ST09UX1BBU1NXT1JEPSJtaW5pbzEyMyIK
+kind: Secret
+metadata:
+  name: minio-configuration
+type: Opaque
+---
+apiVersion: minio.min.io/v2
+kind: Tenant
+metadata:
+  name: minio
+  annotations:
+    prometheus.io/path: /minio/v2/metrics/cluster
+    prometheus.io/port: "9000"
+    prometheus.io/scrape: "true"
+
+spec:
+  ## Secret with credentials to be used by MinIO Tenant.
+  ## Refers to the secret object created above.
+  credsSecret:
+    name: minio-creds-secret
+
+  configuration:
+    name: minio-configuration
+
+  ## Specification for MinIO Pool(s) in this Tenant.
+  pools:
+      ## Servers specifies the number of MinIO Tenant Pods / Servers in this pool.
+      ## For standalone mode, supply 1. For distributed mode, supply 4 or more.
+      ## Note that the operator does not support upgrading from standalone to distributed mode.
+    - servers: 1
+
+      ## volumesPerServer specifies the number of volumes attached per MinIO Tenant Pod / Server.
+      volumesPerServer: 1
+      
+
+    
+
+    
