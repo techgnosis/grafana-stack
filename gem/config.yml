@@ -22,7 +22,7 @@ config:
     storage:
       type: s3
       s3:
-        endpoint: minio:443
+        endpoint: minio.minio.svc.cluster.local:9000
         bucket_name: enterprise-metrics-admin
         access_key_id: minio
         secret_access_key: minio123
