@@ -6,6 +6,7 @@ kapp deploy -a grafana-enterprise \
 -f certificate.yml \
 -f grafana-ldap.yml \
 -f datasources.yml \
+-f postgres.yml \
 -f <(kubectl create cm license \
 --namespace grafana-enterprise \
 --from-file=license.jwt=../licenses/ge-license.jwt \

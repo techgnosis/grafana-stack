@@ -3,6 +3,13 @@ grafana.ini:
     root_url: https://grafana.lab.home/
   users:
     viewers_can_edit: true
+  database:
+    type: postgres
+    host: postgres
+    name: grafana-enterprise
+    user: grafana-enterprise
+    password: grafana-enterprise
+    ssl_mode: disable
   auth.ldap:
     enabled: true
     config_file: /etc/grafana/ldap.toml
