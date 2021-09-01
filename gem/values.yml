@@ -1,2 +1,16 @@
 minio:
   enabled: false
+
+compactor:
+  replicas: 2
+
+distributor:
+  replicas: 2
+  affinity: null
+
+ingester:
+  replicas: 2
+  affinity: null
+
+querier:
+  replicas: 2

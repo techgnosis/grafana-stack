@@ -9,7 +9,7 @@ config:
     engine: blocks
 
   instrumentation:
-    enabled: false
+    enabled: true
 
   auth:
     type: enterprise
