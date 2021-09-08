@@ -1,0 +1,20 @@
+server:
+  http_listen_port: 12346
+loki:
+  positions_directory: /home/james/agent/positions
+  configs:
+    - name: agent-laptop-journald
+      clients:
+        - url: https://gel.lab.home/loki/api/v1/push
+          basic_auth:
+              username: derp
+              password: ZGVycC1hZ2VudC11bmxpbWl0ZWQ6NTQ0MTh9NiY5cTIuPSkoW1NLMEB3L3sz
+      scrape_configs:
+        - job_name: journal
+          journal:
+            max_age: 12h
+            labels:
+              job: systemd-journal
+          relabel_configs:
+            - source_labels: ['__journal__systemd_unit']
+              target_label: 'unit'
