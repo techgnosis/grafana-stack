@@ -25,7 +25,7 @@ kapp deploy -a grafana-enterprise \
 
 helm upgrade --install grafana-enterprise grafana \
 --repo https://grafana.github.io/helm-charts \
---version 6.13.5 \
+--version 6.16.4 \
 --namespace grafana-enterprise \
 --values grafana-values.yml \
 --wait
