@@ -3,4 +3,5 @@ minio:
 
 loki-distributed:
   ingester:
+    replicas: 2
     affinity: "" # you have to have at least two ingesters and I only have one K8s node
