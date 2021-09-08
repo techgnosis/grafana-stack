@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gel
+  namespace: gel
+spec:
+  tls:
+  - hosts:
+      - gel.lab.home
+    secretName: gel-tls
+  rules:
+  - host: gel.lab.home
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: enterprise-logs-test-fixture-gateway
+            port:
+              number: 3100
