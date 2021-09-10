@@ -40,6 +40,8 @@ grafana.ini:
     assertion_attribute_email: mail
   feature_toggles:
     enable: ngalert accesscontrol
+  log:
+    level: debug
 
 image:
   repository: grafana/grafana-enterprise
