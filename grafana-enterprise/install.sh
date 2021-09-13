@@ -28,4 +28,5 @@ helm upgrade --install grafana-enterprise grafana \
 --version 6.16.4 \
 --namespace grafana-enterprise \
 --values grafana-values.yml \
+--values grafana-ini.yml \
 --wait
