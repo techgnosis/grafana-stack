@@ -1,0 +1,30 @@
+config:
+  ruler:
+    storage:
+      type: s3
+      s3:
+        endpoint: "minio.minio.svc.cluster.local:9000"
+        bucketnames: enterprise-logs-ruler
+        access_key_id: minio
+        secret_access_key: minio123
+        s3forcepathstyle: true
+        insecure: true
+
+  storage_config:
+    aws:
+      endpoint: "minio.minio.svc.cluster.local:9000"
+      bucketnames: enterprise-logs-tsdb
+      access_key_id: minio
+      secret_access_key: minio123
+      s3forcepathstyle: true
+      insecure: true
+
+  admin_client:
+    storage:
+      type: s3
+      s3:
+        endpoint: "minio.minio.svc.cluster.local:9000"
+        bucket_name: enterprise-logs-admin
+        access_key_id: minio
+        secret_access_key: minio123
+        insecure: true

@@ -10,4 +10,5 @@ helm upgrade --install enterprise-logs-test-fixture /home/james/code/helm-charts
 --version 1.0.0 \
 --namespace gel \
 --values values.yml \
+--values config.yml \
 --set-file 'license.contents=../licenses/gel-license.jwt'
