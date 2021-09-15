@@ -1,0 +1,35 @@
+FROM amazonlinux:2.0.20210813.1
+
+RUN yum install -y shadow-utils
+
+
+# Create user to run as non-root.
+RUN groupadd -g 10001 enterprise-metrics && \
+    useradd -u 10001 -g 10001 enterprise-metrics -r
+
+# Create and own a data directory to facilitate Cortex default data directory configurations as non-root.
+# A bootstrap directory owned by the user is also necessary to facilitate the dev docker-compose configuration
+# where tokens are shared between services in a bootstrap volume.
+# /rules is required as the ruler users an absolute path by default.
+RUN mkdir /data /bootstrap /rules && chown 10001:10001 /data /bootstrap /rules
+# The workdir is set to /data as the querier (and by extension the ruler) use a relative default path for the
+# active-query-tracker.
+WORKDIR /data
+
+
+COPY metrics-enterprise-v1.5.0-linux-amd64 /usr/bin/enterprise-metrics
+
+# Create a symlink for `metrics-enterprise` to stay backwards compatible
+RUN ln -sf /usr/bin/enterprise-metrics /usr/bin/metrics-enterprise
+
+
+# Allow binding to port 80 as non-root.
+RUN setcap 'cap_net_bind_service=+ep' /usr/bin/enterprise-metrics
+
+EXPOSE 80
+ENTRYPOINT [ "/usr/bin/enterprise-metrics" ]
+
+ARG revision
+LABEL org.opencontainers.image.title="metrics-enterprise" \
+    org.opencontainers.image.source="https://github.com/grafana/backend-enterprise/tree/master/cmd/enterprise-metrics" \
+    org.opencontainers.image.revision="${revision}"
