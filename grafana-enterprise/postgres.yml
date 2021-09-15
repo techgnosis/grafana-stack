@@ -31,7 +31,7 @@ spec:
             - containerPort: 8081
           env:
             - name: DATABASE_URL
-              value: "postgres://grafana-enterprise:grafana-enterprise@postgres:5432/grafana-enterprise?sslmode=disable"
+              value: "postgres://grafana-enterprise:grafana-enterprise@localhost:5432/grafana-enterprise?sslmode=disable"
       volumes:
         - name: postgres
           persistentVolumeClaim:
