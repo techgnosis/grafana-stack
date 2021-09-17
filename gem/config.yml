@@ -64,6 +64,7 @@ config:
   ruler:
     enable_api: true
     enable_sharding: true
+    enable_alertmanager_discovery: true
     ring:
       kvstore:
         store: memberlist
