@@ -1,23 +1,4 @@
 config:
-  auth_enabled: true
-  cluster_name: gem
-  license:
-    path: /license/license.jwt
-
-  # the Helm templates depend on this 'storage' block existing
-  storage:
-    engine: blocks
-
-  instrumentation:
-    enabled: true
-
-  auth:
-    type: enterprise
-
-  server:
-    grpc_listen_port: 9095
-    http_listen_port: 8080
-
   admin_client:
     storage:
       type: s3
@@ -55,45 +36,5 @@ config:
       secret_access_key: minio123
       insecure: true
 
-  compactor:
-    sharding_enabled: true
-    sharding_ring:
-      kvstore:
-        store: memberlist
-
   ruler:
-    enable_api: true
-    enable_sharding: true
     enable_alertmanager_discovery: true
-    ring:
-      kvstore:
-        store: memberlist
-
-
-  alertmanager:
-    enable_api: true
-    sharding_enabled: true
-    sharding_ring:
-      kvstore:
-        store: memberlist
-
-
-  distributor:
-    ring:
-      kvstore:
-        store: memberlist
-
-  ingester:
-    lifecycler:
-      ring:
-        kvstore:
-          store: memberlist
-
-  store_gateway:
-    sharding_enabled: true
-    sharding_ring:
-      kvstore:
-        store: memberlist
-
-  tenant_federation:
-    enabled: false
