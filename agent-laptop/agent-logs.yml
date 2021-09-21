@@ -7,8 +7,8 @@ loki:
       clients:
         - url: https://gel.lab.home/loki/api/v1/push
           basic_auth:
-              username: derp
-              password: ZGVycC1hZ2VudC11bmxpbWl0ZWQ6NTQ0MTh9NiY5cTIuPSkoW1NLMEB3L3sz
+              username: laptop
+              password: bGFwdG9wLXdyaXRlLWZvcmV2ZXI6TkUxMEEpNTw1NSpmNkArOH0ye1wyXTEv
       scrape_configs:
         - job_name: journal
           journal:
