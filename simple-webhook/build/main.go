@@ -3,11 +3,16 @@ package main
 import (
     "log"
     "net/http"
+    "io/ioutil"
 )
 
 func webhook(w http.ResponseWriter, req *http.Request) {
 
-    log.Printf("Webhook activated\n")
+    b, err := ioutil.ReadAll(req.Body)
+    if err != nil {
+        log.Printf("Failed to parse webhook")
+    }
+    log.Printf(string(b))
 }
 
 func main() {
