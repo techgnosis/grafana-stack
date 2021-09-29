@@ -4,7 +4,8 @@ set -euo pipefail
 
 kapp deploy -a gem \
 -f certificate.yml \
--f ingress.yml
+-f ingress.yml \
+-f compactor-service.yaml
 
 helm upgrade --install gem enterprise-metrics \
 --repo https://grafana.github.io/helm-charts \

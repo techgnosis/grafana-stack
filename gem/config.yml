@@ -1,4 +1,16 @@
 config:
+
+  server:
+    log_level: info
+
+  compactor:
+    deletion_delay: 10m
+
+  gateway:
+    proxy:
+      compactor:
+        url: http://gem-enterprise-metrics-compactor.gem.svc:8080
+
   admin_client:
     storage:
       type: s3
@@ -35,6 +47,3 @@ config:
       access_key_id: minio
       secret_access_key: minio123
       insecure: true
-
-  ruler:
-    enable_alertmanager_discovery: true
