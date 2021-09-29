@@ -44,8 +44,3 @@ grafana.ini:
     level: info
   plugins:
     enable_alpha: true
-  smtp:
-    enabled: true
-    host: smtp.smtp.svc.cluster.local
-    from_address: grafana@lab.home
-    from_name: Grafana Homelab

@@ -1,6 +1,6 @@
 image:
   repository: grafana/grafana-enterprise
-  tag: 8.1.4
+  tag: 8.2.0-beta1
 
 replicas: 1
 
