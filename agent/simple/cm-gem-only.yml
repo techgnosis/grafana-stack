@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-agent-config
+  namespace: agent
+data:
+  agent.yaml: |
+    server:
+      http_listen_port: 12345
+    integrations:
+      agent:
+        enabled: true
+        scrape_integration: true
+    prometheus:
+      configs:
+        - name: agent
+          host_filter: true
+          remote_write:
+            - url: http://gem-enterprise-metrics-gateway.gem.svc.cluster.local:8080/api/v1/push
+              basic_auth:
+                username: gem
+                password: Z2VtLWFnZW50LWZvcmV2ZXI6X3syLjEyOGlkNE80e1MmXToyMSp9JDI1
+          scrape_configs:
+            - job_name: gem-pods
+              metrics_path: "/metrics"
+              kubernetes_sd_configs:
+                - role: pod
+                  namespaces:
+                    names:
+                      - gem
+              relabel_configs:
+                - action: drop
+                  regex: Succeeded|Failed
+                  source_labels:
+                    - __meta_kubernetes_pod_phase
+                - action: drop
+                  regex: 9095
+                  source_labels:
+                    - __meta_kubernetes_pod_container_port_number
+                - action: replace
+                  source_labels:
+                    - __meta_kubernetes_namespace
+                  target_label: namespace
+                - action: replace
+                  source_labels:
+                    - __meta_kubernetes_pod_name
+                  target_label: pod
+      global:
+        scrape_interval: 15s
+      wal_directory: /var/lib/agent/data
