@@ -7,10 +7,6 @@ data:
   agent.yaml: |
     server:
       http_listen_port: 12345
-    integrations:
-      agent:
-        enabled: true
-        scrape_integration: true
     prometheus:
       configs:
         - name: agent
