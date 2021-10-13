@@ -38,9 +38,18 @@ grafana.ini:
   #   assertion_attribute_name: displayName
   #   assertion_attribute_login: mail
   #   assertion_attribute_email: mail
-  feature_toggles:
-    enable: ngalert
+  #feature_toggles:
+  #  enable: ngalert
+  alerting:
+    enabled: false
+  unified_alerting:
+    enabled: true
   log:
     level: info
   plugins:
     enable_alpha: true
+  # white_labeling:
+  #   login_background: url(https://play.vidyard.com/rgZKgi1iXBWS1gPBrEkGa2.jpg)
+  #   app_title: Precision Drilling
+  #   login_title: Precision Drilling
+  #   login_subtitle: Use your AD credentials

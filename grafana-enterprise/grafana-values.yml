@@ -1,8 +1,8 @@
 image:
   repository: grafana/grafana-enterprise
-  tag: 8.2.0-beta1
+  tag: 8.2.0
 
-replicas: 1
+replicas: 2
 
 adminPassword: admin
 
@@ -33,3 +33,9 @@ extraConfigmapMounts:
   subPath: license.jwt
   configMap: license
   readOnly: true
+
+extraExposePorts:
+  - name: alertmanager-gossip
+    port: 9094
+    protocol: TCP
+    targetPort: 9094
