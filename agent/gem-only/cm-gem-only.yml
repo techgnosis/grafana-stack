@@ -14,23 +14,23 @@ data:
           remote_write:
             - url: http://gem-enterprise-metrics-gateway.gem.svc.cluster.local:8080/api/v1/push
               basic_auth:
-                username: gem
-                password: Z2VtLWFnZW50LWZvcmV2ZXI6X3syLjEyOGlkNE80e1MmXToyMSp9JDI1
+                username: grafana-enterprise
+                password: Z3JhZmFuYS1lbnRlcnByaXNlLWFnZW50LWZvcmV2ZXI6PiMsbjI3OTR1OTV7ITU0fnwvVTAlP04w
           scrape_configs:
-            - job_name: gem-pods
+            - job_name: grafana-enterprise-pods
               metrics_path: "/metrics"
               kubernetes_sd_configs:
                 - role: pod
                   namespaces:
                     names:
-                      - gem
+                      - grafana-enterprise
               relabel_configs:
                 - action: drop
                   regex: Succeeded|Failed
                   source_labels:
                     - __meta_kubernetes_pod_phase
-                - action: drop
-                  regex: 9095
+                - action: keep
+                  regex: 3000
                   source_labels:
                     - __meta_kubernetes_pod_container_port_number
                 - action: replace

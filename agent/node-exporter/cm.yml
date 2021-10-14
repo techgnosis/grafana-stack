@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-agent-config
+  namespace: agent
+data:
+  agent.yaml: |
+    server:
+      http_listen_port: 12345
+    metrics:
+      wal_directory: /tmp/wal
+      global:
+        scrape_interval: 1m
+        remote_write:
+          - url: https://gem.lab.home/api/prom/push
+            basic_auth:
+              username: node-exporter
+              password: bm9kZS1leHBvcnRlci13cml0ZS1hZ2VudDowLXE6UzE5YH5fW0M5MjcpLz4yNll7NTg=
+            tls_config:
+              insecure_skip_verify: true
+    integrations:
+      node_exporter:
+        enabled: true
+        rootfs_path: /
+        sysfs_path: /sys
+        procfs_path: /proc
