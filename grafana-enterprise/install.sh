@@ -3,6 +3,7 @@
 set -euo pipefail
 
 kapp deploy -a grafana-enterprise \
+-f namespace.yaml \
 -f certificate.yml \
 -f grafana-ldap.yml \
 -f postgres.yml \
