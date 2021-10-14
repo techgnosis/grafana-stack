@@ -3,6 +3,7 @@
 set -euo pipefail
 
 kapp deploy -a openldap \
+-f namespace.yaml \
 -f openldap-dep.yaml \
 -f openldap-service.yaml \
 -f admin-certificate.yaml \
