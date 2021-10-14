@@ -6,5 +6,10 @@ helm upgrade --install minio minio \
 --repo https://helm.min.io \
 --version 8.0.9 \
 --namespace minio \
+--create-namespace \
 --values values.yml \
 --wait
+
+kapp deploy -a minio-ingress \
+-f certificate.yml \
+-f ingress.yml
