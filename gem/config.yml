@@ -4,12 +4,17 @@ config:
     log_level: info
 
   compactor:
-    deletion_delay: 10m
+    sharding_enabled: false
 
-  gateway:
-    proxy:
-      compactor:
-        url: http://gem-enterprise-metrics-compactor.gem.svc:8080
+  alertmanager:
+    sharding_enabled: false
+    sharding_ring:
+      replication_factor: 1
+
+  ingester:
+    lifecycler:
+      ring:
+        replication_factor: 1
 
   admin_client:
     storage:

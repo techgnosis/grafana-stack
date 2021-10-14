@@ -2,18 +2,18 @@ minio:
   enabled: false
 
 compactor:
-  replicas: 3
+  replicas: 1
 
 distributor:
-  replicas: 2
+  replicas: 1
   affinity: null
 
 ingester:
-  replicas: 2
+  replicas: 1
   affinity: null
 
 querier:
-  replicas: 2
+  replicas: 1
 
 alertmanager:
-  replicas: 3
+  replicas: 1
