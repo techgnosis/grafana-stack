@@ -1,0 +1,1 @@
+I used Terraform for simple-webhook for learning purposes. Terraform seems like a compelling way to manage K8s resources
