@@ -16,6 +16,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: enterprise-logs-test-fixture-gateway
+            name: gel-enterprise-logs-gateway
             port:
               number: 3100
