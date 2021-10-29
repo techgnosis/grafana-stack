@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flog
+  namespace: flog
+spec:
+  selector:
+    matchLabels:
+      app: flog
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: flog
+    spec:
+      containers:
+        - name: flog
+          image: techgnosis/flog:1
+          imagePullPolicy: Always
+          args: ["--loop", "--delay", "5ms"]
