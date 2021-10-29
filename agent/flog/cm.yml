@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-agent-config
+  namespace: agent
+data:
+  agent.yaml: |
+    server:
+      http_listen_port: 12345
+    loki:
+      positions_directory: /tmp/positions
+      configs:
+        - name: agent
+          clients:
+            - url: http://gel-enterprise-logs-gateway.gel.svc.cluster.local:3100/loki/api/v1/push
+              basic_auth:
+                  username: flog
+                  password: "ZmxvZy13cml0ZS1mb3JldmVyOjM6KDU1TSQqMzo8QkNDXTEtITU3MDV9MQ=="
+          scrape_configs:
+            - job_name: logs-read-by-promtail
+              kubernetes_sd_configs:
+                - role: pod
+                  namespaces:
+                    names:
+                      - flog
+              pipeline_stages:
+                - docker: {}
+              relabel_configs:
+                - source_labels:
+                    - __meta_kubernetes_pod_node_name
+                  target_label: __host__
+                - action: replace
+                  source_labels:
+                    - __meta_kubernetes_namespace
+                  target_label: namespace
+                - action: replace
+                  source_labels:
+                    - __meta_kubernetes_pod_name
+                  target_label: pod
+                - replacement: /var/log/pods/*$1/*.log
+                  separator: /
+                  source_labels:
+                    - __meta_kubernetes_pod_uid
+                    - __meta_kubernetes_pod_container_name
+                  target_label: __path__
