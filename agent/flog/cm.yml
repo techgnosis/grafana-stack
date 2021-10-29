@@ -43,3 +43,41 @@ data:
                     - __meta_kubernetes_pod_uid
                     - __meta_kubernetes_pod_container_name
                   target_label: __path__
+    prometheus:
+      configs:
+        - name: agent
+          host_filter: true
+          remote_write:
+            - url: http://gem-enterprise-metrics-gateway.gem.svc.cluster.local:8080/api/v1/push
+              basic_auth:
+                username: gel
+                password: Z2VsLXdyaXRlLWZvcmV2ZXI6NTkwXSEzMDlOPjBzTCIxXH4uQDgyJkFe
+          scrape_configs:
+            - job_name: gel-pods
+              metrics_path: "/metrics"
+              kubernetes_sd_configs:
+                - role: pod
+                  namespaces:
+                    names:
+                      - gel
+              relabel_configs:
+                - action: drop
+                  regex: Succeeded|Failed
+                  source_labels:
+                    - __meta_kubernetes_pod_phase
+                - action: keep
+                  regex: 3100
+                  source_labels:
+                    - __meta_kubernetes_pod_container_port_number
+                - action: replace
+                  source_labels:
+                    - __meta_kubernetes_namespace
+                  target_label: namespace
+                - action: replace
+                  source_labels:
+                    - __meta_kubernetes_pod_name
+                  target_label: pod
+      global:
+        scrape_interval: 60s
+      wal_directory: /var/lib/agent/data
+
