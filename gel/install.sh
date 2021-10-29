@@ -6,8 +6,9 @@ kapp deploy -a gel \
 -f certificate.yml \
 -f ingress.yml
 
-helm upgrade --install enterprise-logs-test-fixture /home/james/code/helm-charts/charts/enterprise-logs \
---version 1.0.0 \
+helm upgrade --install gel enterprise-logs \
+--repo https://grafana.github.io/helm-charts \
+--version 1.2.0 \
 --namespace gel \
 --values values.yml \
 --values config.yml \
