@@ -1,0 +1,70 @@
+auth:
+  type: enterprise
+
+target: all
+
+# TODO: Ensure the cluster name is set to match your Grafana Labs License File
+cluster_name: gem
+
+license:
+  path: /etc/gem/license/license.jwt 
+
+server:
+  http_listen_port: 9000
+
+store_gateway:
+  sharding_enabled: true
+  sharding_ring:
+    kvstore:
+      store: memberlist
+
+admin_client:
+  storage:
+    type: s3
+    s3:
+      endpoint: minio:9000
+      bucket_name: grafana-metrics-admin 
+      access_key_id: minio
+      secret_access_key: minio123
+      insecure: true
+
+distributor:
+  shard_by_all_labels: true
+  pool:
+    health_check_ingesters: true
+
+memberlist:
+  abort_if_cluster_join_fails: false
+  bind_port: 7946
+  join_members:
+  - gem-discovery
+
+ingester:
+  lifecycler:
+    num_tokens: 512
+    ring:
+      kvstore:
+        store: memberlist
+      replication_factor: 3
+
+compactor:
+  data_dir: "/data"
+  sharding_enabled: true
+  sharding_ring:
+    kvstore:
+      store: memberlist
+
+blocks_storage:
+  tsdb:
+    dir: /data/cortex/tsdb
+  bucket_store:
+    sync_dir: /data/cortex/tsdb-sync
+  backend: s3
+  s3:
+    endpoint: minio:9000
+    bucket_name: grafana-metrics-tsdb
+    access_key_id: minio
+    secret_access_key: minio123 
+    insecure: true 
+storage:
+  engine: blocks

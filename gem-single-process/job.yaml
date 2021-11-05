@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: gem-tokengen
+  namespace: gem
+spec:
+  template:
+    spec:
+      containers:
+        - name: gem-tokengen
+          image: grafana/metrics-enterprise:v1.5.1
+          imagePullPolicy: IfNotPresent
+          args:
+            - --config.file=/etc/gem/config.yaml
+            - --target=tokengen
+          volumeMounts:
+            - mountPath: /etc/gem
+              name: gem-config
+            - mountPath: /etc/gem/license
+              name: gem-license
+      volumes:
+        - name: gem-config
+          configMap:
+            name: gem-config
+        - name: gem-license
+          secret:
+            secretName: gem-license
+      restartPolicy: Never

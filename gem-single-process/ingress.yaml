@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gem
+  namespace: gem
+spec:
+  tls:
+  - hosts:
+      - gem.lab.home
+    secretName: gem-tls
+  rules:
+  - host: gem.lab.home
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: gem
+            port:
+              number: 3100
