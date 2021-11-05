@@ -13,9 +13,10 @@ kapp deploy -a gel \
 --from-file config.yaml \
 --dry-run=client \
 -o yaml) \
--f service.yaml \
--f statefulset.yaml \
+-f gel-service.yaml \
+-f gel-ss.yaml \
 -f job.yaml \
 -f minio.yaml \
 -f certificate.yaml \
--f ingress.yaml
+-f ingress.yaml \
+-f namespace.yaml
