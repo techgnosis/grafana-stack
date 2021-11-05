@@ -18,6 +18,21 @@ store_gateway:
     kvstore:
       store: memberlist
 
+ruler:
+  enable_sharding: true
+  ring:
+    kvstore:
+      store: memberlist
+
+ruler_storage:
+  backend: s3
+  s3:
+    endpoint: minio:9000
+    bucket_name: enterprise-metrics-ruler
+    access_key_id: minio
+    secret_access_key: minio123
+    insecure: true
+
 admin_client:
   storage:
     type: s3
@@ -65,6 +80,7 @@ blocks_storage:
     bucket_name: grafana-metrics-tsdb
     access_key_id: minio
     secret_access_key: minio123 
-    insecure: true 
+    insecure: true
+
 storage:
   engine: blocks

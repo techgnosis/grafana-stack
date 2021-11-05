@@ -44,7 +44,7 @@ spec:
             [
                 "sh",
                 "-c",
-                "mkdir -p /storage/grafana-metrics-tsdb && mkdir -p /storage/grafana-metrics-admin",
+                "mkdir -p /storage/grafana-metrics-tsdb && mkdir -p /storage/grafana-metrics-admin && mkdir -p /storage/grafana-metrics-ruler",
             ]
           volumeMounts:
             - name: storage # must match the volume name, above

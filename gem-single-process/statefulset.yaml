@@ -39,7 +39,6 @@ spec:
               name: gem-config
             - mountPath: /etc/gem/license
               name: gem-license
-      terminationGracePeriodSeconds: 300
       volumes:
         - name: gem-config
           configMap:
