@@ -14,9 +14,10 @@ kapp deploy -a gem \
 --from-file config.yaml \
 --dry-run=client \
 -o yaml) \
--f service.yaml \
--f statefulset.yaml \
+-f gem-service.yaml \
+-f gem-ss.yaml \
 -f job.yaml \
 -f minio.yaml \
 -f certificate.yaml \
--f ingress.yaml
+-f ingress.yaml \
+-f compactor-ss.yaml
