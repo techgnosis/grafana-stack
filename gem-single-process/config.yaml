@@ -1,13 +1,11 @@
 auth:
   type: enterprise
 
-target: all
-
 # TODO: Ensure the cluster name is set to match your Grafana Labs License File
 cluster_name: gem
 
 license:
-  path: /etc/gem/license/license.jwt 
+  path: /etc/gem/license/gem-license.jwt 
 
 server:
   http_listen_port: 9000
@@ -16,6 +14,8 @@ gateway:
   proxy:
     admin_api:
       url: http://gem.gem.svc.cluster.local:9000
+    alertmanager:
+      url: http://alertmanager.gem.svc.cluster.local:9000
     compactor:
       url: http://compactor.gem.svc.cluster.local:9000
     distributor:
@@ -29,6 +29,16 @@ gateway:
     store_gateway:
       url: http://gem.gem.svc.cluster.local:9000
     
+
+alertmanager_storage:
+  backend: s3
+  s3:
+    endpoint: minio:9000
+    bucket_name: enterprise-metrics-alertmanager
+    access_key_id: minio
+    secret_access_key: minio123
+    insecure: true
+
 
 store_gateway:
   sharding_enabled: true
@@ -56,7 +66,7 @@ admin_client:
     type: s3
     s3:
       endpoint: minio:9000
-      bucket_name: grafana-metrics-admin 
+      bucket_name: enterprise-metrics-admin 
       access_key_id: minio
       secret_access_key: minio123
       insecure: true
@@ -87,6 +97,14 @@ compactor:
     kvstore:
       store: memberlist
 
+alertmanager:
+  data_dir: /data/alertmanager
+  external_url: /alertmanager
+  sharding_enabled: true
+  sharding_ring:
+    kvstore:
+      store: memberlist
+
 blocks_storage:
   tsdb:
     dir: /data/cortex/tsdb
@@ -95,7 +113,7 @@ blocks_storage:
   backend: s3
   s3:
     endpoint: minio:9000
-    bucket_name: grafana-metrics-tsdb
+    bucket_name: enterprise-metrics-tsdb
     access_key_id: minio
     secret_access_key: minio123 
     insecure: true

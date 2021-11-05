@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: alertmanager
+  namespace: gem
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: alertmanager
+  template:
+    metadata:
+      labels:
+        name: alertmanager
+    spec:
+      containers:
+        - name: alertmanager
+          args:
+            - -config.file=/etc/gem/config.yaml
+            - -target=alertmanager
+          image: grafana/metrics-enterprise:v1.5.1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9000
+              name: http
+            - containerPort: 9095
+              name: grpc
+            - containerPort: 7946
+              name: gossip
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 9000
+            initialDelaySeconds: 15
+            timeoutSeconds: 1
+          volumeMounts:
+            - mountPath: /data
+              name: data
+            - mountPath: /etc/gem
+              name: gem-config
+            - mountPath: /etc/gem/license
+              name: gem-license
+      volumes:
+        - name: gem-config
+          configMap:
+            name: gem-config
+        - name: gem-license
+          secret:
+            secretName: gem-license
+  updateStrategy:
+    type: RollingUpdate
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 50Gi
