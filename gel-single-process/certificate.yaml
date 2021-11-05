@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: gel-tls
+  namespace: gel
+spec:
+  dnsNames:
+  - gel.lab.home
+  issuerRef:
+    kind: ClusterIssuer
+    name: mkcert
+  secretName: gel-tls
