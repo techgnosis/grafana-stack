@@ -16,6 +16,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: gem
+            name: gateway
             port:
-              number: 3100
+              number: 9000
