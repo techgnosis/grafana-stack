@@ -12,6 +12,24 @@ license:
 server:
   http_listen_port: 9000
 
+gateway:
+  proxy:
+    admin_api:
+      url: http://gem.gem.svc.cluster.local:9000
+    compactor:
+      url: http://compactor.gem.svc.cluster.local:9000
+    distributor:
+      url: http://gem.gem.svc.cluster.local:9000
+    ingester:
+      url: http://gem.gem.svc.cluster.local:9000
+    query_frontend:
+      url: http://gem.gem.svc.cluster.local:9000
+    ruler:
+      url: http://gem.gem.svc.cluster.local:9000
+    store_gateway:
+      url: http://gem.gem.svc.cluster.local:9000
+    
+
 store_gateway:
   sharding_enabled: true
   sharding_ring:

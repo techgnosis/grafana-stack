@@ -20,4 +20,7 @@ kapp deploy -a gem \
 -f minio.yaml \
 -f certificate.yaml \
 -f ingress.yaml \
--f compactor-ss.yaml
+-f compactor-ss.yaml \
+-f compactor-service.yaml \
+-f gateway-deployment.yaml \
+-f gateway-service.yaml

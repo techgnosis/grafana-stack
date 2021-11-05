@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway
+  namespace: gem
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: gateway
+  template:
+    metadata:
+      labels:
+        name: gateway
+    spec:
+      containers:
+        - name: gateway
+          args:
+            - -config.file=/etc/gem/config.yaml
+            - -target=gateway
+          image: grafana/metrics-enterprise:v1.5.1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9000
+              name: http
+            - containerPort: 9095
+              name: grpc
+            - containerPort: 7946
+              name: gossip
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 9000
+            initialDelaySeconds: 15
+            timeoutSeconds: 1
+          volumeMounts:
+            - mountPath: /etc/gem
+              name: gem-config
+            - mountPath: /etc/gem/license
+              name: gem-license
+      volumes:
+        - name: gem-config
+          configMap:
+            name: gem-config
+        - name: gem-license
+          secret:
+            secretName: gem-license
+  updateStrategy:
+    type: RollingUpdate
