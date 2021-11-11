@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: alertmanager-discovery
+  namespace: get
+spec:
+  clusterIP: None
+  ports:
+    - name: get-grpc
+      port: 9095
+      targetPort: grpc
+    - name: get-gossip
+      port: 7946
+      targetPort: gossip
+  publishNotReadyAddresses: true
+  selector:
+    name: compactor
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: alertmanager
+  namespace: get
+spec:
+  ports:
+    - name: get-http
+      port: 9000
+      targetPort: http
+  selector:
+    name: alertmanager
+  sessionAffinity: None
+  type: ClusterIP

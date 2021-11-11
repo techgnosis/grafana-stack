@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway
+  namespace: get
+spec:
+  type: ClusterIP
+  selector:
+    name: gateway
+  ports:
+    - name: gateway-http
+      port: 9000
+      targetPort: http
+  
+  

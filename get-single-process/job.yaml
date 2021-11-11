@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: get-tokengen
+  namespace: get
+spec:
+  template:
+    spec:
+      containers:
+        - name: get-tokengen
+          image: grafana/metrics-enterprise:v1.5.1
+          imagePullPolicy: IfNotPresent
+          args:
+            - --config.file=/etc/get/config.yaml
+            - --target=tokengen
+          volumeMounts:
+            - mountPath: /etc/get
+              name: get-config
+            - mountPath: /etc/get/license
+              name: get-license
+      volumes:
+        - name: get-config
+          configMap:
+            name: get-config
+        - name: get-license
+          secret:
+            secretName: get-license
+      restartPolicy: Never
