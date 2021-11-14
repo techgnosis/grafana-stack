@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: compactor
+  namespace: gel
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: compactor
+  template:
+    metadata:
+      labels:
+        name: compactor
+    spec:
+      containers:
+        - name: compactor
+          args:
+            - -config.file=/etc/gel/config.yaml
+            - -target=compactor
+          image: grafana/metrics-enterprise:v1.5.1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9000
+              name: http
+            - containerPort: 9095
+              name: grpc
+            - containerPort: 7946
+              name: gossip
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 9000
+            initialDelaySeconds: 15
+            timeoutSeconds: 1
+          volumeMounts:
+            - mountPath: /data
+              name: data
+            - mountPath: /etc/gel
+              name: gel-config
+            - mountPath: /etc/gel/license
+              name: gel-license
+      volumes:
+        - name: gel-config
+          configMap:
+            name: gel-config
+        - name: gel-license
+          secret:
+            secretName: gel-license
+  updateStrategy:
+    type: RollingUpdate
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 50Gi
