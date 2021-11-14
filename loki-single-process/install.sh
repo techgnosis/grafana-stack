@@ -10,7 +10,6 @@ kapp deploy -a loki \
 -o yaml) \
 -f loki-service.yaml \
 -f loki-ss.yaml \
--f minio.yaml \
 -f certificate.yaml \
 -f ingress.yaml \
 -f namespace.yaml
