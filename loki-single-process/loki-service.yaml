@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: loki-discovery
+  namespace: loki
+spec:
+  clusterIP: None
+  ports:
+    - name: loki-grpc
+      port: 9095
+      targetPort: grpc
+    - name: loki-gossip
+      port: 7946
+      targetPort: gossip
+  publishNotReadyAddresses: true
+  selector:
+    name: loki
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: loki
+  namespace: loki
+spec:
+  ports:
+    - name: loki-http
+      port: 3100
+      targetPort: http
+  selector:
+    name: loki
+  sessionAffinity: None
+  type: ClusterIP
