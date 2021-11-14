@@ -2,64 +2,33 @@ auth:
   type: enterprise
 
 # TODO: Ensure the cluster name is set to match your Grafana Labs License File
-cluster_name: gem
+cluster_name: get
 
 license:
-  path: /etc/gem/license/gem-license.jwt 
+  path: /etc/get/license/get-license.jwt 
 
 server:
-  http_listen_port: 9000
+  http_listen_port: 8080
 
 gateway:
   proxy:
     admin_api:
-      url: http://gem.gem.svc.cluster.local:9000
+      url: http://gem.gem.svc.cluster.local:8080
     alertmanager:
-      url: http://alertmanager.gem.svc.cluster.local:9000
+      url: http://alertmanager.gem.svc.cluster.local:8080
     compactor:
-      url: http://compactor.gem.svc.cluster.local:9000
+      url: http://compactor.gem.svc.cluster.local:8080
     distributor:
-      url: http://gem.gem.svc.cluster.local:9000
+      url: http://gem.gem.svc.cluster.local:8080
     ingester:
-      url: http://gem.gem.svc.cluster.local:9000
+      url: http://gem.gem.svc.cluster.local:8080
     query_frontend:
-      url: http://gem.gem.svc.cluster.local:9000
+      url: http://gem.gem.svc.cluster.local:8080
     ruler:
-      url: http://gem.gem.svc.cluster.local:9000
+      url: http://gem.gem.svc.cluster.local:8080
     store_gateway:
-      url: http://gem.gem.svc.cluster.local:9000
+      url: http://gem.gem.svc.cluster.local:8080
     
-
-alertmanager_storage:
-  backend: s3
-  s3:
-    endpoint: minio:9000
-    bucket_name: enterprise-metrics-alertmanager
-    access_key_id: minio
-    secret_access_key: minio123
-    insecure: true
-
-
-store_gateway:
-  sharding_enabled: true
-  sharding_ring:
-    kvstore:
-      store: memberlist
-
-ruler:
-  enable_sharding: true
-  ring:
-    kvstore:
-      store: memberlist
-
-ruler_storage:
-  backend: s3
-  s3:
-    endpoint: minio:9000
-    bucket_name: enterprise-metrics-ruler
-    access_key_id: minio
-    secret_access_key: minio123
-    insecure: true
 
 admin_client:
   storage:
@@ -71,16 +40,12 @@ admin_client:
       secret_access_key: minio123
       insecure: true
 
-distributor:
-  shard_by_all_labels: true
-  pool:
-    health_check_ingesters: true
 
 memberlist:
   abort_if_cluster_join_fails: false
   bind_port: 7946
   join_members:
-  - gem-discovery
+  - get-discovery
 
 ingester:
   lifecycler:
@@ -92,14 +57,6 @@ ingester:
 
 compactor:
   data_dir: "/data"
-  sharding_enabled: true
-  sharding_ring:
-    kvstore:
-      store: memberlist
-
-alertmanager:
-  data_dir: /data/alertmanager
-  external_url: /alertmanager
   sharding_enabled: true
   sharding_ring:
     kvstore:
