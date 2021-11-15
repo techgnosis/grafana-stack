@@ -1,0 +1,1 @@
+This is just for the official Grafana Terraform provider. It is used to make dashboards, data sources, teams, etc. 
