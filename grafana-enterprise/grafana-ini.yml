@@ -41,15 +41,21 @@ grafana.ini:
   #feature_toggles:
   #  enable: ngalert
   alerting:
-    enabled: false
-  unified_alerting:
     enabled: true
+  unified_alerting:
+    enabled: false
   log:
     level: info
   plugins:
     enable_alpha: true
-  # white_labeling:
-  #   login_background: url(https://play.vidyard.com/rgZKgi1iXBWS1gPBrEkGa2.jpg)
-  #   app_title: Precision Drilling
-  #   login_title: Precision Drilling
-  #   login_subtitle: Use your AD credentials
+  rendering:
+    server_url: http://image-renderer:8081/render
+    callback_url: http://grafana-enterprise
+  #white_labeling:
+  #  login_background: url(https://www.t-mobile.com/news/_admin/uploads/2020/11/Neon-T-Hill-Tower-1024x576.png)
+  #  app_title: T-Mobile ESD
+  #  login_title: T-Mobile ESD
+  #  login_subtitle: Use your AD credentials (without @tmobile.com)
+  #  footer_links: support wiki
+  #  footer_links_support_text: Support
+  #  footer_links_wiki_text: Wiki

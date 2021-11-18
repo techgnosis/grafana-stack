@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: image-renderer
+  namespace: grafana-enterprise
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: image-renderer
+  template:
+    metadata:
+      labels:
+        app: image-renderer
+    spec:
+      containers:
+        - name: image-renderer
+          image: grafana/grafana-image-renderer:3.2.1
+          ports:
+            - containerPort: 8081
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: image-renderer
+  namespace: grafana-enterprise
+spec:
+  selector:
+    app: image-renderer
+  ports:
+    - name: image-renderer
+      protocol: TCP
+      port: 8081
