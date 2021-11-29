@@ -18,10 +18,10 @@ spec:
           args:
             - -config.file=/etc/gel/config.yaml
             - -target=compactor
-          image: grafana/metrics-enterprise:v1.5.1
+          image: grafana/enterprise-logs:v1.2.0
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 9000
+            - containerPort: 3100
               name: http
             - containerPort: 9095
               name: grpc
@@ -30,7 +30,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /ready
-              port: 9000
+              port: 3100
             initialDelaySeconds: 15
             timeoutSeconds: 1
           volumeMounts:

@@ -17,7 +17,7 @@ spec:
         - name: gel
           args:
             - -config.file=/etc/gel/config.yaml
-          image: grafana/enterprise-logs:v1.1.0
+          image: grafana/enterprise-logs:v1.2.0
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3100
