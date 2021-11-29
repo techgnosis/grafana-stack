@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
         - name: gel-tokengen
-          image: grafana/enterprise-logs:v1.1.0
+          image: grafana/enterprise-logs:v1.2.0
           imagePullPolicy: IfNotPresent
           args:
             - --config.file=/etc/gel/config.yaml

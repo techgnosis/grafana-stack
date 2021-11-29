@@ -44,7 +44,7 @@ spec:
             [
                 "sh",
                 "-c",
-                "mkdir -p /storage/grafana-logs-data && mkdir -p /storage/grafana-logs-admin",
+                "mkdir -p /storage/grafana-logs-data && mkdir -p /storage/grafana-logs-admin && mkdir -p /storage/grafana-logs-ruler",
             ]
           volumeMounts:
             - name: storage # must match the volume name, above

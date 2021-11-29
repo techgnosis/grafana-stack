@@ -54,7 +54,18 @@ admin_client:
     s3:
       bucket_name: grafana-logs-admin
 
+ruler:
+  rule_path: /data/ruler
+  storage:
+    type: s3
+    s3:
+      bucketnames: grafana-logs-ruler
+
 storage_config:
+  boltdb_shipper:
+    active_index_directory: /data/boltdb-storage
+    cache_location: /data/boltdb-index-cache
+    shared_store: s3
   aws:
     bucketnames: grafana-logs-data
 
