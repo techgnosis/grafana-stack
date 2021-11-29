@@ -24,7 +24,7 @@ metadata:
 spec:
   ports:
     - name: gel-http
-      port: 9000
+      port: 3100
       targetPort: http
   selector:
     name: compactor

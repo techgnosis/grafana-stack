@@ -55,7 +55,8 @@ admin_client:
       bucket_name: grafana-logs-admin
 
 ruler:
-  rule_path: /data/ruler
+  enable_sharding: true
+  rule_path: /data/rules
   storage:
     type: s3
     s3:
