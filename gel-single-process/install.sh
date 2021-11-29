@@ -21,4 +21,6 @@ kapp deploy -a gel \
 -f ingress.yaml \
 -f compactor-service.yaml \
 -f compactor-ss.yaml \
--f namespace.yaml
+-f namespace.yaml \
+-f gateway-deployment.yaml \
+-f gateway-service.yaml

@@ -17,6 +17,21 @@ ingester:
     enabled: true
     dir: /data/wal
 
+gateway:
+  proxy:
+    admin_api:
+      url: http://gel.gel.svc.cluster.local:3100
+    compactor:
+      url: http://compactor.gel.svc.cluster.local:3100
+    distributor:
+      url: http://gel.gel.svc.cluster.local:3100
+    ingester:
+      url: http://gel.gel.svc.cluster.local:3100
+    query_frontend:
+      url: http://gel.gel.svc.cluster.local:3100
+    ruler:
+      url: http://gel.gel.svc.cluster.local:3100
+
 memberlist:
   abort_if_cluster_join_fails: false
   bind_port: 7946
