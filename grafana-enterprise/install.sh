@@ -5,19 +5,24 @@ set -euo pipefail
 kapp deploy -a grafana-enterprise \
 -f namespace.yaml \
 -f certificate.yml \
--f grafana-ldap.yml \
 -f postgres.yml \
 -f image-renderer.yaml \
--f <(kubectl create cm license \
+-f ge-ss.yaml \
+-f ge-pvc.yaml \
+-f ge-service.yaml \
+-f ge-ingress.yaml \
+-f <(kubectl create secret generic grafana-enterprise-license \
 --namespace grafana-enterprise \
 --from-file=license.jwt=../licenses/ge-license.jwt \
 --dry-run=client \
--o yaml)
-
-helm upgrade --install grafana-enterprise grafana \
---repo https://grafana.github.io/helm-charts \
---version 6.16.6 \
+-o yaml) \
+-f <(kubectl create cm grafana-config \
 --namespace grafana-enterprise \
---values grafana-values.yml \
---values grafana-ini.yml \
---wait
+--from-file=grafana.ini \
+--dry-run=client \
+-o yaml) \
+-f <(kubectl create cm ldap-config \
+--namespace grafana-enterprise \
+--from-file=ldap.toml \
+--dry-run=client \
+-o yaml)

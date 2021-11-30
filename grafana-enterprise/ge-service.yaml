@@ -7,9 +7,9 @@ spec:
   selector:
     app: grafana-enterprise
   ports:
-    - name: 3000
+    - name: http
       protocol: TCP
-      port: 5432
+      port: 3000
     - name: gossip
       protocol: TCP
       port: 9094

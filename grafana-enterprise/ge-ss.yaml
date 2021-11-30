@@ -13,6 +13,33 @@ spec:
       labels:
         name: grafana-enterprise
     spec:
+      # initContainers:
+      #   - name: init-chown-data
+      #     command:
+      #     - chown
+      #     - -R
+      #     - 472:472
+      #     - /var/lib/grafana
+      #     image: busybox:1.31.1
+      #     imagePullPolicy: IfNotPresent
+      #     resources: {}
+      #     securityContext:
+      #       runAsNonRoot: false
+      #       runAsUser: 0
+      #     terminationMessagePath: /dev/termination-log
+      #     terminationMessagePolicy: File
+      #     volumeMounts:
+      #     - mountPath: /var/lib/grafana
+      #       name: data
+      #     restartPolicy: Always
+      #     schedulerName: default-scheduler
+      #     securityContext:
+      #       fsGroup: 472
+      #       runAsGroup: 472
+      #       runAsUser: 472
+      #     serviceAccount: grafana-enterprise
+      #     serviceAccountName: grafana-enterprise
+      #     terminationGracePeriodSeconds: 30
       containers:
         - name: grafana-enterprise
           image: grafana/grafana-enterprise:8.2.0
@@ -43,7 +70,7 @@ spec:
               name: ldap-config
               subPath: ldap.toml
             - mountPath: /var/lib/grafana/license.jwt
-              name: grafana-license
+              name: grafana-enterprise-license
               subPath: license.jwt
       volumes:
         - name: grafana-config
@@ -60,12 +87,3 @@ spec:
             claimName: grafana-enterprise
   updateStrategy:
     type: RollingUpdate
-  volumeClaimTemplates:
-    - metadata:
-        name: data
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 50Gi
