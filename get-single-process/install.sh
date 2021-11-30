@@ -23,6 +23,4 @@ kapp deploy -a get \
 -f compactor-ss.yaml \
 -f compactor-service.yaml \
 -f gateway-deployment.yaml \
--f gateway-service.yaml \
--f alertmanager-service.yaml \
--f alertmanager-ss.yaml
+-f gateway-service.yaml

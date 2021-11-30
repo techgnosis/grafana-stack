@@ -9,7 +9,7 @@ spec:
     name: gateway
   ports:
     - name: gateway-http
-      port: 9000
+      port: 8080
       targetPort: http
   
   

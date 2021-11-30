@@ -18,10 +18,10 @@ spec:
           args:
             - -config.file=/etc/get/config.yaml
             - -target=compactor
-          image: grafana/metrics-enterprise:v1.5.1
+          image: grafana/enterprise-traces:v1.0.0
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 9000
+            - containerPort: 8080
               name: http
             - containerPort: 9095
               name: grpc
@@ -30,7 +30,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /ready
-              port: 9000
+              port: 8080
             initialDelaySeconds: 15
             timeoutSeconds: 1
           volumeMounts:

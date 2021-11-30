@@ -1,41 +1,66 @@
-auth:
-  type: enterprise
-
-# TODO: Ensure the cluster name is set to match your Grafana Labs License File
-cluster_name: get
+auth_enabled: true
+multitenancy_enabled: true
+search_enabled: true
 
 license:
-  path: /etc/get/license/get-license.jwt 
+  path: /etc/get/license/get-license.jwt
+
+auth:
+  type: enterprise
 
 server:
   http_listen_port: 8080
 
+ingester:
+  lifecycler:
+    ring:
+      replication_factor: 3
+
+compactor:
+  ring:
+    kvstore:
+      store: memberlist
+
+storage:
+  trace:
+    wal:
+      path: /data/wal
+    backend: s3
+    s3:
+      bucket: enterprise-traces-data
+      endpoint: minio:9000
+      access_key: minio
+      secret_key: minio123
+      insecure: true
+      forcepathstyle: true
+
 gateway:
   proxy:
     admin_api:
-      url: http://gem.gem.svc.cluster.local:8080
-    alertmanager:
-      url: http://alertmanager.gem.svc.cluster.local:8080
+      url: http://get.get.svc.cluster.local:8080
     compactor:
-      url: http://compactor.gem.svc.cluster.local:8080
+      url: http://compactor.get.svc.cluster.local:8080
     distributor:
-      url: http://gem.gem.svc.cluster.local:8080
+      url: http://get.get.svc.cluster.local:8080
     ingester:
-      url: http://gem.gem.svc.cluster.local:8080
+      url: http://get.get.svc.cluster.local:8080
     query_frontend:
-      url: http://gem.gem.svc.cluster.local:8080
-    ruler:
-      url: http://gem.gem.svc.cluster.local:8080
-    store_gateway:
-      url: http://gem.gem.svc.cluster.local:8080
+      url: http://get.get.svc.cluster.local:8080
     
+
+admin_api:
+  leader_election:
+    enabled: true
+    ring:
+      kvstore:
+        store: memberlist
 
 admin_client:
   storage:
     type: s3
     s3:
       endpoint: minio:9000
-      bucket_name: enterprise-metrics-admin 
+      bucket_name: enterprise-traces-admin 
       access_key_id: minio
       secret_access_key: minio123
       insecure: true
@@ -46,34 +71,3 @@ memberlist:
   bind_port: 7946
   join_members:
   - get-discovery
-
-ingester:
-  lifecycler:
-    num_tokens: 512
-    ring:
-      kvstore:
-        store: memberlist
-      replication_factor: 3
-
-compactor:
-  data_dir: "/data"
-  sharding_enabled: true
-  sharding_ring:
-    kvstore:
-      store: memberlist
-
-blocks_storage:
-  tsdb:
-    dir: /data/cortex/tsdb
-  bucket_store:
-    sync_dir: /data/cortex/tsdb-sync
-  backend: s3
-  s3:
-    endpoint: minio:9000
-    bucket_name: enterprise-metrics-tsdb
-    access_key_id: minio
-    secret_access_key: minio123 
-    insecure: true
-
-storage:
-  engine: blocks
