@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana-enterprise
+  namespace: grafana-enterprise
+spec:
+  tls:
+  - hosts:
+      - grafana.lab.home
+    secretName: grafana-tls
+  rules:
+  - host: grafana.lab.home
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: grafana
+            port:
+              number: 3000

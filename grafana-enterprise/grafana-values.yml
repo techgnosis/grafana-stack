@@ -2,7 +2,7 @@ image:
   repository: grafana/grafana-enterprise
   tag: 8.2.0
 
-replicas: 2
+replicas: 1
 
 adminPassword: admin
 
