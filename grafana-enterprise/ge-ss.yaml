@@ -69,9 +69,11 @@ spec:
             - mountPath: /etc/grafana/ldap.toml
               name: ldap-config
               subPath: ldap.toml
+              readOnly: true
             - mountPath: /var/lib/grafana/license.jwt
               name: grafana-enterprise-license
               subPath: license.jwt
+              readOnly: true
       volumes:
         - name: grafana-config
           configMap:
@@ -82,8 +84,14 @@ spec:
         - name: grafana-enterprise-license
           secret:
             secretName: grafana-enterprise-license
-        - name: data
-          persistentVolumeClaim:
-            claimName: grafana-enterprise
   updateStrategy:
     type: RollingUpdate
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 50Gi

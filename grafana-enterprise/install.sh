@@ -8,9 +8,9 @@ kapp deploy -a grafana-enterprise \
 -f postgres.yml \
 -f image-renderer.yaml \
 -f ge-ss.yaml \
--f ge-pvc.yaml \
 -f ge-service.yaml \
 -f ge-ingress.yaml \
+-f prometheus.yaml \
 -f <(kubectl create secret generic grafana-enterprise-license \
 --namespace grafana-enterprise \
 --from-file=license.jwt=../licenses/ge-license.jwt \

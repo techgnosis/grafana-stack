@@ -8,6 +8,7 @@ kapp deploy -a grafana-enterprise \
 -f grafana-ldap.yml \
 -f postgres.yml \
 -f image-renderer.yaml \
+-f prometheus.yaml \
 -f <(kubectl create cm license \
 --namespace grafana-enterprise \
 --from-file=license.jwt=../licenses/ge-license.jwt \
