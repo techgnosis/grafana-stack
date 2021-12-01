@@ -26,6 +26,12 @@ resource "grafana_data_source" "GrafanaPostgres" {
   
 }
 
+resource "grafana_data_source" "RecordedQueries" {
+  type = "prometheus"
+  name = "Recorded Queries"
+  url  = "http://prometheus:9090"
+}
+
 resource "grafana_data_source_permission" "Backend" {
   datasource_id = grafana_data_source.Backend.id
   permissions {
