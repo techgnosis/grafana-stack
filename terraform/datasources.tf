@@ -31,19 +31,3 @@ resource "grafana_data_source" "RecordedQueries" {
   name = "Recorded Queries"
   url  = "http://prometheus:9090"
 }
-
-resource "grafana_data_source_permission" "Backend" {
-  datasource_id = grafana_data_source.Backend.id
-  permissions {
-    team_id    = grafana_team.Backend.id
-    permission = "Query"
-  }
-}
-
-resource "grafana_data_source_permission" "Frontend" {
-  datasource_id = grafana_data_source.Frontend.id
-  permissions {
-    team_id    = grafana_team.Frontend.id
-    permission = "Query"
-  }
-}
