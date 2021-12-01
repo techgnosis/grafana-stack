@@ -75,15 +75,15 @@ spec:
               subPath: license.jwt
               readOnly: true
       volumes:
-        - name: grafana-config
-          configMap:
+        - configMap:
             name: grafana-config
-        - name: ldap-config
-          confipMap:
+          name: grafana-config
+        - confipMap:
             name: ldap-config
-        - name: grafana-enterprise-license
-          secret:
+          name: ldap-config
+        - secret:
             secretName: grafana-enterprise-license
+          name: grafana-enterprise-license
   updateStrategy:
     type: RollingUpdate
   volumeClaimTemplates:
