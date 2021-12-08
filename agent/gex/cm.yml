@@ -1,0 +1,83 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-agent-config
+  namespace: agent
+data:
+  agent.yaml: |
+    server:
+      http_listen_port: 12345
+    loki:
+      positions_directory: /tmp/positions
+      configs:
+        - name: gem
+          clients:
+            - url: http://gel.gel.svc.cluster.local:3100/loki/api/v1/push
+              basic_auth:
+                  username: gem
+                  password: Z2VtLXdyaXRlLWFnZW50OiQ2I3p8Om8zNikzdjVfMH40KThhNjMlJA==
+          scrape_configs:
+            - job_name: gem-pods
+              kubernetes_sd_configs:
+                - role: pod
+                  namespaces:
+                    names:
+                      - gem
+              pipeline_stages:
+                - docker: {}
+              relabel_configs:
+                - source_labels:
+                    - __meta_kubernetes_pod_node_name
+                  target_label: __host__
+                - action: replace
+                  source_labels:
+                    - __meta_kubernetes_namespace
+                  target_label: namespace
+                - action: replace
+                  source_labels:
+                    - __meta_kubernetes_pod_name
+                  target_label: pod
+                - replacement: /var/log/pods/*$1/*.log
+                  separator: /
+                  source_labels:
+                    - __meta_kubernetes_pod_uid
+                    - __meta_kubernetes_pod_container_name
+                  target_label: __path__
+    prometheus:
+      configs:
+        - name: gel
+          host_filter: true
+          remote_write:
+            - url: http://gem-enterprise-metrics-gateway.gem.svc.cluster.local:8080/api/v1/push
+              basic_auth:
+                username: gel
+                password: Z2VsLXdyaXRlLWFnZW50OjFlJls+fjVdODkwWzUhNWMidzEmMjMoQQ==
+          scrape_configs:
+            - job_name: gel-pods
+              metrics_path: "/metrics"
+              kubernetes_sd_configs:
+                - role: pod
+                  namespaces:
+                    names:
+                      - gel
+              relabel_configs:
+                - action: drop
+                  regex: Succeeded|Failed
+                  source_labels:
+                    - __meta_kubernetes_pod_phase
+                - action: keep
+                  regex: 3100
+                  source_labels:
+                    - __meta_kubernetes_pod_container_port_number
+                - action: replace
+                  source_labels:
+                    - __meta_kubernetes_namespace
+                  target_label: namespace
+                - action: replace
+                  source_labels:
+                    - __meta_kubernetes_pod_name
+                  target_label: pod
+      global:
+        scrape_interval: 60s
+      wal_directory: /var/lib/agent/data
+
