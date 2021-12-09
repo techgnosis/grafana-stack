@@ -43,21 +43,39 @@ data:
                     - __meta_kubernetes_pod_uid
                     - __meta_kubernetes_pod_container_name
                   target_label: __path__
-        - name: journald
+        - name: grafana
           clients:
             - url: http://gel.gel.svc.cluster.local:3100/loki/api/v1/push
               basic_auth:
-                  username: hosts
-                  password: aG9zdHMtd3JpdGUtYWdlbnQ6IiomMTJzTzMxLn1aVDgwKjMtOTcmMl4q
+                  username: grafana
+                  password: Z3JhZmFuYS13cml0ZS1hZ2VudDorMyJyNCwqIzw1OFgxK2xAXTNlODM3NVs=
           scrape_configs:
-            - job_name: journal
-              journal:
-                max_age: 12h
-                labels:
-                  job: systemd-journal
+            - job_name: grafana-pods
+              kubernetes_sd_configs:
+                - role: pod
+                  namespaces:
+                    names:
+                      - grafana-enterprise
+              pipeline_stages:
+                - docker: {}
               relabel_configs:
-                - source_labels: ['__journal__systemd_unit']
-                  target_label: 'unit'
+                - source_labels:
+                    - __meta_kubernetes_pod_node_name
+                  target_label: __host__
+                - action: replace
+                  source_labels:
+                    - __meta_kubernetes_namespace
+                  target_label: namespace
+                - action: replace
+                  source_labels:
+                    - __meta_kubernetes_pod_name
+                  target_label: pod
+                - replacement: /var/log/pods/*$1/*.log
+                  separator: /
+                  source_labels:
+                    - __meta_kubernetes_pod_uid
+                    - __meta_kubernetes_pod_container_name
+                  target_label: __path__
     prometheus:
       configs:
         - name: gel
@@ -125,7 +143,7 @@ data:
                     - __meta_kubernetes_pod_name
                   target_label: pod
       global:
-        scrape_interval: 60s
+        scrape_interval: 5s
       wal_directory: /var/lib/agent/data
     integrations:
       prometheus_remote_write:

@@ -6,6 +6,10 @@ resource "grafana_folder" "Backend" {
   title = "Backend"
 }
 
+resource "grafana_folder" "GrafanaHealth" {
+  title = "Grafana Health"
+}
+
 resource "grafana_folder_permission" "Frontend" {
   folder_uid = grafana_folder.Frontend.uid
   permissions {
