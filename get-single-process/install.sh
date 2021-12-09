@@ -3,7 +3,6 @@
 set -euo pipefail
 
 kapp deploy -a get \
--f namespace.yaml \
 -f <(kubectl create secret generic get-license \
 --namespace get \
 --from-file ../licenses/get-license.jwt \
@@ -17,10 +16,10 @@ kapp deploy -a get \
 -f get-service.yaml \
 -f get-ss.yaml \
 -f job.yaml \
--f minio.yaml \
 -f certificate.yaml \
 -f ingress.yaml \
 -f compactor-ss.yaml \
 -f compactor-service.yaml \
+-f namespace.yaml \
 -f gateway-deployment.yaml \
 -f gateway-service.yaml
