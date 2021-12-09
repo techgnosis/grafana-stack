@@ -16,6 +16,18 @@ ingester:
     ring:
       replication_factor: 3
 
+
+distributor:
+  receivers:
+    otlp:
+      protocols:
+        grpc:
+        http:
+    jaeger:
+      protocols:
+        thrift_compact:
+
+
 compactor:
   ring:
     kvstore:

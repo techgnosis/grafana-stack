@@ -1,3 +1,5 @@
+This repo does not represent a finished project and is purely for my own learning purposes
+
 Use this repo to install Grafana, GEM, GEL, Tempo, Grafana Agent, and a fully instrumented demo app called `tns`
 
 
@@ -9,7 +11,13 @@ The following steps need to be done by hand:
 1. GEL Instance, Access Policy, and Token creation
 
 
-## TODO
+## Paths
+
+Loki write - `/loki/api/v1/push`
+Cortex write - `/api/v1/push`
+
+Loki read - `/`
+Cortex read - `/api/prom`
 
 
 ## TNS

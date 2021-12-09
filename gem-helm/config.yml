@@ -52,3 +52,6 @@ config:
       access_key_id: minio
       secret_access_key: minio123
       insecure: true
+
+  limits:
+    cardinality_analysis_enabled: true

@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: loki
-  namespace: loki
+  name: gem
+  namespace: gem
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
-      name: loki
+      name: gem
   template:
     metadata:
       labels:
-        name: loki
+        name: gem
     spec:
       containers:
-        - name: loki
+        - name: gem
           args:
-            - -config.file=/etc/loki/config.yaml
-          image: grafana/loki:2.4.1
+            - -config.file=/etc/gem/config.yaml
+          image: grafana/metrics-enterprise:v1.6.1
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 3100
+            - containerPort: 9000
               name: http
             - containerPort: 9095
               name: grpc
@@ -29,19 +29,23 @@ spec:
           readinessProbe:
             httpGet:
               path: /ready
-              port: 3100
+              port: 9000
             initialDelaySeconds: 15
             timeoutSeconds: 1
           volumeMounts:
             - mountPath: /data
               name: data
-            - mountPath: /etc/loki
-              name: loki-config
-      terminationGracePeriodSeconds: 300
+            - mountPath: /etc/gem
+              name: gem-config
+            - mountPath: /etc/gem/license
+              name: gem-license
       volumes:
-        - name: loki-config
+        - name: gem-config
           configMap:
-            name: loki-config
+            name: gem-config
+        - name: gem-license
+          secret:
+            secretName: gem-license
   updateStrategy:
     type: RollingUpdate
   volumeClaimTemplates:

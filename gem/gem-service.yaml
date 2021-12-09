@@ -26,6 +26,9 @@ spec:
     - name: gem-http
       port: 9000
       targetPort: http
+    - name: gem-grpc
+      port: 9095
+      targetPort: grpc
   selector:
     name: gem
   sessionAffinity: None

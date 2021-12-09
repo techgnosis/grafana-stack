@@ -1,24 +1,24 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: gateway
+  name: compactor
   namespace: gem
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
-      name: gateway
+      name: compactor
   template:
     metadata:
       labels:
-        name: gateway
+        name: compactor
     spec:
       containers:
-        - name: gateway
+        - name: compactor
           args:
             - -config.file=/etc/gem/config.yaml
-            - -target=gateway
-          image: grafana/metrics-enterprise:v1.5.1
+            - -target=compactor
+          image: grafana/metrics-enterprise:v1.6.1
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9000
@@ -34,6 +34,8 @@ spec:
             initialDelaySeconds: 15
             timeoutSeconds: 1
           volumeMounts:
+            - mountPath: /data
+              name: data
             - mountPath: /etc/gem
               name: gem-config
             - mountPath: /etc/gem/license
@@ -47,3 +49,12 @@ spec:
             secretName: gem-license
   updateStrategy:
     type: RollingUpdate
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 50Gi

@@ -52,15 +52,16 @@ admin_client:
   storage:
     type: s3
     s3:
-      bucket_name: grafana-logs-admin
+      bucket_name: enterprise-logs-admin
 
 ruler:
+  enable_api: true
   enable_sharding: true
-  rule_path: /data/rules
+  rule_path: rules
   storage:
     type: s3
     s3:
-      bucketnames: grafana-logs-ruler
+      bucketnames: enterprise-logs-ruler
 
 storage_config:
   boltdb_shipper:
@@ -68,7 +69,7 @@ storage_config:
     cache_location: /data/boltdb-index-cache
     shared_store: s3
   aws:
-    bucketnames: grafana-logs-data
+    bucketnames: enterprise-logs-data
 
 
 compactor:
@@ -79,7 +80,7 @@ common:
   replication_factor: 3
   storage:
     s3:
-      endpoint: minio:9000
+      endpoint: minio.minio.svc.cluster.local:9000
       access_key_id: minio
       secret_access_key: minio123
       insecure: true

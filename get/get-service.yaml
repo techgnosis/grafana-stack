@@ -26,6 +26,9 @@ spec:
     - name: get-http
       port: 8080
       targetPort: http
+    - name: get-thrift-compact
+      port: 6831
+      targetPort: thrift-compact
   selector:
     name: get
   sessionAffinity: None

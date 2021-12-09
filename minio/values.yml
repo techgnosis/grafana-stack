@@ -1,5 +1,5 @@
 buckets:
-  - name: enterprise-logs-tsdb
+  - name: enterprise-logs-data
     policy: none
     purge: false
   - name: enterprise-logs-admin

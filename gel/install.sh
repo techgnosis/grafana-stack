@@ -16,7 +16,6 @@ kapp deploy -a gel \
 -f gel-service.yaml \
 -f gel-ss.yaml \
 -f job.yaml \
--f minio.yaml \
 -f certificate.yaml \
 -f ingress.yaml \
 -f compactor-service.yaml \

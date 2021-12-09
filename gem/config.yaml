@@ -9,9 +9,12 @@ license:
 
 server:
   http_listen_port: 9000
+  grpc_listen_port: 9095
 
 gateway:
   proxy:
+    default:
+      url: http://gem.gem.svc.cluster.local:9000
     admin_api:
       url: http://gem.gem.svc.cluster.local:9000
     alertmanager:
@@ -120,3 +123,11 @@ blocks_storage:
 
 storage:
   engine: blocks
+
+limits:
+  cardinality_analysis_enabled: true
+
+instrumentation:
+  enabled: true
+  distributor_client:
+    address: 'dns:///gem:9095'

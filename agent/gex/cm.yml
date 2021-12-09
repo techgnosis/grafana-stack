@@ -15,7 +15,7 @@ data:
             - url: http://gel.gel.svc.cluster.local:3100/loki/api/v1/push
               basic_auth:
                   username: gem
-                  password: Z2VtLXdyaXRlLWFnZW50OiQ2I3p8Om8zNikzdjVfMH40KThhNjMlJA==
+                  password: Z2VtLXdyaXRlLWFnZW50OlNfJDY2Xjx8MzU2aFwzbDIvMTNeLjhGKA==
           scrape_configs:
             - job_name: gem-pods
               kubernetes_sd_configs:

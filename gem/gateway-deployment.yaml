@@ -1,23 +1,24 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
-  name: gem
+  name: gateway
   namespace: gem
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      name: gem
+      name: gateway
   template:
     metadata:
       labels:
-        name: gem
+        name: gateway
     spec:
       containers:
-        - name: gem
+        - name: gateway
           args:
             - -config.file=/etc/gem/config.yaml
-          image: grafana/metrics-enterprise:v1.5.1
+            - -target=gateway
+          image: grafana/metrics-enterprise:v1.6.1
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9000
@@ -33,8 +34,6 @@ spec:
             initialDelaySeconds: 15
             timeoutSeconds: 1
           volumeMounts:
-            - mountPath: /data
-              name: data
             - mountPath: /etc/gem
               name: gem-config
             - mountPath: /etc/gem/license
@@ -48,12 +47,3 @@ spec:
             secretName: gem-license
   updateStrategy:
     type: RollingUpdate
-  volumeClaimTemplates:
-    - metadata:
-        name: data
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 50Gi

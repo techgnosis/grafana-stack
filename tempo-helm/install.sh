@@ -2,9 +2,10 @@
 
 set -euo pipefail
 
-helm upgrade --install tempo tempo-distributed \
+helm upgrade --install tempo tempo \
 --repo https://grafana.github.io/helm-charts \
---version 0.9.13 \
+--version 0.12.1 \
 --namespace tempo \
+--create-namespace \
 --values tempo-values.yml \
 --wait
