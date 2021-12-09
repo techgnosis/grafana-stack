@@ -4,42 +4,34 @@ metadata:
   name: grafana-enterprise
   namespace: grafana-enterprise
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      name: grafana-enterprise
+      app: grafana-enterprise
   template:
     metadata:
       labels:
-        name: grafana-enterprise
+        app: grafana-enterprise
     spec:
-      # initContainers:
-      #   - name: init-chown-data
-      #     command:
-      #     - chown
-      #     - -R
-      #     - 472:472
-      #     - /var/lib/grafana
-      #     image: busybox:1.31.1
-      #     imagePullPolicy: IfNotPresent
-      #     resources: {}
-      #     securityContext:
-      #       runAsNonRoot: false
-      #       runAsUser: 0
-      #     terminationMessagePath: /dev/termination-log
-      #     terminationMessagePolicy: File
-      #     volumeMounts:
-      #     - mountPath: /var/lib/grafana
-      #       name: data
-      #     restartPolicy: Always
-      #     schedulerName: default-scheduler
-      #     securityContext:
-      #       fsGroup: 472
-      #       runAsGroup: 472
-      #       runAsUser: 472
-      #     serviceAccount: grafana-enterprise
-      #     serviceAccountName: grafana-enterprise
-      #     terminationGracePeriodSeconds: 30
+      serviceName: grafana-enterprise-headless
+      initContainers:
+        - name: init-chown-data
+          command:
+            - chown
+            - -R
+            - 472:472
+            - /var/lib/grafana
+          image: busybox:1.31.1
+          imagePullPolicy: IfNotPresent
+          resources: {}
+          securityContext:
+            runAsNonRoot: false
+            runAsUser: 0
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /var/lib/grafana
+              name: data
       containers:
         - name: grafana-enterprise
           image: grafana/grafana-enterprise:8.2.0
@@ -78,7 +70,7 @@ spec:
         - configMap:
             name: grafana-config
           name: grafana-config
-        - confipMap:
+        - configMap:
             name: ldap-config
           name: ldap-config
         - secret:

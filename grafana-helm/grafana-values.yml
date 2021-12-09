@@ -1,6 +1,6 @@
 image:
   repository: grafana/grafana-enterprise
-  tag: 8.2.0
+  tag: 8.3.0
 
 replicas: 1
 
@@ -12,6 +12,7 @@ persistence:
 plugins:
   - grafana-metrics-enterprise-app
   - grafana-enterprise-logs-app
+  - grafana-enterprise-traces-app
 
 ingress:
   enabled: true

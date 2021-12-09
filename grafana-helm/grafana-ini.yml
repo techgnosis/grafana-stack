@@ -16,6 +16,29 @@ grafana.ini:
     allow_sign_up: true
     sync_cron: "* */10 * * * *"
     active_sync_enabled: true
+  feature_toggles:
+    enable: recordedQueries
+  alerting:
+    enabled: false
+  unified_alerting:
+    enabled: true
+  recorded_queries:
+    enabled: true
+  log:
+    level: info
+  plugins:
+    enable_alpha: true
+  rendering:
+    server_url: http://image-renderer:8081/render
+    callback_url: http://grafana-enterprise
+  # white_labeling:
+  #   login_background: url(https://www.t-mobile.com/news/_admin/uploads/2020/11/Neon-T-Hill-Tower-1024x576.png)
+  #   app_title: T-Mobile ESD
+  #   login_title: T-Mobile ESD
+  #   login_subtitle: Use your AD credentials (without @tmobile.com)
+  #   footer_links: support wiki
+  #   footer_links_support_text: Support
+  #   footer_links_wiki_text: Wiki
   # auth.generic_oauth:
   #   enabled: false
   #   api_url: https://keycloak.lab.home/auth/realms/grafana/protocol/openid-connect/userinfo
@@ -38,24 +61,3 @@ grafana.ini:
   #   assertion_attribute_name: displayName
   #   assertion_attribute_login: mail
   #   assertion_attribute_email: mail
-  #feature_toggles:
-  #  enable: ngalert
-  alerting:
-    enabled: true
-  unified_alerting:
-    enabled: false
-  log:
-    level: info
-  plugins:
-    enable_alpha: true
-  rendering:
-    server_url: http://image-renderer:8081/render
-    callback_url: http://grafana-enterprise
-  #white_labeling:
-  #  login_background: url(https://www.t-mobile.com/news/_admin/uploads/2020/11/Neon-T-Hill-Tower-1024x576.png)
-  #  app_title: T-Mobile ESD
-  #  login_title: T-Mobile ESD
-  #  login_subtitle: Use your AD credentials (without @tmobile.com)
-  #  footer_links: support wiki
-  #  footer_links_support_text: Support
-  #  footer_links_wiki_text: Wiki
