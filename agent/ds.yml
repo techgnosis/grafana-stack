@@ -60,13 +60,6 @@ spec:
         - -config.expand-env
         command:
         - /bin/agent
-        envFrom:
-        - secretRef:
-            name: gel-creds
-        - secretRef:
-            name: gem-creds
-        - secretRef:
-            name: tempo-creds
         env:
         - name: HOSTNAME
           valueFrom:

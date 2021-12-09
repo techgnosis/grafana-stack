@@ -43,6 +43,21 @@ data:
                     - __meta_kubernetes_pod_uid
                     - __meta_kubernetes_pod_container_name
                   target_label: __path__
+        - name: journald
+          clients:
+            - url: http://gel.gel.svc.cluster.local:3100/loki/api/v1/push
+              basic_auth:
+                  username: hosts
+                  password: aG9zdHMtd3JpdGUtYWdlbnQ6IiomMTJzTzMxLn1aVDgwKjMtOTcmMl4q
+          scrape_configs:
+            - job_name: journal
+              journal:
+                max_age: 12h
+                labels:
+                  job: systemd-journal
+              relabel_configs:
+                - source_labels: ['__journal__systemd_unit']
+                  target_label: 'unit'
     prometheus:
       configs:
         - name: gel

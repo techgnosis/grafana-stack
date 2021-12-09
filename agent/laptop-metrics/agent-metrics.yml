@@ -1,0 +1,17 @@
+server:
+  http_listen_port: 12345
+prometheus:
+  wal_directory: /home/james/agent/wal
+  global:
+    scrape_interval: 1s
+    remote_write:
+      - url: https://gem.lab.home/api/v1/push
+        basic_auth:
+          username: laptop
+          password: bGFwdG9wLXdyaXRlLWFnZW50OixdPTkyNyEtMCs5fXopTzBeOUJcNjk1UA==
+integrations:
+  node_exporter:
+    enabled: true
+    rootfs_path: /
+    sysfs_path: /sys
+    procfs_path: /proc
