@@ -20,6 +20,12 @@ buckets:
   - name: enterprise-metrics-alertmanager
     policy: none
     purge: false
+  - name: enterprise-traces-data
+    policy: none
+    purge: false
+  - name: enterprise-traces-admin
+    policy: none
+    purge: false
 persistence:
   size: 100Gi
 accessKey: minio
