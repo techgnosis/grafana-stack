@@ -16,6 +16,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: gateway
+            name: gel
             port:
               number: 3100

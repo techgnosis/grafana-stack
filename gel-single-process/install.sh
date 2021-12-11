@@ -18,8 +18,4 @@ kapp deploy -a gel \
 -f job.yaml \
 -f certificate.yaml \
 -f ingress.yaml \
--f compactor-service.yaml \
--f compactor-ss.yaml \
--f namespace.yaml \
--f gateway-deployment.yaml \
--f gateway-service.yaml
+-f namespace.yaml
