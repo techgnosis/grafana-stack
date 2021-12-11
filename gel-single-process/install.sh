@@ -14,7 +14,9 @@ kapp deploy -a gel \
 --dry-run=client \
 -o yaml) \
 -f gel-service.yaml \
+-f gel-service-headless.yaml \
 -f gel-ss.yaml \
+-f memberlist-service.yaml \
 -f job.yaml \
 -f certificate.yaml \
 -f ingress.yaml \

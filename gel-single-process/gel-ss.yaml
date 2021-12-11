@@ -8,6 +8,7 @@ spec:
   selector:
     matchLabels:
       name: gel
+  serviceName: gel-headless
   template:
     metadata:
       labels:
