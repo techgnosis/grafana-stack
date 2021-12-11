@@ -1,29 +1,38 @@
 This repo does not represent a finished project and is purely for my own learning purposes
 
-Use this repo to install Grafana, GEM, GEL, Tempo, Grafana Agent, and a fully instrumented demo app called `tns`
+This repo is for deploying the entire Grafana Labs Enterprise suite:
+* Grafana Enterprise
+* Grafana Enterprise Metrics
+* Grafana Enterprise Logs
+* Grafana Enterprise Traces
 
+
+## TODO
+* Fix `get`. I don't know how receivers work with the gateway
+* Fix `gem`. The Ring Health does not work well in the plugin
 
 ## Setup
 The following steps need to be done by hand:
 1. Setup and enable GEM plugin
 1. Setup and enable GEL plugin
-1. GEM Instance, Access Policy, and Token creation
-1. GEL Instance, Access Policy, and Token creation
+1. Setup and enable GET plugin
+1. GEM Tenant, Access Policy, and Token creation
+1. GEL Tenant, Access Policy, and Token creation
+1. GET Tenant, Access Policy, and Token creation
 
 
 ## Paths
 
+Loki read - `/`
 Loki write - `/loki/api/v1/push`
+
+Cortex read - `/api/prom`
 Cortex write - `/api/v1/push`
 
-Loki read - `/`
-Cortex read - `/api/prom`
 
 
-## TNS
-* TNS sends spans via Jaeger Thrift HTTP on port 14268
-* sock-shop sends spans via Zipkin on port 9411
-* the Grafana Agent can only send to Tempo via OTLP on port 4317
+## Example app
+Grafana itself is instrumented with Prometheus metrics and Jeager traces, and it logs trace IDs in its logs. It's the perfect example app.
 
 ## Keycloak
 Realm:

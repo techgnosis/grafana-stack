@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: gel-tokengen
+  namespace: gel
+spec:
+  template:
+    spec:
+      containers:
+        - name: gel-tokengen
+          image: grafana/enterprise-logs:v1.2.0
+          imagePullPolicy: IfNotPresent
+          args:
+            - --config.file=/etc/gel/config.yaml
+            - --target=tokengen
+          volumeMounts:
+            - mountPath: /etc/gel
+              name: gel-config
+            - mountPath: /etc/gel/license
+              name: gel-license
+      volumes:
+        - name: gel-config
+          configMap:
+            name: gel-config
+        - name: gel-license
+          secret:
+            secretName: gel-license
+      restartPolicy: Never

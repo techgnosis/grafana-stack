@@ -1,0 +1,91 @@
+auth:
+  type: enterprise
+
+target: all
+
+cluster_name: gel
+
+license:
+  path: /etc/gel/license/gel-license.jwt
+
+server:
+  http_listen_port: 3100
+
+ingester:
+  max_transfer_retries: 0 # required for usage of WAL
+  wal:
+    enabled: true
+    dir: /data/wal
+
+gateway:
+  proxy:
+    admin_api:
+      url: http://gel.gel.svc.cluster.local:3100
+    compactor:
+      url: http://compactor.gel.svc.cluster.local:3100
+    distributor:
+      url: http://gel.gel.svc.cluster.local:3100
+    ingester:
+      url: http://gel.gel.svc.cluster.local:3100
+    query_frontend:
+      url: http://gel.gel.svc.cluster.local:3100
+    ruler:
+      url: http://gel.gel.svc.cluster.local:3100
+
+memberlist:
+  abort_if_cluster_join_fails: false
+  bind_port: 7946
+  join_members:
+    - gel-discovery
+
+schema_config:
+  configs:
+    - from: 2021-01-01
+      store: boltdb-shipper
+      object_store: aws
+      schema: v11
+      index:
+        prefix: index_
+        period: 24h
+
+admin_client:
+  storage:
+    type: s3
+    s3:
+      bucket_name: enterprise-logs-admin
+
+ruler:
+  enable_api: true
+  enable_sharding: true
+  rule_path: rules
+  storage:
+    type: s3
+    s3:
+      bucketnames: enterprise-logs-ruler
+
+storage_config:
+  boltdb_shipper:
+    active_index_directory: /data/boltdb-storage
+    cache_location: /data/boltdb-index-cache
+    shared_store: s3
+  aws:
+    bucketnames: enterprise-logs-data
+
+
+compactor:
+  working_directory: /data/boltdb-shipper-compactor
+  shared_store: s3
+
+common:
+  replication_factor: 3
+  storage:
+    s3:
+      endpoint: minio.minio.svc.cluster.local:9000
+      access_key_id: minio
+      secret_access_key: minio123
+      insecure: true
+      s3forcepathstyle: true
+  ring:
+    kvstore:
+      store: memberlist
+

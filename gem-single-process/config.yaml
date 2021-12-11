@@ -36,7 +36,7 @@ gateway:
 alertmanager_storage:
   backend: s3
   s3:
-    endpoint: minio:9000
+    endpoint: minio.minio.svc.cluster.local:9000
     bucket_name: enterprise-metrics-alertmanager
     access_key_id: minio
     secret_access_key: minio123
@@ -58,7 +58,7 @@ ruler:
 ruler_storage:
   backend: s3
   s3:
-    endpoint: minio:9000
+    endpoint: minio.minio.svc.cluster.local:9000
     bucket_name: enterprise-metrics-ruler
     access_key_id: minio
     secret_access_key: minio123
@@ -68,7 +68,7 @@ admin_client:
   storage:
     type: s3
     s3:
-      endpoint: minio:9000
+      endpoint: minio.minio.svc.cluster.local:9000
       bucket_name: enterprise-metrics-admin 
       access_key_id: minio
       secret_access_key: minio123
@@ -115,7 +115,7 @@ blocks_storage:
     sync_dir: /data/cortex/tsdb-sync
   backend: s3
   s3:
-    endpoint: minio:9000
+    endpoint: minio.minio.svc.cluster.local:9000
     bucket_name: enterprise-metrics-tsdb
     access_key_id: minio
     secret_access_key: minio123 

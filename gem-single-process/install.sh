@@ -15,14 +15,17 @@ kapp deploy -a gem \
 --dry-run=client \
 -o yaml) \
 -f gem-service.yaml \
+-f gem-service-headless.yaml \
 -f gem-ss.yaml \
+-f memberlist-service.yaml \
 -f job.yaml \
--f minio.yaml \
 -f certificate.yaml \
 -f ingress.yaml \
 -f compactor-ss.yaml \
 -f compactor-service.yaml \
+-f compactor-service-headless.yaml \
 -f gateway-deployment.yaml \
 -f gateway-service.yaml \
 -f alertmanager-service.yaml \
+-f alertmanager-service-headless.yaml \
 -f alertmanager-ss.yaml

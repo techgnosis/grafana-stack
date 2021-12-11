@@ -1,23 +1,25 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: alertmanager
+  name: compactor
   namespace: gem
 spec:
   replicas: 3
   selector:
     matchLabels:
-      name: alertmanager
+      name: compactor
+  serviceName: compactor-headless
   template:
     metadata:
       labels:
-        name: alertmanager
+        name: compactor
+        memberlist: "true"
     spec:
       containers:
-        - name: alertmanager
+        - name: compactor
           args:
             - -config.file=/etc/gem/config.yaml
-            - -target=alertmanager
+            - -target=compactor
           image: grafana/metrics-enterprise:v1.6.1
           imagePullPolicy: IfNotPresent
           ports:
