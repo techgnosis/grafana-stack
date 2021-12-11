@@ -1,23 +1,22 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: compactor
+  name: get
   namespace: get
 spec:
   replicas: 3
   selector:
     matchLabels:
-      name: compactor
+      name: get
   template:
     metadata:
       labels:
-        name: compactor
+        name: get
     spec:
       containers:
-        - name: compactor
+        - name: get
           args:
             - -config.file=/etc/get/config.yaml
-            - -target=compactor
           image: grafana/enterprise-traces:v1.0.0
           imagePullPolicy: IfNotPresent
           ports:
@@ -27,12 +26,13 @@ spec:
               name: grpc
             - containerPort: 7946
               name: gossip
+            - containerPort: 6831
+              name: thrift-compact
           readinessProbe:
             httpGet:
               path: /ready
               port: 8080
-            initialDelaySeconds: 15
-            timeoutSeconds: 1
+            initialDelaySeconds: 60
           volumeMounts:
             - mountPath: /data
               name: data

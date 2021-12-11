@@ -14,12 +14,10 @@ kapp deploy -a get \
 --dry-run=client \
 -o yaml) \
 -f get-service.yaml \
+-f get-service-headless.yaml \
 -f get-ss.yaml \
+-f memberlist-service.yaml \
 -f job.yaml \
 -f certificate.yaml \
 -f ingress.yaml \
--f compactor-ss.yaml \
--f compactor-service.yaml \
--f namespace.yaml \
--f gateway-deployment.yaml \
--f gateway-service.yaml
+-f namespace.yaml
