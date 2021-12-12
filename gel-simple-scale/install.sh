@@ -13,13 +13,12 @@ kapp deploy -a gel \
 --from-file config.yaml \
 --dry-run=client \
 -o yaml) \
--f gel-service.yaml \
--f gel-ss.yaml \
+-f read/ \
+-f write/ \
 -f job.yaml \
 -f certificate.yaml \
 -f ingress.yaml \
--f compactor-service.yaml \
--f compactor-ss.yaml \
 -f namespace.yaml \
 -f gateway-deployment.yaml \
--f gateway-service.yaml
+-f gateway-service.yaml \
+-f service-memberlist.yaml

@@ -4,14 +4,11 @@ metadata:
   name: gel-discovery
   namespace: gel
 spec:
+  type: ClusterIP
   clusterIP: None
   ports:
-    - name: gel-grpc
-      port: 9095
-      targetPort: grpc
     - name: gel-gossip
       port: 7946
       targetPort: gossip
-  publishNotReadyAddresses: true
   selector:
-    name: gel
+    memberlist: "true"

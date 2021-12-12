@@ -18,6 +18,7 @@ spec:
         - name: gel
           args:
             - -config.file=/etc/gel/config.yaml
+            - -target=all
           image: grafana/enterprise-logs:v1.2.0
           imagePullPolicy: IfNotPresent
           ports:

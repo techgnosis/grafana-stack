@@ -16,6 +16,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: gateway
+            name: get
             port:
               number: 8080

@@ -7,15 +7,15 @@ data:
   agent.yaml: |
     server:
       http_listen_port: 12345
-    loki:
+    logs:
       positions_directory: /tmp/positions
       configs:
         - name: interlake
           clients:
             - url: http://gel.gel.svc.cluster.local:3100/loki/api/v1/push
               basic_auth:
-                  username: interlake
-                  password: aW50ZXJsYWtlLWFsbC1hbGw6JXsxWzJkfjhjMSU3WWZ7fTE0XTEyJSU3
+                  username: single
+                  password: c2luZ2xlLWFsbC1hbGw6MjQiNyklQWw5LDI0JXZ9MzVcayUyXDM9
           scrape_configs:
             - job_name: gem-pods
               kubernetes_sd_configs:
@@ -121,7 +121,7 @@ data:
                     - __meta_kubernetes_pod_uid
                     - __meta_kubernetes_pod_container_name
                   target_label: __path__
-    prometheus:
+    metrics:
       configs:
         - name: interlake
           host_filter: true
@@ -206,6 +206,19 @@ data:
       global:
         scrape_interval: 5s
       wal_directory: /var/lib/agent/data
+    traces:
+      configs:
+        - name: interlake
+          remote_write:
+            - endpoint: http://get.get.svc.cluster.local:6831
+              insecure: true
+              basic_auth:
+                username: derp
+                password: ZGVycC1hbGwtZGVycDouLm5xNygjSjgzOTI4Ijk2Mnw3IngiKkA=
+          receivers:
+            jaeger:
+              protocols:
+                thrift_compact:
     integrations:
       prometheus_remote_write:
         - url: http://gem-enterprise-metrics-gateway.gem.svc.cluster.local:8080/api/v1/push

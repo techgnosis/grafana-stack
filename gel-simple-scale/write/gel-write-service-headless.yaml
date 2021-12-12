@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: gel-write
+  name: gel-write-headless
   namespace: gel
 spec:
   ports:
@@ -14,3 +14,4 @@ spec:
   selector:
     name: gel-write
   type: ClusterIP
+  clusterIP: None

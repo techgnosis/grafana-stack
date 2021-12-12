@@ -6,10 +6,10 @@ This repo is for deploying the entire Grafana Labs Enterprise suite:
 * Grafana Enterprise Logs
 * Grafana Enterprise Traces
 
-
 ## TODO
-* Fix `get`. I don't know how receivers work with the gateway
-* Fix `gem`. The Ring Health does not work well in the plugin
+* Fix `gem-single-process`. The Ring Health does not work well in the plugin
+* Fix `gel-simple-scale`. Neither read nor write work.
+* Fix `grafana`. 
 
 ## Setup
 The following steps need to be done by hand:

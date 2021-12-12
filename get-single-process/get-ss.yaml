@@ -17,6 +17,7 @@ spec:
         - name: get
           args:
             - -config.file=/etc/get/config.yaml
+            - -target=all
           image: grafana/enterprise-traces:v1.0.0
           imagePullPolicy: IfNotPresent
           ports:

@@ -1,8 +1,6 @@
 auth:
   type: enterprise
 
-target: all
-
 cluster_name: gel
 
 license:
@@ -10,6 +8,16 @@ license:
 
 server:
   http_listen_port: 3100
+  grpc_listen_port: 9095
+  http_path_prefix: /loki/api/v1/
+
+frontend:
+  downstream_url: http://gel-read.gel.svc.cluster.local:3100
+
+distributor:
+  ring:
+    kvstore:
+      store: memberlist
 
 ingester:
   max_transfer_retries: 0 # required for usage of WAL
@@ -20,17 +28,17 @@ ingester:
 gateway:
   proxy:
     admin_api:
-      url: http://gel.gel.svc.cluster.local:3100
+      url: http://gel-read.gel.svc.cluster.local:3100
     compactor:
-      url: http://compactor.gel.svc.cluster.local:3100
+      url: http://gel-read.gel.svc.cluster.local:3100
     distributor:
-      url: http://gel.gel.svc.cluster.local:3100
+      url: http://gel-write.gel.svc.cluster.local:3100
     ingester:
-      url: http://gel.gel.svc.cluster.local:3100
+      url: http://gel-write.gel.svc.cluster.local:3100
     query_frontend:
-      url: http://gel.gel.svc.cluster.local:3100
+      url: http://gel-read.gel.svc.cluster.local:3100
     ruler:
-      url: http://gel.gel.svc.cluster.local:3100
+      url: http://gel-read.gel.svc.cluster.local:3100
 
 memberlist:
   abort_if_cluster_join_fails: false

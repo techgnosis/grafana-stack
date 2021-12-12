@@ -22,10 +22,6 @@ distributor:
     otlp:
       protocols:
         grpc:
-        http:
-    jaeger:
-      protocols:
-        thrift_compact:
 
 
 compactor:
@@ -45,20 +41,6 @@ storage:
       secret_key: minio123
       insecure: true
       forcepathstyle: true
-
-gateway:
-  proxy:
-    admin_api:
-      url: http://get.get.svc.cluster.local:8080
-    compactor:
-      url: http://compactor.get.svc.cluster.local:8080
-    distributor:
-      url: http://get.get.svc.cluster.local:8080
-    ingester:
-      url: http://get.get.svc.cluster.local:8080
-    query_frontend:
-      url: http://get.get.svc.cluster.local:8080
-    
 
 admin_client:
   storage:

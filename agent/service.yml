@@ -5,10 +5,8 @@ metadata:
   namespace: agent
 spec:
   ports:
-    - name: zipkin
-      port: 9411
-    - name: thrifthttp
-      port: 14268
+    - name: thrift-compact
+      port: 6831
     - name: api
       port: 12345
   type: ClusterIP

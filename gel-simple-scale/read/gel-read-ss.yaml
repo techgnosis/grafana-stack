@@ -8,15 +8,18 @@ spec:
   selector:
     matchLabels:
       name: gel-read
+  serviceName: gel-read-headless
   template:
     metadata:
       labels:
         name: gel-read
+        memberlist: "true"
     spec:
       containers:
         - name: gel
           args:
             - -config.file=/etc/gel/config.yaml
+            - -target=read
           image: grafana/enterprise-logs:v1.2.0
           imagePullPolicy: IfNotPresent
           ports:

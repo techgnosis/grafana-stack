@@ -1,9 +1,10 @@
 auth:
   type: enterprise
 
-target: all
-
 cluster_name: gel
+
+limits_config:
+  ingestion_rate_mb: 12 # default for GEL 1.2 is 4 which was too low to ingest GEM, GEL, GET, and Grafana Enterprise logs at the same time
 
 license:
   path: /etc/gel/license/gel-license.jwt

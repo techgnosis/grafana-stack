@@ -32,7 +32,7 @@ grafana.ini:
     server_url: http://image-renderer:8081/render
     callback_url: http://grafana-enterprise
   tracing.jaeger:
-    address: tempo.tempo.svc.cluster.local:6831
+    address: grafana-agent.agent.svc.cluster.local:6831
   # white_labeling:
   #   login_background: url(https://www.t-mobile.com/news/_admin/uploads/2020/11/Neon-T-Hill-Tower-1024x576.png)
   #   app_title: T-Mobile ESD
