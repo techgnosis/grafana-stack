@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: hotrod-tls
+  namespace: hotrod
+spec:
+  dnsNames:
+  - hotrod.lab.home
+  issuerRef:
+    kind: ClusterIssuer
+    name: mkcert
+  secretName: hotrod-tls

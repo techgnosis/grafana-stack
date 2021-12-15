@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hotrod
+  namespace: hotrod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hotrod
+  template:
+    metadata:
+      labels:
+        app: hotrod
+    spec:
+      containers:
+        - name: hotrod
+          image: jaegertracing/example-hotrod:1.29
+          args: ["all", "-m", "prometheus"]
+          ports:
+            - name: http
+              containerPort: 8080
+            - name: metrics
+              containerPort: 8083
+          env:
+            - name: JAEGER_AGENT_HOST
+              value: grafana-agent.agent.svc.cluster.local
+            - name: JAEGER_AGENT_PORT
+              value: "6831"
