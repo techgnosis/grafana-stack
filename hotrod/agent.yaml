@@ -7,8 +7,8 @@ logs:
       clients:
         - url: http://gel.gel.svc.cluster.local:3100/loki/api/v1/push
           basic_auth:
-              username: interlake
-              password: aW50ZXJsYWtlLWFsbC1hbGw6aDE2PzF7eSsyMmZGKzEuNCkmMz8qMTkh
+              username: hotrod
+              password: aG90cm9kLWFsbC1hZ2VudDo+LDM4ODFgJStkIy44THw2ME5LOT4oMDg=
       scrape_configs:
         - job_name: hotrod-pods
           kubernetes_sd_configs:
