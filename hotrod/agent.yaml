@@ -1,0 +1,89 @@
+server:
+  http_listen_port: 12345
+logs:
+  positions_directory: /tmp/positions
+  configs:
+    - name: hotrod
+      clients:
+        - url: http://gel.gel.svc.cluster.local:3100/loki/api/v1/push
+          basic_auth:
+              username: interlake
+              password: aW50ZXJsYWtlLWFsbC1hbGw6aDE2PzF7eSsyMmZGKzEuNCkmMz8qMTkh
+      scrape_configs:
+        - job_name: hotrod-pods
+          kubernetes_sd_configs:
+            - role: pod
+              namespaces:
+                names:
+                  - hotrod
+          pipeline_stages:
+            - docker: {}
+          relabel_configs:
+            - source_labels:
+                - __meta_kubernetes_pod_node_name
+              target_label: __host__
+            - action: replace
+              source_labels:
+                - __meta_kubernetes_namespace
+              target_label: namespace
+            - action: replace
+              source_labels:
+                - __meta_kubernetes_pod_name
+              target_label: pod
+            - replacement: /var/log/pods/*$1/*.log
+              separator: /
+              source_labels:
+                - __meta_kubernetes_pod_uid
+                - __meta_kubernetes_pod_container_name
+              target_label: __path__
+metrics:
+  global:
+    scrape_interval: 5s
+  wal_directory: /var/lib/agent/data
+  configs:
+    - name: hotrod
+      host_filter: true
+      remote_write:
+        - url: http://gem-enterprise-metrics-gateway.gem.svc.cluster.local:8080/api/v1/push
+          basic_auth:
+            username: hotrod
+            password: aG90cm9kLWFsbC1hZ2VudDpFM2g9LyU4NjhfX3k+VzUzLiw0NyI2ODo=
+      scrape_configs:
+        - job_name: hotrod-pods
+          metrics_path: "/metrics"
+          kubernetes_sd_configs:
+            - role: pod
+              namespaces:
+                names:
+                  - hotrod
+          relabel_configs:
+            - action: drop
+              regex: Succeeded|Failed
+              source_labels:
+                - __meta_kubernetes_pod_phase
+            - action: keep
+              regex: 8083
+              source_labels:
+                - __meta_kubernetes_pod_container_port_number
+            - action: replace
+              source_labels:
+                - __meta_kubernetes_namespace
+              target_label: namespace
+            - action: replace
+              source_labels:
+                - __meta_kubernetes_pod_name
+              target_label: pod
+traces:
+  configs:
+    - name: hotrod
+      remote_write:
+        - endpoint: get.get.svc.cluster.local:4317
+          protocol: grpc
+          insecure: true
+          basic_auth:
+            username: test2
+            password: dGVzdDItdGVzdDI6XzY1aissOTZ9MzF8XVwycm1FNn05Py4y
+      receivers:
+        jaeger:
+          protocols:
+            thrift_compact:

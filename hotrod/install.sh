@@ -7,4 +7,10 @@ kapp deploy -a hotrod \
 -f deployment.yaml \
 -f namespace.yaml \
 -f certificate.yaml \
--f service.yaml
+-f service.yaml \
+-f agent-deployment.yaml \
+-f <(kubectl create configmap grafana-agent-config \
+--namespace hotrod \
+--from-file agent.yaml \
+--dry-run=client \
+-o yaml)
