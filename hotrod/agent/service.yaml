@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana-agent
+  namespace: hotrod
+spec:
+  selector:
+    app: grafana-agent
+  ports:
+    - name: api
+      port: 12345
+      targetPort: api
+    - name: thrift-compact
+      port: 6831
+      targetPort: thrift-compact

@@ -24,6 +24,6 @@ spec:
               containerPort: 8083
           env:
             - name: JAEGER_AGENT_HOST
-              value: grafana-agent.agent.svc.cluster.local
+              value: grafana-agent
             - name: JAEGER_AGENT_PORT
               value: "6831"

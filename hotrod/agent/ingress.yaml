@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana-agent
+  namespace: hotrod
+spec:
+  rules:
+    - host: grafana-agent.lab.home
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: grafana-agent
+              port:
+                number: 12345

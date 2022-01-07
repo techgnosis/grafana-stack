@@ -3,14 +3,19 @@
 set -euo pipefail
 
 kapp deploy -a hotrod \
--f ingress.yaml \
--f deployment.yaml \
 -f namespace.yaml \
--f certificate.yaml \
--f service.yaml \
--f agent-deployment.yaml \
+-f hotrod/ingress.yaml \
+-f hotrod/deployment.yaml \
+-f hotrod/certificate.yaml \
+-f hotrod/service.yaml \
+-f agent/deployment.yaml \
+-f agent/clusterrole.yaml \
+-f agent/clusterrolebinding.yaml \
+-f agent/ingress.yaml \
+-f agent/service.yaml \
+-f agent/serviceaccount.yaml \
 -f <(kubectl create configmap grafana-agent-config \
 --namespace hotrod \
---from-file agent.yaml \
+--from-file agent/agent.yaml \
 --dry-run=client \
 -o yaml)
