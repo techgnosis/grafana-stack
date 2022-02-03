@@ -1,26 +1,24 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
-  name: alertmanager
+  name: gateway
   namespace: gem
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      name: alertmanager
-  serviceName: alertmanager-headless
+      name: gateway
   template:
     metadata:
       labels:
-        name: alertmanager
-        memberlist: "true"
+        name: gateway
     spec:
       containers:
-        - name: alertmanager
+        - name: gateway
           args:
             - -config.file=/etc/gem/config.yaml
-            - -target=alertmanager
-          image: grafana/metrics-enterprise:v1.6.1
+            - -target=gateway
+          image: grafana/metrics-enterprise:v1.7.0
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9000
@@ -36,8 +34,6 @@ spec:
             initialDelaySeconds: 15
             timeoutSeconds: 1
           volumeMounts:
-            - mountPath: /data
-              name: data
             - mountPath: /etc/gem
               name: gem-config
             - mountPath: /etc/gem/license
@@ -51,12 +47,3 @@ spec:
             secretName: gem-license
   updateStrategy:
     type: RollingUpdate
-  volumeClaimTemplates:
-    - metadata:
-        name: data
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 50Gi

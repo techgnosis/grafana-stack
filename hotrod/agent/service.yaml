@@ -13,3 +13,4 @@ spec:
     - name: thrift-compact
       port: 6831
       targetPort: thrift-compact
+      protocol: UDP

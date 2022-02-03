@@ -17,11 +17,12 @@ grafana.ini:
     sync_cron: "* */10 * * * *"
     active_sync_enabled: true
   feature_toggles:
-    enable: recordedQueries
+    enable: recordedQueries tempoSearch
   alerting:
     enabled: false
   unified_alerting:
     enabled: true
+    ha_peers: grafana-enterprise-headless:9094
   recorded_queries:
     enabled: true
   log:
@@ -31,8 +32,6 @@ grafana.ini:
   rendering:
     server_url: http://image-renderer:8081/render
     callback_url: http://grafana-enterprise
-  tracing.jaeger:
-    address: grafana-agent.agent.svc.cluster.local:6831
   # white_labeling:
   #   login_background: url(https://www.t-mobile.com/news/_admin/uploads/2020/11/Neon-T-Hill-Tower-1024x576.png)
   #   app_title: T-Mobile ESD

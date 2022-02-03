@@ -71,7 +71,7 @@ spec:
           - containerPort: 12345
             name: api
           - containerPort: 6831
-            name: thrifthttp
+            name: thrift-compact
         securityContext:
           privileged: true
           runAsUser: 0

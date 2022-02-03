@@ -4,7 +4,7 @@ metadata:
   name: get
   namespace: get
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       name: get
@@ -27,8 +27,8 @@ spec:
               name: grpc
             - containerPort: 7946
               name: gossip
-            - containerPort: 6831
-              name: thrift-compact
+            - containerPort: 4317
+              name: otel-grpc
           readinessProbe:
             httpGet:
               path: /ready

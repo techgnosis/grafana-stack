@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: compactor
+  name: gem
   namespace: gem
 spec:
+  podManagementPolicy: Parallel
   replicas: 3
   selector:
     matchLabels:
-      name: compactor
-  serviceName: compactor-headless
+      name: gem
+  serviceName: gem-headless
   template:
     metadata:
       labels:
-        name: compactor
-        memberlist: "true"
+        name: gem
     spec:
       containers:
-        - name: compactor
+        - name: gem
           args:
             - -config.file=/etc/gem/config.yaml
-            - -target=compactor
-          image: grafana/metrics-enterprise:v1.6.1
+            - -target=all
+          image: grafana/metrics-enterprise:v1.7.0
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9000

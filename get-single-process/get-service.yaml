@@ -11,9 +11,9 @@ spec:
     - name: get-grpc
       port: 9095
       targetPort: grpc
-    - name: get-thrift-compact
-      port: 6831
-      targetPort: thrift-compact
+    - name: otel-grpc
+      port: 4317
+      targetPort: otel-grpc
   selector:
     name: get
   type: ClusterIP

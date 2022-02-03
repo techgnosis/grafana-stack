@@ -31,6 +31,18 @@ Cortex write - `/api/v1/push`
 
 
 
+## Image Rendering
+Image Rendering is actually a Grafana OSS feature. You can capture images of panels when panel alerts go off, and send that image with the alert.
+
+PDF Exporting and Reporting are the Grafana Enterprise features.
+
+If you install the plugin, you don't need to set `rendering.server_url` or `rendering.callback_url`. The plugin is part of the Grafana process and is reached on the same port as Grafana.
+
+If you are using the container, which you should definitley do, then be aware that `grafana/grafana-image-renderer` listens on 8081 and `bitnami/grana-image-renderer` listens on 8080.
+
+If you use the plugin, you do need to set `rendering.server_url` and `rendering.callback_url` as per the docs.
+
+
 ## Example app
 Grafana itself is instrumented with Prometheus metrics and Jeager traces, and it logs trace IDs in its logs. It's the perfect example app.
 

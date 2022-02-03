@@ -17,7 +17,7 @@ kapp deploy -a grafana-enterprise \
 
 helm upgrade --install grafana-enterprise grafana \
 --repo https://grafana.github.io/helm-charts \
---version 6.17.10 \
+--version 6.19.2 \
 --namespace grafana-enterprise \
 --values grafana-values.yml \
 --values grafana-ini.yml \

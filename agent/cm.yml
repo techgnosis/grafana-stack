@@ -14,8 +14,8 @@ data:
           clients:
             - url: http://gel.gel.svc.cluster.local:3100/loki/api/v1/push
               basic_auth:
-                  username: single
-                  password: c2luZ2xlLWFsbC1hbGw6MjQiNyklQWw5LDI0JXZ9MzVcayUyXDM9
+                  username: interlake
+                  password: aW50ZXJsYWtlLWFsbC1hbGw6aDE2PzF7eSsyMmZGKzEuNCkmMz8qMTkh
           scrape_configs:
             - job_name: gem-pods
               kubernetes_sd_configs:
@@ -129,7 +129,7 @@ data:
             - url: http://gem-enterprise-metrics-gateway.gem.svc.cluster.local:8080/api/v1/push
               basic_auth:
                 username: interlake
-                password: aW50ZXJsYWtlLWFsbC1hbGw6ezFgJjo1PSs1dTc3RnQ+KDkyODc5Iy5V
+                password: aW50ZXJsYWtlLWludGVybGFrZToiPCg4JH44eTM2M0E0dTQ2JnkoOCJ7NSQ=
           scrape_configs:
             - job_name: gel-pods
               metrics_path: "/metrics"
@@ -210,21 +210,22 @@ data:
       configs:
         - name: interlake
           remote_write:
-            - endpoint: http://get.get.svc.cluster.local:6831
+            - endpoint: get.get.svc.cluster.local:4317
+              protocol: grpc
               insecure: true
               basic_auth:
-                username: derp
-                password: ZGVycC1hbGwtZGVycDouLm5xNygjSjgzOTI4Ijk2Mnw3IngiKkA=
+                username: test2
+                password: dGVzdDItdGVzdDI6XzY1aissOTZ9MzF8XVwycm1FNn05Py4y
           receivers:
             jaeger:
               protocols:
                 thrift_compact:
     integrations:
       prometheus_remote_write:
-        - url: http://gem-enterprise-metrics-gateway.gem.svc.cluster.local:8080/api/v1/push
+        - url: http://gateway.gem.svc.cluster.local:9000/api/v1/push
           basic_auth:
-            username: hosts
-            password: aG9zdHMtd3JpdGUtYWdlbnQ6MDVdMFwqe1wxM30mOFo2MU52NF88ITBN
+            username: interlake
+            password: aW50ZXJsYWtlLWFsbC1hbGw6PGE0JS00Wz4+SnhfNzREODMyLVszLTMx
       node_exporter:
         enabled: true
         rootfs_path: /

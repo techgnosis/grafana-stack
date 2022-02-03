@@ -10,7 +10,7 @@ kapp deploy -a get \
 -o yaml) \
 -f <(kubectl create configmap get-config \
 --namespace get \
---from-file config.yaml \
+--from-file=config.yaml=config.yaml \
 --dry-run=client \
 -o yaml) \
 -f get-service.yaml \

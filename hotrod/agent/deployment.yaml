@@ -23,13 +23,14 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: spec.nodeName
-        image: grafana/agent:v0.21.2
+        image: grafana/agent:main-8bb01ea
         name: agent
         ports:
           - containerPort: 12345
             name: api
           - containerPort: 6831
             name: thrift-compact
+            protocol: UDP
         securityContext:
           privileged: true
           runAsUser: 0

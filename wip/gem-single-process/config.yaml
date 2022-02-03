@@ -1,3 +1,4 @@
+auth_enabled: true
 auth:
   type: enterprise
 
@@ -31,7 +32,15 @@ gateway:
       url: http://gem.gem.svc.cluster.local:9000
     store_gateway:
       url: http://gem.gem.svc.cluster.local:9000
-    
+
+alertmanager:
+  data_dir: /data
+  enable_api: true
+  external_url: /alertmanager
+  sharding_enabled: true
+  sharding_ring:
+    kvstore:
+      store: memberlist    
 
 alertmanager_storage:
   backend: s3
@@ -50,6 +59,7 @@ store_gateway:
       store: memberlist
 
 ruler:
+  enable_api: true
   enable_sharding: true
   ring:
     kvstore:
@@ -83,7 +93,9 @@ memberlist:
   abort_if_cluster_join_fails: false
   bind_port: 7946
   join_members:
-  - gem-discovery
+    - alertmanager-headless
+    - compactor-headless
+    - gem-headless
 
 ingester:
   lifecycler:
@@ -100,13 +112,7 @@ compactor:
     kvstore:
       store: memberlist
 
-alertmanager:
-  data_dir: /data/alertmanager
-  external_url: /alertmanager
-  sharding_enabled: true
-  sharding_ring:
-    kvstore:
-      store: memberlist
+
 
 blocks_storage:
   tsdb:
@@ -126,6 +132,14 @@ storage:
 
 limits:
   cardinality_analysis_enabled: true
+
+admin_api:
+  leader_election:
+    enabled: true
+    ring:
+      kvstore:
+        store: memberlist
+
 
 instrumentation:
   enabled: true

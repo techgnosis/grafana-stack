@@ -4,7 +4,8 @@ metadata:
   name: grafana-enterprise
   namespace: grafana-enterprise
 spec:
-  replicas: 1
+  podManagementPolicy: Parallel
+  replicas: 3
   selector:
     matchLabels:
       app: grafana-enterprise
@@ -14,24 +15,6 @@ spec:
         app: grafana-enterprise
     spec:
       serviceName: grafana-enterprise-headless
-      initContainers:
-        - name: init-chown-data
-          command:
-            - chown
-            - -R
-            - 472:472
-            - /var/lib/grafana
-          image: busybox:1.31.1
-          imagePullPolicy: IfNotPresent
-          resources: {}
-          securityContext:
-            runAsNonRoot: false
-            runAsUser: 0
-          terminationMessagePath: /dev/termination-log
-          terminationMessagePolicy: File
-          volumeMounts:
-            - mountPath: /var/lib/grafana
-              name: data
       containers:
         - name: grafana-enterprise
           image: grafana/grafana-enterprise:8.2.0

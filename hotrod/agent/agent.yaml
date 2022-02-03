@@ -1,5 +1,6 @@
 server:
   http_listen_port: 12345
+  log_level: debug
 logs:
   positions_directory: /tmp/positions
   configs:
@@ -80,10 +81,10 @@ traces:
         - endpoint: get.get.svc.cluster.local:4317
           protocol: grpc
           insecure: true
-          basic_auth:
-            username: test2
-            password: dGVzdDItdGVzdDI6XzY1aissOTZ9MzF8XVwycm1FNn05Py4y
       receivers:
         jaeger:
           protocols:
             thrift_compact:
+      automatic_logging:
+        backend: stdout
+        roots: true

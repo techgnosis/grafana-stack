@@ -11,5 +11,11 @@ spec:
     - name: gateway-http
       port: 9000
       targetPort: http
+    - name: gem-grpc
+      port: 9095
+      targetPort: grpc
+    - name: gem-gossip
+      port: 7946
+      targetPort: gossip
   
   

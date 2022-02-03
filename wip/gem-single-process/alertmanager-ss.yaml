@@ -1,25 +1,26 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: gem
+  name: alertmanager
   namespace: gem
 spec:
+  podManagementPolicy: Parallel
   replicas: 3
   selector:
     matchLabels:
-      name: gem
-  serviceName: gem-headless
+      name: alertmanager
+  serviceName: alertmanager-headless
   template:
     metadata:
       labels:
-        name: gem
-        memberlist: "true"
+        name: alertmanager
     spec:
       containers:
-        - name: gem
+        - name: alertmanager
           args:
             - -config.file=/etc/gem/config.yaml
-          image: grafana/metrics-enterprise:v1.6.1
+            - -target=alertmanager
+          image: grafana/metrics-enterprise:v1.7.0
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9000

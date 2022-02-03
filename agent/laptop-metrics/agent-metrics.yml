@@ -8,7 +8,7 @@ prometheus:
       - url: https://gem.lab.home/api/v1/push
         basic_auth:
           username: laptop
-          password: bGFwdG9wLXdyaXRlLWFnZW50OixdPTkyNyEtMCs5fXopTzBeOUJcNjk1UA==
+          password: bGFwdG9wLXdyaXRlLWFnZW50OiJYNjEzWDc4MjY4PX4+ODRcSiVaXiYmLw==
 integrations:
   node_exporter:
     enabled: true

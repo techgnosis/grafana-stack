@@ -17,8 +17,7 @@ kapp deploy -a gem \
 -f gem-service.yaml \
 -f gem-service-headless.yaml \
 -f gem-ss.yaml \
--f memberlist-service.yaml \
--f job.yaml \
+-f tokengen-job.yaml \
 -f certificate.yaml \
 -f ingress.yaml \
 -f compactor-ss.yaml \

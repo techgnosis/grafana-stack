@@ -1,6 +1,5 @@
 multitenancy_enabled: true
 search_enabled: false
-http_api_prefix: /tempo
 
 license:
   path: /etc/get/license/get-license.jwt
@@ -11,7 +10,12 @@ auth:
 server:
   http_listen_port: 8080
   grpc_listen_port: 9095
-  log_level: info
+  log_level: debug
+
+ingester:
+  lifecycler:
+    ring:
+      replication_factor: 1
 
 
 distributor:
@@ -21,6 +25,11 @@ distributor:
       protocols:
         grpc:
 
+
+compactor:
+  ring:
+    kvstore:
+      store: memberlist
 
 storage:
   trace:
@@ -45,3 +54,9 @@ admin_client:
       secret_access_key: minio123
       insecure: true
 
+
+memberlist:
+  abort_if_cluster_join_fails: false
+  bind_port: 7946
+  join_members:
+  - get-discovery
