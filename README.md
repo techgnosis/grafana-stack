@@ -1,27 +1,7 @@
-This repo does not represent a finished project and is purely for my own learning purposes
-
-This repo is for deploying the entire Grafana Labs Enterprise suite:
-* Grafana Enterprise
-* Grafana Enterprise Metrics
-* Grafana Enterprise Logs
-* Grafana Enterprise Traces
-
-## TODO
-* Fix `gem-single-process`. The Ring Health does not work well in the plugin
-* Fix `gel-simple-scale`. Neither read nor write work.
-* Fix `grafana`. 
-
-## Setup
-The following steps need to be done by hand:
-1. Setup and enable GEM plugin
-1. Setup and enable GEL plugin
-1. Setup and enable GET plugin
-1. GEM Tenant, Access Policy, and Token creation
-1. GEL Tenant, Access Policy, and Token creation
-1. GET Tenant, Access Policy, and Token creation
-
-
 ## Paths
+
+Prometheus read - `/`
+Prometheus write - `/api/v1/write` and also requires the `--web.enable-remote-write-receiver` flag on Prometheus
 
 Loki read - `/`
 Loki write - `/loki/api/v1/push`
@@ -29,7 +9,9 @@ Loki write - `/loki/api/v1/push`
 Cortex read - `/api/prom`
 Cortex write - `/api/v1/push`
 
-
+# TODO
+1. Use custom YAML for Loki and Tempo. Shouldn't need Helm for such simple deploys.
+1. Use custom YAML for Grafana too. Little more complicated but it shouldn't be..
 
 ## Image Rendering
 Image Rendering is actually a Grafana OSS feature. You can capture images of panels when panel alerts go off, and send that image with the alert.
@@ -44,7 +26,7 @@ If you use the plugin, you do need to set `rendering.server_url` and `rendering.
 
 
 ## Example app
-Grafana itself is instrumented with Prometheus metrics and Jeager traces, and it logs trace IDs in its logs. It's the perfect example app.
+HotROD is the example app used in this repo
 
 ## Keycloak
 Realm:
