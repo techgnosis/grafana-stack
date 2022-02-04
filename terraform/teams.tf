@@ -9,3 +9,7 @@ resource "grafana_team" "Backend" {
 resource "grafana_team" "Managers" {
   name  = "Managers"
 }
+
+resource "grafana_team" "HotROD" {
+  name = "HotROD"
+}

@@ -13,3 +13,11 @@ resource "grafana_folder_permission" "Backend" {
     permission = "Admin"
   }
 }
+
+resource "grafana_folder_permission" "HotROD" {
+  folder_uid = grafana_folder.HotROD.uid
+  permissions {
+    team_id = grafana_team.HotROD.id
+    permission = "Admin"
+  }
+}

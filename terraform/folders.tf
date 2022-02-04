@@ -10,3 +10,7 @@ resource "grafana_folder" "GrafanaHealth" {
   title = "Grafana Health"
 }
 
+resource "grafana_folder" "HotROD" {
+  title = "HotROD"
+}
+
