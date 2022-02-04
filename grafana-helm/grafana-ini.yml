@@ -10,6 +10,14 @@ grafana.ini:
     user: grafana-enterprise
     password: grafana-enterprise
     ssl_mode: disable
+  auditing:
+    enabled: true
+    loggers: loki
+    log_dashboard_content: false
+  auditing.logs.loki:
+    type: http
+    url: loki.loki.svc.cluster.local:3100
+    tls: false
   auth.ldap:
     enabled: true
     config_file: /etc/grafana/ldap.toml
@@ -17,7 +25,7 @@ grafana.ini:
     sync_cron: "* */10 * * * *"
     active_sync_enabled: true
   feature_toggles:
-    enable: recordedQueries tempoSearch accesscontrol
+    enable: recordedQueries tempoSearch
   alerting:
     enabled: false
   unified_alerting:
