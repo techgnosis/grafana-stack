@@ -12,7 +12,6 @@ logs:
             - targets: [localhost]
               labels:
                 __path__: "/home/james/code/grafana-stack/agent/laptop-logs/flog.log"
-                chicken: noodle
           pipeline_stages:
             - regex:
                 expression: ".*(?P<http>HTTP....).*"
