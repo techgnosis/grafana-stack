@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: telegraf
+  namespace: grafana-enterprise
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: telegraf
+  template:
+    metadata:
+      labels:
+        app: telegraf
+    spec:
+      volumes:
+        - name: telegraf-config
+          configMap:
+            name: telegraf-config
+      containers:
+        - name: telegraf
+          image: aa
+          command: ['prometheus']
+          args:
+            - "--config /tmp/telegraf.conf"
+          volumeMounts:
+            - name: telegraph-config
+              mountPath: /tmp/telegraf-config.yml
+              subPath: telegraf.conf

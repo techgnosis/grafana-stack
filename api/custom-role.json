@@ -1,0 +1,24 @@
+{
+    "name": "custom:edit:datasources",
+    "description": "Edit your own datasource settings",
+    "group":"Lab Testing",
+    "displayName": "Custom Datasource",
+    "global": false,
+    "permissions": [
+        {
+            "action": "datasources:explore"
+        },
+        {
+            "action": "datasources:write",
+            "scope": "datasources:id:2"
+        },
+        {
+            "action": "datasources:read",
+            "scope": "datasources:id:2"
+        },
+        {
+            "action": "datasources:query",
+            "scope": "datasources:id:2"
+        }
+    ]
+}

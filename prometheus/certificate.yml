@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: prometheus-tls
+  namespace: prometheus
+spec:
+  dnsNames:
+  - prometheus.lab.home
+  issuerRef:
+    kind: ClusterIssuer
+    name: mkcert
+  secretName: prometheus-tls

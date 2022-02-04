@@ -7,3 +7,5 @@ rm -rf \
 .terraform.lock.hcl \
 terraform.tfstate \
 terraform.tfstate.backup
+
+terraform init

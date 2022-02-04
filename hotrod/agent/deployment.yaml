@@ -23,7 +23,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: spec.nodeName
-        image: grafana/agent:main-8bb01ea
+        image: grafana/agent:latest
         name: agent
         ports:
           - containerPort: 12345

@@ -20,14 +20,12 @@
   },
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "gnetId": null,
   "graphTooltip": 0,
-  "id": 42,
+  "id": 26,
   "links": [],
   "liveNow": false,
   "panels": [
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -95,12 +93,12 @@
           "mode": "single"
         }
       },
-      "title": "Database Response Times",
+      "title": "Database Response Times Panel",
       "type": "timeseries"
     }
   ],
   "refresh": "",
-  "schemaVersion": 31,
+  "schemaVersion": 33,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -114,5 +112,6 @@
   "timezone": "",
   "title": "Database Stats",
   "uid": "U2P5hp5nk",
-  "version": 2
+  "version": 2,
+  "weekStart": ""
 }
