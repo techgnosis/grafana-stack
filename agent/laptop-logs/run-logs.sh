@@ -2,4 +2,5 @@
 
 set -euo pipefail
 
-sudo /home/james/bin/agent -config.file=agent-logs.yml
+sudo /home/james/bin/agent \
+-config.file=flog-config.yaml

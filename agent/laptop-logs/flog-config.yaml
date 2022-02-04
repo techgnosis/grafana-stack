@@ -1,0 +1,20 @@
+server:
+  http_listen_port: 12346
+logs:
+  positions_directory: /home/james/agent/positions
+  configs:
+    - name: flog
+      clients:
+        - url: https://loki.lab.home/loki/api/v1/push
+      scrape_configs:
+        - job_name: flog
+          static_configs:
+            - targets: [localhost]
+              labels:
+                __path__: "/home/james/code/grafana-stack/agent/laptop-logs/flog.log"
+                chicken: noodle
+          pipeline_stages:
+            - regex:
+                expression: ".*(?P<http>HTTP....).*"
+            - labels:
+                http:

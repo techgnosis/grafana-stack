@@ -1,14 +1,11 @@
 server:
   http_listen_port: 12345
-prometheus:
+metrics:
   wal_directory: /home/james/agent/wal
   global:
     scrape_interval: 1s
     remote_write:
-      - url: https://gem.lab.home/api/v1/push
-        basic_auth:
-          username: laptop
-          password: bGFwdG9wLXdyaXRlLWFnZW50OiJYNjEzWDc4MjY4PX4+ODRcSiVaXiYmLw==
+      - url: https://prometheus.lab.home/api/v1/write
 integrations:
   node_exporter:
     enabled: true
