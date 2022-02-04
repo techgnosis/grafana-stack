@@ -14,7 +14,6 @@ logs:
                 names:
                   - flog
           pipeline_stages:
-            - docker: {}
             - regex:
                 expression: ".*(?P<http>HTTP....).*"
             - labels:
