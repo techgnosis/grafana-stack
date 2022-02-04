@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: zabbix-tls
+  namespace: zabbix
+spec:
+  dnsNames:
+  - zabbix.lab.home
+  issuerRef:
+    kind: ClusterIssuer
+    name: mkcert
+  secretName: zabbix-tls

@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: zabbix
+  namespace: zabbix
+spec:
+  tls:
+  - hosts:
+      - zabbix.lab.home
+    secretName: zabbix-tls
+  rules:
+  - host: zabbix.lab.home
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: zabbix
+            port:
+              number: 8080
