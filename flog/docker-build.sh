@@ -2,4 +2,4 @@
 
 set -euo pipefail
 
-docker build -t techgnosis/flog:1 .
+docker build -t docker.io/techgnosis/flog:1 .

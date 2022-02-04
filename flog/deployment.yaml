@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: flog
-          image: techgnosis/flog:1
+          image: docker.io/techgnosis/flog:1
           imagePullPolicy: Always
-          args: ["--loop", "--delay", "5ms"]
+          args: ["--loop", "--delay", "2s"]
