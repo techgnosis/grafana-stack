@@ -7,7 +7,7 @@ logs:
       clients:
         - url: http://loki.loki.svc.cluster.local:3100/loki/api/v1/push
       scrape_configs:
-        - job_name: hotrod-pods
+        - job_name: flog-pods
           kubernetes_sd_configs:
             - role: pod
               namespaces:
@@ -15,6 +15,10 @@ logs:
                   - flog
           pipeline_stages:
             - docker: {}
+            - regex:
+                expression: ".*(?P<http>HTTP....).*"
+            - labels:
+                http:
           relabel_configs:
             - action: drop
               regex: ".*grafana-agent.*"
