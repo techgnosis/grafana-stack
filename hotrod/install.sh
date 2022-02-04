@@ -9,9 +9,7 @@ kapp deploy -a hotrod \
 -f hotrod/certificate.yaml \
 -f hotrod/service.yaml \
 -f agent/deployment.yaml \
--f agent/clusterrole.yaml \
 -f agent/clusterrolebinding.yaml \
--f agent/ingress.yaml \
 -f agent/service.yaml \
 -f agent/serviceaccount.yaml \
 -f <(kubectl create configmap grafana-agent-config \
