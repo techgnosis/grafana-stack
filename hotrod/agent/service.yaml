@@ -5,7 +5,7 @@ metadata:
   namespace: hotrod
 spec:
   selector:
-    app: grafana-agent
+    name: grafana-agent
   ports:
     - name: thrift-compact
       port: 6831

@@ -80,10 +80,10 @@ traces:
   configs:
     - name: hotrod
       remote_write:
-        - endpoint: tempo.tempo.svc.cluster.local:6831
-          protocol: grpc
+        - endpoint: http://tempo.tempo.svc.cluster.local:4318
+          protocol: http
           insecure: true
-          format: jaeger
+          format: otlp
       receivers:
         jaeger:
           protocols:
