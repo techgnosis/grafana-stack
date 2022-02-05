@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tempo
+  namespace: tempo
+spec:
+  tls:
+  - hosts:
+      - tempo.lab.home
+    secretName: tempo-tls
+  rules:
+  - host: tempo.lab.home
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: tempo
+            port:
+              number: 3100

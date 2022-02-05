@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: tempo-tls
+  namespace: tempo
+spec:
+  dnsNames:
+  - tempo.lab.home
+  issuerRef:
+    kind: ClusterIssuer
+    name: mkcert
+  secretName: tempo-tls
