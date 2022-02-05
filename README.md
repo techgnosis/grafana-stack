@@ -10,7 +10,8 @@ Cortex read - `/api/prom`
 Cortex write - `/api/v1/push`
 
 # TODO
-1. Use custom YAML for Grafana too. Little more complicated but it shouldn't be..
+1. Figure out required PromQL for HotROD
+
 
 ## Image Rendering
 Image Rendering is actually a Grafana OSS feature. You can capture images of panels when panel alerts go off, and send that image with the alert.

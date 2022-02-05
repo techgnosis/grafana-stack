@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: hotrod
-          image: jaegertracing/example-hotrod:1.29
+          image: docker.io/techgnosis/hotrod:1
           args: ["all", "-m", "prometheus"]
           ports:
             - name: http
