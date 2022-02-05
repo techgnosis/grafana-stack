@@ -1,6 +1,6 @@
 server:
   http_listen_port: 12345
-  log_level: debug
+  log_level: info
 logs:
   positions_directory: /tmp/positions
   configs:
@@ -57,6 +57,10 @@ metrics:
                   - hotrod
           relabel_configs:
             - action: drop
+              regex: ".*grafana-agent.*"
+              source_labels:
+                - __meta_kubernetes_pod_name
+            - action: drop
               regex: Succeeded|Failed
               source_labels:
                 - __meta_kubernetes_pod_phase
@@ -72,17 +76,35 @@ metrics:
               source_labels:
                 - __meta_kubernetes_pod_name
               target_label: pod
-# traces:
-#   configs:
-#     - name: hotrod
-#       remote_write:
-#         - endpoint: tempo.tempo.svc.cluster.local:6831
-#           protocol: grpc
-#           insecure: true
-#       receivers:
-#         jaeger:
-#           protocols:
-#             thrift_compact:
-#       automatic_logging:
-#         backend: stdout
-#         roots: true
+traces:
+  configs:
+    - name: hotrod
+      remote_write:
+        - endpoint: tempo.tempo.svc.cluster.local:6831
+          protocol: grpc
+          insecure: true
+          format: jaeger
+      receivers:
+        jaeger:
+          protocols:
+            thrift_compact:
+      scrape_configs:
+        - job_name: hotrod-pods
+          kubernetes_sd_configs:
+            - role: pod
+              namespaces:
+                names:
+                  - hotrod
+          relabel_configs:
+            - action: drop
+              regex: ".*grafana-agent.*"
+              source_labels:
+                - __meta_kubernetes_pod_name
+            - action: replace
+              source_labels:
+                - __meta_kubernetes_namespace
+              target_label: namespace
+            - action: replace
+              source_labels:
+                - __meta_kubernetes_pod_name
+              target_label: pod        
