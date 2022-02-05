@@ -10,7 +10,6 @@ Cortex read - `/api/prom`
 Cortex write - `/api/v1/push`
 
 # TODO
-1. Use custom YAML for Loki and Tempo. Shouldn't need Helm for such simple deploys.
 1. Use custom YAML for Grafana too. Little more complicated but it shouldn't be..
 
 ## Image Rendering
