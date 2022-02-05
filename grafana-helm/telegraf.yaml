@@ -19,11 +19,8 @@ spec:
             name: telegraf-config
       containers:
         - name: telegraf
-          image: aa
-          command: ['prometheus']
-          args:
-            - "--config /tmp/telegraf.conf"
+          image: docker.io/telegraf:1.21.3
           volumeMounts:
-            - name: telegraph-config
-              mountPath: /tmp/telegraf-config.yml
+            - name: telegraf-config
+              mountPath: /etc/telegraf/telegraf.conf
               subPath: telegraf.conf
