@@ -1,5 +1,5 @@
 multitenancy_enabled: false
-search_enabled: false
+search_enabled: true
 compactor:
   compaction:
     compacted_block_retention: 24h

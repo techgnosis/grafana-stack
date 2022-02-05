@@ -10,7 +10,6 @@ Cortex read - `/api/prom`
 Cortex write - `/api/v1/push`
 
 # TODO
-1. Attach labels to HotROD spans using Grafana Agent
 1. Use custom YAML for Grafana too. Little more complicated but it shouldn't be..
 
 ## Image Rendering
