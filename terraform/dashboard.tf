@@ -8,6 +8,11 @@ resource "grafana_dashboard" "Frontend" {
   folder = grafana_folder.Frontend.id
 }
 
+resource "grafana_dashboard" "HotROD" {
+  config_json = file("dashboards/hotrod.json")
+  folder = grafana_folder.HotROD.id
+}
+
 resource "grafana_dashboard" "GrafanaHealth" {
   config_json = file("dashboards/grafana-health-dashboard.json")
   folder = grafana_folder.GrafanaHealth.id
