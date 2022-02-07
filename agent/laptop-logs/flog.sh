@@ -6,4 +6,5 @@ flog \
 --type log \
 --output flog.log \
 --delay 2s \
+--overwrite \
 --loop
