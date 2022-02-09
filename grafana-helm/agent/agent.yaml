@@ -1,6 +1,3 @@
-server:
-  http_listen_port: 12345
-  log_level: info
 logs:
   positions_directory: /tmp/positions
   configs:
@@ -41,12 +38,11 @@ logs:
 metrics:
   global:
     scrape_interval: 5s
+    remote_write:
+      - url: http://prometheus.prometheus.svc.cluster.local:9090/api/v1/write
   wal_directory: /var/lib/agent/data
   configs:
     - name: hotrod
-      host_filter: true
-      remote_write:
-        - url: http://prometheus.prometheus.svc.cluster.local:9090/api/v1/write
       scrape_configs:
         - job_name: grafana-enterprise-pods
           metrics_path: "/metrics"
