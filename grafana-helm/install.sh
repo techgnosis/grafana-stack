@@ -5,7 +5,7 @@ set -euo pipefail
 kapp deploy -a grafana-enterprise \
 -f namespace.yaml \
 -f certificate.yml \
--f grafana-ldap.yml \
+-f ldap.toml.yaml \
 -f postgres.yml \
 -f image-renderer.yaml \
 -f telegraf.yaml \
@@ -34,6 +34,6 @@ helm upgrade --install grafana-enterprise grafana \
 --repo https://grafana.github.io/helm-charts \
 --version 6.19.2 \
 --namespace grafana-enterprise \
---values grafana-values.yml \
+--values values.yaml \
 --values grafana-ini.yml \
 --wait
