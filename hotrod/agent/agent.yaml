@@ -41,41 +41,36 @@ logs:
 metrics:
   global:
     scrape_interval: 5s
+    remote_write:
+      - url: http://prometheus.prometheus.svc.cluster.local:9090/api/v1/write
   wal_directory: /var/lib/agent/data
   configs:
     - name: hotrod
-      host_filter: true
-      remote_write:
-        - url: http://prometheus.prometheus.svc.cluster.local:9090/api/v1/write
       scrape_configs:
-        - job_name: hotrod-pods
+        - job_name: hotrod-service
           metrics_path: "/metrics"
           kubernetes_sd_configs:
-            - role: pod
+            - role: service
               namespaces:
                 names:
                   - hotrod
           relabel_configs:
-            - action: drop
-              regex: ".*grafana-agent.*"
-              source_labels:
-                - __meta_kubernetes_pod_name
-            - action: drop
-              regex: Succeeded|Failed
-              source_labels:
-                - __meta_kubernetes_pod_phase
             - action: keep
-              regex: 8083
+              regex: "hotrod"
               source_labels:
-                - __meta_kubernetes_pod_container_port_number
+                - __meta_kubernetes_service_name
+            - action: keep
+              regex: metrics
+              source_labels:
+                - __meta_kubernetes_service_port_name
             - action: replace
               source_labels:
                 - __meta_kubernetes_namespace
               target_label: namespace
             - action: replace
               source_labels:
-                - __meta_kubernetes_pod_name
-              target_label: pod
+                - __meta_kubernetes_service_name
+              target_label: service
 traces:
   configs:
     - name: hotrod
