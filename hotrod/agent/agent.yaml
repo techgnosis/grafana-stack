@@ -88,23 +88,3 @@ traces:
         jaeger:
           protocols:
             thrift_compact:
-      scrape_configs:
-        - job_name: hotrod-pods
-          kubernetes_sd_configs:
-            - role: pod
-              namespaces:
-                names:
-                  - hotrod
-          relabel_configs:
-            - action: drop
-              regex: ".*grafana-agent.*"
-              source_labels:
-                - __meta_kubernetes_pod_name
-            - action: replace
-              source_labels:
-                - __meta_kubernetes_namespace
-              target_label: namespace
-            - action: replace
-              source_labels:
-                - __meta_kubernetes_pod_name
-              target_label: pod        
