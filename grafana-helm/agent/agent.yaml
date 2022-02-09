@@ -1,0 +1,90 @@
+server:
+  http_listen_port: 12345
+  log_level: info
+logs:
+  positions_directory: /tmp/positions
+  configs:
+    - name: hotrod
+      clients:
+        - url: http://loki.loki.svc.cluster.local:3100/loki/api/v1/push
+      scrape_configs:
+        - job_name: grafana-enterprise-pods
+          kubernetes_sd_configs:
+            - role: pod
+              namespaces:
+                names:
+                  - grafana-enterprise
+          pipeline_stages:
+            - docker: {}
+          relabel_configs:
+            - action: keep
+              regex: ".*grafana-enterprise.*"
+              source_labels:
+                - __meta_kubernetes_pod_name
+            - source_labels:
+                - __meta_kubernetes_pod_node_name
+              target_label: __host__
+            - action: replace
+              source_labels:
+                - __meta_kubernetes_namespace
+              target_label: namespace
+            - action: replace
+              source_labels:
+                - __meta_kubernetes_pod_name
+              target_label: pod
+            - replacement: /var/log/pods/*$1/*.log
+              separator: /
+              source_labels:
+                - __meta_kubernetes_pod_uid
+                - __meta_kubernetes_pod_container_name
+              target_label: __path__
+metrics:
+  global:
+    scrape_interval: 5s
+  wal_directory: /var/lib/agent/data
+  configs:
+    - name: hotrod
+      host_filter: true
+      remote_write:
+        - url: http://prometheus.prometheus.svc.cluster.local:9090/api/v1/write
+      scrape_configs:
+        - job_name: grafana-enterprise-pods
+          metrics_path: "/metrics"
+          kubernetes_sd_configs:
+            - role: pod
+              namespaces:
+                names:
+                  - grafana-enterprise
+          relabel_configs:
+            - action: keep
+              regex: ".*grafana-enterprise.*"
+              source_labels:
+                - __meta_kubernetes_pod_name
+            - action: drop
+              regex: Succeeded|Failed
+              source_labels:
+                - __meta_kubernetes_pod_phase
+            - action: keep
+              regex: 3000
+              source_labels:
+                - __meta_kubernetes_pod_container_port_number
+            - action: replace
+              source_labels:
+                - __meta_kubernetes_namespace
+              target_label: namespace
+            - action: replace
+              source_labels:
+                - __meta_kubernetes_pod_name
+              target_label: pod
+traces:
+  configs:
+    - name: grafana-enterprise
+      remote_write:
+        - endpoint: http://tempo.tempo.svc.cluster.local:4318
+          protocol: http
+          insecure: true
+          format: otlp
+      receivers:
+        jaeger:
+          protocols:
+            thrift_compact:

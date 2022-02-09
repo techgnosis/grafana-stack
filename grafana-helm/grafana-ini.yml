@@ -26,11 +26,12 @@ grafana.ini:
     active_sync_enabled: true
   feature_toggles:
     enable: recordedQueries tempoSearch
+  tracing.jaeger:
+    address: grafana-agent:6831
   alerting:
     enabled: false
   unified_alerting:
     enabled: true
-    ha_peers: grafana-enterprise-headless:9094
   recorded_queries:
     enabled: true
   log:

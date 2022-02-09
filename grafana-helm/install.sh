@@ -9,6 +9,10 @@ kapp deploy -a grafana-enterprise \
 -f postgres.yml \
 -f image-renderer.yaml \
 -f telegraf.yaml \
+-f agent/clusterrolebinding.yaml \
+-f agent/deployment.yaml \
+-f agent/service.yaml \
+-f agent/serviceaccount.yaml \
 -f <(kubectl create cm license \
 --namespace grafana-enterprise \
 --from-file=license.jwt=../licenses/ge-license.jwt \
@@ -17,6 +21,11 @@ kapp deploy -a grafana-enterprise \
 -f <(kubectl create cm telegraf-config \
 --namespace grafana-enterprise \
 --from-file=telegraf.conf \
+--dry-run=client \
+-o yaml) \
+-f <(kubectl create cm grafana-agent-config \
+--namespace grafana-enterprise \
+--from-file=agent/agent.yaml \
 --dry-run=client \
 -o yaml)
 
