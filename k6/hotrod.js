@@ -1,11 +1,10 @@
 import http from 'k6/http';
-import { sleep } from 'k6';
 
 export default function() {
 
     var chance = Math.floor((Math.random() * 75) + 1);
     var loops = 1
-    if (chance == 15) {
+    if (chance == 75) {
         loops = 50
     }
     
