@@ -1,7 +1,7 @@
 logs:
   positions_directory: /tmp/positions
   configs:
-    - name: hotrod
+    - name: grafana-enterprise
       clients:
         - url: http://loki.loki.svc.cluster.local:3100/loki/api/v1/push
       scrape_configs:
@@ -42,36 +42,32 @@ metrics:
       - url: http://prometheus.prometheus.svc.cluster.local:9090/api/v1/write
   wal_directory: /var/lib/agent/data
   configs:
-    - name: hotrod
+    - name: grafana-enterprise
       scrape_configs:
-        - job_name: grafana-enterprise-pods
+        - job_name: grafana-enterprise-service
           metrics_path: "/metrics"
           kubernetes_sd_configs:
-            - role: pod
+            - role: service
               namespaces:
                 names:
                   - grafana-enterprise
           relabel_configs:
             - action: keep
-              regex: ".*grafana-enterprise.*"
+              regex: "grafana-enterprise"
               source_labels:
-                - __meta_kubernetes_pod_name
-            - action: drop
-              regex: Succeeded|Failed
-              source_labels:
-                - __meta_kubernetes_pod_phase
+                - __meta_kubernetes_service_name
             - action: keep
-              regex: 3000
+              regex: service
               source_labels:
-                - __meta_kubernetes_pod_container_port_number
+                - __meta_kubernetes_service_port_name
             - action: replace
               source_labels:
                 - __meta_kubernetes_namespace
               target_label: namespace
             - action: replace
               source_labels:
-                - __meta_kubernetes_pod_name
-              target_label: pod
+                - __meta_kubernetes_service_name
+              target_label: service
 traces:
   configs:
     - name: grafana-enterprise
