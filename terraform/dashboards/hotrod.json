@@ -28,7 +28,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "e03xYM-nk"
+        "uid": "zgBXVaa7k"
       },
       "fieldConfig": {
         "defaults": {
@@ -101,7 +101,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "e03xYM-nk"
+            "uid": "zgBXVaa7k"
           },
           "exemplar": true,
           "expr": "rate(hotrod_frontend_requests_total{endpoint=\"HTTP-GET-/dispatch\",error=\"false\"}[20s])",
@@ -116,7 +116,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "e03xYM-nk"
+        "uid": "zgBXVaa7k"
       },
       "fieldConfig": {
         "defaults": {
@@ -189,7 +189,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "e03xYM-nk"
+            "uid": "zgBXVaa7k"
           },
           "exemplar": true,
           "expr": "histogram_quantile(0.95, rate(hotrod_frontend_request_latency_bucket{endpoint=\"HTTP-GET-/dispatch\", error=\"false\"}[$__rate_interval]))",
