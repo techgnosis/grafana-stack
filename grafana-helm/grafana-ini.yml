@@ -3,6 +3,10 @@ grafana.ini:
     root_url: https://grafana.lab.home/
   users:
     viewers_can_edit: true
+  caching:
+    backend: redis
+  caching.redis:
+    url: redis://redis.redis.svc.cluster.local:6379
   database:
     type: postgres
     host: postgres
