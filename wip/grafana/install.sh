@@ -10,10 +10,9 @@ kapp deploy -a grafana-enterprise \
 -f ge-ss.yaml \
 -f ge-service.yaml \
 -f ge-ingress.yaml \
--f prometheus.yaml \
 -f <(kubectl create secret generic grafana-enterprise-license \
 --namespace grafana-enterprise \
---from-file=license.jwt=../licenses/ge-license.jwt \
+--from-file=license.jwt=../../licenses/ge-license.jwt \
 --dry-run=client \
 -o yaml) \
 -f <(kubectl create cm grafana-config \

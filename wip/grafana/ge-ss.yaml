@@ -9,56 +9,7 @@ spec:
   selector:
     matchLabels:
       app: grafana-enterprise
-  template:
-    metadata:
-      labels:
-        app: grafana-enterprise
-    spec:
-      serviceName: grafana-enterprise-headless
-      containers:
-        - name: grafana-enterprise
-          image: grafana/grafana-enterprise:8.2.0
-          imagePullPolicy: IfNotPresent
-          env:
-            - name: GF_SECURITY_ADMIN_USER
-              value: admin
-            - name: GF_SECURITY_ADMIN_PASSWORD
-              value: admin
-          ports:
-            - containerPort: 3000
-              name: http
-            - containerPort: 9094
-              name: gossip
-          readinessProbe:
-            httpGet:
-              path: /api/health
-              port: 3000
-            initialDelaySeconds: 15
-            timeoutSeconds: 1
-          volumeMounts:
-            - mountPath: /var/lib/grafana
-              name: data
-            - mountPath: /etc/grafana/grafana.ini
-              name: grafana-config
-              subPath: grafana.ini
-            - mountPath: /etc/grafana/ldap.toml
-              name: ldap-config
-              subPath: ldap.toml
-              readOnly: true
-            - mountPath: /var/lib/grafana/license.jwt
-              name: grafana-enterprise-license
-              subPath: license.jwt
-              readOnly: true
-      volumes:
-        - configMap:
-            name: grafana-config
-          name: grafana-config
-        - configMap:
-            name: ldap-config
-          name: ldap-config
-        - secret:
-            secretName: grafana-enterprise-license
-          name: grafana-enterprise-license
+  serviceName: grafana-enterprise-headless
   updateStrategy:
     type: RollingUpdate
   volumeClaimTemplates:
@@ -70,3 +21,58 @@ spec:
         resources:
           requests:
             storage: 50Gi
+  template:
+    metadata:
+      labels:
+        app: grafana-enterprise
+    spec:
+      containers:
+        - name: grafana-enterprise
+          image: grafana/grafana-enterprise:8.3.4
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: GF_SECURITY_ADMIN_USER
+              value: admin
+            - name: GF_SECURITY_ADMIN_PASSWORD
+              value: admin
+            - name: GF_PATHS_DATA
+              value: /var/lib/grafana
+            - name: GF_PATHS_LOGS
+              value: /var/log/grafana
+            - name: GF_PATHS_PLUGINS
+              value: /var/lib/grafana/plugins
+            - name: GF_PATHS_PROVISIONING
+              value: /etc/grafana/provisioning
+          ports:
+            - containerPort: 3000
+              name: http
+            - containerPort: 9094
+              name: gossip
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 3000
+            initialDelaySeconds: 15
+            timeoutSeconds: 3
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/grafana
+            - name: grafana-config
+              mountPath: /etc/grafana/grafana.ini
+              subPath: grafana.ini
+            - name: ldap-config
+              mountPath: /etc/grafana/ldap.toml
+              subPath: ldap.toml
+            - name: grafana-enterprise-license
+              mountPath: /etc/grafana/license.jwt
+              subPath: license.jwt
+      volumes:
+        - name: grafana-config
+          configMap:
+            name: grafana-config
+        - name: ldap-config
+          configMap:
+            name: ldap-config
+        - name: grafana-enterprise-license
+          secret:
+            secretName: grafana-enterprise-license
