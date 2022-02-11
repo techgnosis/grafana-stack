@@ -9,6 +9,7 @@ kapp deploy -a grafana-enterprise \
 -f postgres.yml \
 -f image-renderer.yaml \
 -f telegraf.yaml \
+-f mysql.yaml \
 -f agent/clusterrolebinding.yaml \
 -f agent/deployment.yaml \
 -f agent/service.yaml \

@@ -8,12 +8,12 @@ grafana.ini:
   caching.redis:
     url: redis://redis.redis.svc.cluster.local:6379
   database:
-    type: postgres
-    host: postgres
+    type: mysql
+    host: mysql:3306
     name: grafana-enterprise
     user: grafana-enterprise
     password: grafana-enterprise
-    ssl_mode: disable
+    ssl_mode: false # false for MySQL, disable for PostgreSQL
   auditing:
     enabled: true
     loggers: loki
