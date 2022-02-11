@@ -1,0 +1,79 @@
+logs:
+  positions_directory: /tmp/positions
+  configs:
+    - name: loki
+      clients:
+        - url: http://loki:3100/loki/api/v1/push
+      scrape_configs:
+        - job_name: loki-pods
+          kubernetes_sd_configs:
+            - role: pod
+              namespaces:
+                names:
+                  - loki
+          relabel_configs:
+            - action: drop
+              regex: ".*grafana-agent.*"
+              source_labels:
+                - __meta_kubernetes_pod_name
+            - source_labels:
+                - __meta_kubernetes_pod_node_name
+              target_label: __host__
+            - action: replace
+              source_labels:
+                - __meta_kubernetes_namespace
+              target_label: namespace
+            - action: replace
+              source_labels:
+                - __meta_kubernetes_pod_name
+              target_label: pod
+            - replacement: /var/log/pods/*$1/*.log
+              separator: /
+              source_labels:
+                - __meta_kubernetes_pod_uid
+                - __meta_kubernetes_pod_container_name
+              target_label: __path__
+metrics:
+  global:
+    scrape_interval: 60s
+    remote_write:
+      - url: http://prometheus.prometheus.svc.cluster.local:9090/api/v1/write
+  wal_directory: /var/lib/agent/data
+  configs:
+    - name: loki
+      scrape_configs:
+        - job_name: loki-service
+          kubernetes_sd_configs:
+            - role: service
+              namespaces:
+                names:
+                  - loki
+          relabel_configs:
+            - action: keep
+              regex: "loki"
+              source_labels:
+                - __meta_kubernetes_service_name
+            - action: keep
+              regex: loki
+              source_labels:
+                - __meta_kubernetes_service_port_name
+            - action: replace
+              source_labels:
+                - __meta_kubernetes_namespace
+              target_label: namespace
+            - action: replace
+              source_labels:
+                - __meta_kubernetes_service_name
+              target_label: service
+traces:
+  configs:
+    - name: loki
+      remote_write:
+        - endpoint: http://tempo.tempo.svc.cluster.local:4318
+          protocol: http
+          insecure: true
+          format: otlp
+      receivers:
+        jaeger:
+          protocols:
+            thrift_compact:

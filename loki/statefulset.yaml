@@ -26,6 +26,11 @@ spec:
         - name: loki
           image: index.docker.io/grafana/loki:2.4.2
           command: ['loki']
+          env:
+            - name: JAEGER_AGENT_HOST
+              value: grafana-agent
+            - name: JAEGER_AGENT_PORT
+              value: "6831"          
           args:
             - "-config.file=/etc/loki/loki.yaml"
           volumeMounts:

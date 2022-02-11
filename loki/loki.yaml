@@ -3,29 +3,41 @@ auth_enabled: false
 server:
   http_listen_port: 3100
 
-limits_config:
-  enforce_metric_name: false
-  reject_old_samples: false
-  reject_old_samples_max_age: 168h
-  unordered_writes: true
+#ingester:
+#  max_chunk_age: 1m
 
 schema_config:
   configs:
   - store: boltdb-shipper
-    object_store: filesystem
+    object_store: aws
     from: "2020-10-24"
     index:
       period: 24h
       prefix: index_
     schema: v11
     
+# common:
+#   path_prefix: /data/loki
+#   replication_factor: 1
+#   storage:
+#     filesystem:
+#       chunks_directory: /data/loki/chunks
+#       rules_directory: /data/loki/rules
+#   ring:
+#     kvstore:
+#       store: inmemory
+
 common:
   path_prefix: /data/loki
   replication_factor: 1
   storage:
-    filesystem:
-      chunks_directory: /data/loki/chunks
-      rules_directory: /data/loki/rules
+    s3:
+      endpoint: minio.minio.svc.cluster.local:9000
+      bucketnames: loki-data
+      access_key_id: minio
+      secret_access_key: minio123
+      s3forcepathstyle: true
+      insecure: true
   ring:
     kvstore:
       store: inmemory

@@ -8,7 +8,8 @@ spec:
   selector:
     app: loki
   ports:
-    - protocol: TCP
+    - name: loki
+      protocol: TCP
       port: 3100
 ---
 apiVersion: v1
