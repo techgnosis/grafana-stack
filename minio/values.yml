@@ -26,6 +26,9 @@ buckets:
   - name: enterprise-traces-admin
     policy: none
     purge: false
+  - name: loki-data
+    policy: none
+    purge: false
 persistence:
   size: 100Gi
 accessKey: minio
