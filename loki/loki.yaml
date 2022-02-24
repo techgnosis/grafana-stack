@@ -3,8 +3,11 @@ auth_enabled: false
 server:
   http_listen_port: 3100
 
-#ingester:
-#  max_chunk_age: 1m
+ingester:
+  max_chunk_age: 1h # should match querier: query_ingesters_within
+
+querier:
+  query_ingesters_within: 1h # should match ingester: max_chunk_age
 
 schema_config:
   configs:
@@ -16,17 +19,6 @@ schema_config:
       prefix: index_
     schema: v11
     
-# common:
-#   path_prefix: /data/loki
-#   replication_factor: 1
-#   storage:
-#     filesystem:
-#       chunks_directory: /data/loki/chunks
-#       rules_directory: /data/loki/rules
-#   ring:
-#     kvstore:
-#       store: inmemory
-
 common:
   path_prefix: /data/loki
   replication_factor: 1
