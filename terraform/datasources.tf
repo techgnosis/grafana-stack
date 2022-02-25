@@ -14,6 +14,7 @@ resource "grafana_data_source" "Prometheus" {
   type = "prometheus"
   name = "Prometheus"
   url = "http://prometheus.prometheus.svc.cluster.local:9090"
+  uid = "zgBXVaa7k"
 }
 
 resource "grafana_data_source" "Loki" {
