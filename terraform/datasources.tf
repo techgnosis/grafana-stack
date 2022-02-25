@@ -13,16 +13,23 @@ resource "grafana_data_source" "Frontend" {
 resource "grafana_data_source" "Prometheus" {
   type = "prometheus"
   name = "Prometheus"
-  url = "http://prometheus.prometheus.svc.cluster.local:9090"
+  url = "https://prometheus.lab.home"
   uid = "zgBXVaa7k"
+
+  json_data {
+    tls_skip_verify = true
+  }
 }
 
 resource "grafana_data_source" "Loki" {
   type = "loki"
   name = "Loki"
-  url = "http://loki.loki.svc.cluster.local:3100"
+  url = "https://loki.lab.home"
+  uid = "zl2ZeQB7z"
 
   json_data {
+
+    tls_skip_verify = true
 
     derived_field {
       matcher_regex = ".*(?:trace_id\":\\s*\")(.*?)(?:\"|\\s).*"
@@ -36,7 +43,12 @@ resource "grafana_data_source" "Loki" {
 resource "grafana_data_source" "Tempo" {
   type = "tempo"
   name = "Tempo"
-  url = "http://tempo.tempo.svc.cluster.local:3100"
+  url = "https://tempo.lab.home"
+  uid = "_JhW6wfnz"
+
+  json_data {
+    tls_skip_verify = true
+  }
 }
 
 resource "grafana_data_source" "MySQL" {
