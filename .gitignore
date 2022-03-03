@@ -8,5 +8,8 @@ terraform.tfstate.backup
 .terraform
 .terraform.lock.hcl
 .envrc
+grizzly/folders
+grizzly/datasources
+grizzly/dashboards
 
 flog/flog
