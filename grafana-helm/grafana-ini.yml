@@ -45,11 +45,11 @@ grafana.ini:
   rendering:
     server_url: http://image-renderer:8081/render
     callback_url: http://grafana-enterprise
-  #white_labeling:
-  #  login_background: url(https://www.autonomousvehicleinternational.com/wp-content/uploads/2019/05/cruise-web_cropped.gif)
-  #  app_title: Cruise
-  #  login_title: Cruise Observability Platform
-  #  login_subtitle: Use your email address to login (including @cruise.com)
-  #  footer_links: support wiki
-  #  footer_links_support_text: Support
-  #  footer_links_wiki_text: Wiki
+  # white_labeling:
+  #   login_background: url(https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.androidguys.com%2Fwp-content%2Fuploads%2F2016%2F08%2Ftmobile-logo.jpg&f=1&nofb=1)
+  #   app_title: T-Mobile
+  #   login_title: T-Mobile Observability Platform
+  #   login_subtitle: Use your email address to login (including @tmobile.com)
+  #   footer_links: support wiki
+  #   footer_links_support_text: Support
+  #   footer_links_wiki_text: Wiki

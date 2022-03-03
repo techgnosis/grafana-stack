@@ -11,8 +11,6 @@ logs:
               namespaces:
                 names:
                   - grafana-enterprise
-          pipeline_stages:
-            - docker: {}
           relabel_configs:
             - action: keep
               regex: ".*grafana-enterprise.*"
@@ -37,7 +35,7 @@ logs:
               target_label: __path__
 metrics:
   global:
-    scrape_interval: 5s
+    scrape_interval: 60s
     remote_write:
       - url: http://prometheus.prometheus.svc.cluster.local:9090/api/v1/write
   wal_directory: /var/lib/agent/data
@@ -45,7 +43,6 @@ metrics:
     - name: grafana-enterprise
       scrape_configs:
         - job_name: grafana-enterprise-service
-          metrics_path: "/metrics"
           kubernetes_sd_configs:
             - role: service
               namespaces:
@@ -56,10 +53,6 @@ metrics:
               regex: "grafana-enterprise"
               source_labels:
                 - __meta_kubernetes_service_name
-            - action: keep
-              regex: service
-              source_labels:
-                - __meta_kubernetes_service_port_name
             - action: replace
               source_labels:
                 - __meta_kubernetes_namespace
