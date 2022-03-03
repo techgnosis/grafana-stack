@@ -10,7 +10,8 @@ Cortex read - `/api/prom`
 Cortex write - `/api/v1/push`
 
 # TODO
-1. Figure out required PromQL for HotROD
+1. Figure out histogram query
+1. Make an alert on the histogram
 
 
 ## Image Rendering
@@ -23,6 +24,10 @@ If you install the plugin, you don't need to set `rendering.server_url` or `rend
 If you are using the container, which you should definitley do, then be aware that `grafana/grafana-image-renderer` listens on 8081 and `bitnami/grana-image-renderer` listens on 8080.
 
 If you use the plugin, you do need to set `rendering.server_url` and `rendering.callback_url` as per the docs.
+
+
+## Importing dashboards
+Whether you use the "Import" button or you use the API directly via curl or Terraform, you need to change the datasource UIDs in the JSON. Otherwise the panels will be broken.
 
 
 ## Example app
