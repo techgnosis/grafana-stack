@@ -22,12 +22,6 @@ grafana.ini:
     type: http
     url: loki.loki.svc.cluster.local:3100
     tls: false
-  auth.ldap:
-    enabled: true
-    config_file: /etc/grafana/ldap.toml
-    allow_sign_up: true
-    sync_cron: "* */10 * * * *"
-    active_sync_enabled: true
   feature_toggles:
     enable: recordedQueries tempoSearch
   tracing.jaeger:
@@ -45,11 +39,39 @@ grafana.ini:
   rendering:
     server_url: http://image-renderer:8081/render
     callback_url: http://grafana-enterprise
-  # white_labeling:
-  #   login_background: url(https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.androidguys.com%2Fwp-content%2Fuploads%2F2016%2F08%2Ftmobile-logo.jpg&f=1&nofb=1)
-  #   app_title: T-Mobile
-  #   login_title: T-Mobile Observability Platform
-  #   login_subtitle: Use your email address to login (including @tmobile.com)
-  #   footer_links: support wiki
-  #   footer_links_support_text: Support
-  #   footer_links_wiki_text: Wiki
+  white_labeling:
+    login_background: url(https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.androidguys.com%2Fwp-content%2Fuploads%2F2016%2F08%2Ftmobile-logo.jpg&f=1&nofb=1)
+    app_title: T-Mobile
+    login_title: T-Mobile Observability Platform
+    login_subtitle: Use your email address to login (including @tmobile.com)
+    footer_links: support wiki
+    footer_links_support_text: Support
+    footer_links_wiki_text: Wiki
+  auth.ldap:
+    enabled: true
+    config_file: /etc/grafana/ldap.toml
+    allow_sign_up: true
+    sync_cron: "* */10 * * * *"
+    active_sync_enabled: true
+  auth.generic_oauth:
+    enabled: false
+    api_url: https://keycloak.lab.home/auth/realms/grafana/protocol/openid-connect/userinfo
+    auth_url: https://keycloak.lab.home/auth/realms/grafana/protocol/openid-connect/auth
+    token_url: https://keycloak.lab.home/auth/realms/grafana/protocol/openid-connect/token
+    allow_sign_up: true
+    oauth_auto_login: false
+    allowed_domains: grafana.lab.home
+    scopes: email
+    empty_scopes: false
+    tls_skip_verify_insecure: true
+    client_id: grafana-oauth
+    client_secret: cf003265-bc5a-47e6-95f7-6f8b92e7146a
+  auth.saml:
+    enabled: false
+    certificate: MIICqzCCAZMCBgF6jG20FzANBgkqhkiG9w0BAQsFADAZMRcwFQYDVQQDDA5ncmFmYW5hLWNsaWVudDAeFw0yMTA3MDkxNzU4NTdaFw0zMTA3MDkxODAwMzdaMBkxFzAVBgNVBAMMDmdyYWZhbmEtY2xpZW50MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkMbZJoXeCYybHvA3jqYqE7U0FGmf1oUlFYR4OBU8L105l8hoELgdwsPSgMshQnsbKGklf1LDRAPle+v7amVsXV2PJyXRsQUXoVAiQ1NaJezskw79oW0f0TciS/BqDRKJeI99ezY1siBP94HIeh5wJhPl6+QLjJkEgbfCTlOryRNY6VQwp2YWeKlOCqEVAsUqwwxFbKikJqkdXOlNHfpl2q47Mj0NFcThwmQL0hob1moWAmdqZYK5nCO7sw938e9fRTDyXGwdvoNYQpGmbKgRNIBDU5nlPJMD5oss9RvuUEU9L5kn/0mD6VeodTxLfqgjIH2B+7k15/B5Rw9MMiSO6wIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQAMWBJqFCKOWQT7EcvVNaWilnKb+WO1SHKhmO6sT1c/s+mQvCEhCevoMz2xByAiy2UVkijpXrFaTbL0IcnB3Dg/DvRc3L+ftndXvlERQRSyItOdK61cer759SmI9stjbtt7n5NMqp2fpo8QLYgD6rrHrke0G97BZ6/nmaD1QNinOudawSggNS+m+YwXPT9OUtDdEWfn8xRQG4nBtvyNhsWieK5I7Ga3dRpjemyoTRH0c310HT8Pbi7W1HuMWb7w+5sKNetSK7k/KWgzmQdu1vUsHQjUqdYQ+YmBoHFJ+kbMCLVyOt8b6D+v2+cB6/uZmGRQT7zANlkn1xDjmlGpD+Xj
+    private_key: MIIEowIBAAKCAQEAkMbZJoXeCYybHvA3jqYqE7U0FGmf1oUlFYR4OBU8L105l8hoELgdwsPSgMshQnsbKGklf1LDRAPle+v7amVsXV2PJyXRsQUXoVAiQ1NaJezskw79oW0f0TciS/BqDRKJeI99ezY1siBP94HIeh5wJhPl6+QLjJkEgbfCTlOryRNY6VQwp2YWeKlOCqEVAsUqwwxFbKikJqkdXOlNHfpl2q47Mj0NFcThwmQL0hob1moWAmdqZYK5nCO7sw938e9fRTDyXGwdvoNYQpGmbKgRNIBDU5nlPJMD5oss9RvuUEU9L5kn/0mD6VeodTxLfqgjIH2B+7k15/B5Rw9MMiSO6wIDAQABAoIBAQCHsfkCRGKSbLlPzDMmftPdWO+RWla4CF9zxY+wcSbR9fzvKKVxVkB+tm/sy3dHCn+v5q2Aox/l9gj3l300gg+JixGLzcS2uGEnjyYuGEfcWC58v4Y18UPrIlQA/TtJOWCkIUmpXGwDoomRIJG49CKFbg0IhdvVUe6JbqSuKXpPoWpXI6kQgG2UmewPbc9i6qmCwz/i/XBcBZJxKsAmbEre+yZkEpdUpCFAwvJMoB3nKKGqfaAKnCMJjJWeN1rkPnQ77Gx5bGXc5maCr+g/bRcnNwPCxEVIceoDouRtVjkccm3Zvk7K/VEemEAKKxdDc5qiSxRoCFg9QNzBKiQHAqSxAoGBANJ9AAepSRKk4m9rL8JZ+czWDl/bqacaOIyK6QTOG++1EEZgqW8SccEkI5eOY8eiEZxfboigJYBIAlw9WErKQei3Rrwn4HOPd+Y048XGoyjlMigSk2FmEM6FGKtoI0SwYmy9ZjIE9j5JnDz5sJLqANq8cGCvOcSGswpFvvXQbkm1AoGBALAUkSxVmiBfArjgEPbV3OCf5WNxrvKsaOdYZLdusvzluBK+0Xm5flRRYihMiZmQoY4WKwZC+bHEBiuPs2M4Dx3fzkl8O7dZGEjDterJdHsAEdayl8XbutYPkQeHvhBlKovHnAp4AOLVzAvGlUrPzhMYhMNDsVP/9HNFzPo/YFofAoGAVomNuZifskqXzbcDq6PST6SxxDdLSKg/F4kExDT4x1RpnIWhI0kx+3YgK+8elrTLCL8zcnhk8pioX8PYyObesg6nxjOe0+PoJ30XJ/jCm82fEVqRvTl5L28I9W+bEGJ0FMDJg0cG9hTNZ0RAlCYgs81FZnqkBWhbs515JRbMQQECgYAr0WJzKvZI+fveb/wowP3PdFsMTT0hLOCKOcgOkeC+6JfPKmdMqGmUqBAKQUm4ynI5vrCERWSH5WU3r/IPTeMNJyXZya2+qdBOQ03hGLMA7PqDeDwmw9CR9pu7yP72a4aT9F+Th1uJF3VItOlwDZiVzfMz+IOHiNmXWhZxbBYZNwKBgGCAG83ZR3FQDw+loF/b3Mrgs+5TePowerRNHlFc9nEqf2Hk+sQIcPa8ACH3tEiHdT+i5RnnvSZBi3EBkoYX5+QKZ8SDpT5TqXpPR9pF0AT0cQO/uk5sw6LvhGCLfzMWeQARXui1A/+3UU9i/mxv2QEFIoPuW3eGF/Wjm2GF/DWo
+    signature_algorithm: rsa-sha256 # keycloak default
+    idp_metadata_url: https://keycloak.lab.home/auth/realms/grafana/protocol/saml/descriptor # found in keycloak realm
+    assertion_attribute_name: displayName
+    assertion_attribute_login: mail
+    assertion_attribute_email: mail
