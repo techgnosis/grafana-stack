@@ -48,24 +48,25 @@ grafana.ini:
     footer_links_support_text: Support
     footer_links_wiki_text: Wiki
   auth.ldap:
-    enabled: true
+    enabled: false
     config_file: /etc/grafana/ldap.toml
     allow_sign_up: true
     sync_cron: "* */10 * * * *"
     active_sync_enabled: true
   auth.generic_oauth:
-    enabled: false
+    name: keycloak
+    enabled: true
     api_url: https://keycloak.lab.home/auth/realms/grafana/protocol/openid-connect/userinfo
     auth_url: https://keycloak.lab.home/auth/realms/grafana/protocol/openid-connect/auth
     token_url: https://keycloak.lab.home/auth/realms/grafana/protocol/openid-connect/token
     allow_sign_up: true
     oauth_auto_login: false
-    allowed_domains: grafana.lab.home
+    allowed_domains: example.org
     scopes: email
     empty_scopes: false
     tls_skip_verify_insecure: true
-    client_id: grafana-oauth
-    client_secret: cf003265-bc5a-47e6-95f7-6f8b92e7146a
+    client_id: grafana
+    client_secret: I70Q9T2eOLRtjXZ4LSTm05jABfn0NCfs
   auth.saml:
     enabled: false
     certificate: MIICqzCCAZMCBgF6jG20FzANBgkqhkiG9w0BAQsFADAZMRcwFQYDVQQDDA5ncmFmYW5hLWNsaWVudDAeFw0yMTA3MDkxNzU4NTdaFw0zMTA3MDkxODAwMzdaMBkxFzAVBgNVBAMMDmdyYWZhbmEtY2xpZW50MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkMbZJoXeCYybHvA3jqYqE7U0FGmf1oUlFYR4OBU8L105l8hoELgdwsPSgMshQnsbKGklf1LDRAPle+v7amVsXV2PJyXRsQUXoVAiQ1NaJezskw79oW0f0TciS/BqDRKJeI99ezY1siBP94HIeh5wJhPl6+QLjJkEgbfCTlOryRNY6VQwp2YWeKlOCqEVAsUqwwxFbKikJqkdXOlNHfpl2q47Mj0NFcThwmQL0hob1moWAmdqZYK5nCO7sw938e9fRTDyXGwdvoNYQpGmbKgRNIBDU5nlPJMD5oss9RvuUEU9L5kn/0mD6VeodTxLfqgjIH2B+7k15/B5Rw9MMiSO6wIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQAMWBJqFCKOWQT7EcvVNaWilnKb+WO1SHKhmO6sT1c/s+mQvCEhCevoMz2xByAiy2UVkijpXrFaTbL0IcnB3Dg/DvRc3L+ftndXvlERQRSyItOdK61cer759SmI9stjbtt7n5NMqp2fpo8QLYgD6rrHrke0G97BZ6/nmaD1QNinOudawSggNS+m+YwXPT9OUtDdEWfn8xRQG4nBtvyNhsWieK5I7Ga3dRpjemyoTRH0c310HT8Pbi7W1HuMWb7w+5sKNetSK7k/KWgzmQdu1vUsHQjUqdYQ+YmBoHFJ+kbMCLVyOt8b6D+v2+cB6/uZmGRQT7zANlkn1xDjmlGpD+Xj
