@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: alertmanager-tls
+  namespace: alertmanager
+spec:
+  dnsNames:
+  - alertmanager.lab.home
+  issuerRef:
+    kind: ClusterIssuer
+    name: mkcert
+  secretName: alertmanager-tls

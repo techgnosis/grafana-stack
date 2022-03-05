@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alertmanager
+  namespace: alertmanager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: alertmanager
+  template:
+    metadata:
+      labels:
+        app: alertmanager
+    spec:
+      volumes:
+        - name: alertmanager-config
+          configMap:
+            name: alertmanager
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
+      containers:
+        - name: alertmanager
+          image: index.docker.io/prom/alertmanager:v0.23.0
+          command: ['alertmanager']
+          args:
+            - "--config.file=/tmp/alertmanager.yml"
+          volumeMounts:
+            - name: data
+              mountPath: /data
+            - name: alertmanager-config
+              mountPath: /tmp/alertmanager.yml
+              subPath: alertmanager.yml
+          ports:
+            - containerPort: 9093
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data
+  namespace: alertmanager
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: alertmanager
+  namespace: alertmanager
+spec:
+  type: ClusterIP
+  selector:
+    app: alertmanager
+  ports:
+    - protocol: TCP
+      port: 9093

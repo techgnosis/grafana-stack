@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: alertmanager
+  namespace: alertmanager
+spec:
+  tls:
+  - hosts:
+      - alertmanager.lab.home
+    secretName: alertmanager-tls
+  rules:
+  - host: alertmanager.lab.home
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: alertmanager
+            port:
+              number: 9093
