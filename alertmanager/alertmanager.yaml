@@ -1,1 +1,7 @@
-global:
+route:
+  receiver: send-to-webhook
+
+receivers:
+  - name: send-to-webhook
+    webhook_configs:
+      - url: "http://simple-webhook.simple-webhook.svc.cluster.local:8090"

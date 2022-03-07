@@ -25,13 +25,13 @@ spec:
           image: index.docker.io/prom/alertmanager:v0.23.0
           command: ['alertmanager']
           args:
-            - "--config.file=/tmp/alertmanager.yml"
+            - "--config.file=/tmp/alertmanager.yaml"
           volumeMounts:
             - name: data
               mountPath: /data
             - name: alertmanager-config
-              mountPath: /tmp/alertmanager.yml
-              subPath: alertmanager.yml
+              mountPath: /tmp/alertmanager.yaml
+              subPath: alertmanager.yaml
           ports:
             - containerPort: 9093
 ---
