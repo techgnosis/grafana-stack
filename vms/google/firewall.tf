@@ -5,7 +5,7 @@ resource "google_compute_firewall" "jmusselwhite-k3s" {
 
   allow {
     protocol  = "tcp"
-    ports     = ["6443", "22"]
+    ports     = ["6443", "22", "443"]
   }
 
   source_ranges = ["0.0.0.0/0"]
