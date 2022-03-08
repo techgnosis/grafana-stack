@@ -6,6 +6,7 @@ resource "google_compute_instance" "jmusselwhite-k3s" {
 
   boot_disk {
     initialize_params {
+      size = 100
       image = "ubuntu-2004-focal-v20220303a"
     }
   }
@@ -14,7 +15,7 @@ resource "google_compute_instance" "jmusselwhite-k3s" {
     network = "default"
 
     access_config {
-      // Ephemeral public IP
+      network_tier = "STANDARD"
     }
   }
 }
