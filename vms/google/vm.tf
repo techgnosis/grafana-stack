@@ -1,17 +1,12 @@
-resource "google_service_account" "musselwhite-temp" {
-  account_id   = "musselwhite-temp"
-  display_name = "musselwhite-temp-vm"
-}
-
-resource "google_compute_instance" "musselwhite-temp" {
-  name         = "musselwhite-test"
+resource "google_compute_instance" "jmusselwhite-k3s" {
+  name         = "jmusselwhite-k3s"
   machine_type = "e2-medium"
 
-  tags = ["musselwhite"]
+  tags = ["jmusselwhite"]
 
   boot_disk {
     initialize_params {
-      image = "rhel-8-v20211105"
+      image = "ubuntu-2004-focal-v20220303a"
     }
   }
 
@@ -21,11 +16,5 @@ resource "google_compute_instance" "musselwhite-temp" {
     access_config {
       // Ephemeral public IP
     }
-  }
-
-  service_account {
-    # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
-    email  = google_service_account.musselwhite-temp.email
-    scopes = ["cloud-platform"]
   }
 }
