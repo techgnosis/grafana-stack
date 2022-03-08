@@ -34,7 +34,7 @@ Whether you use the "Import" button or you use the API directly via curl or Terr
 HotROD is the example app used in this repo
 
 ## Keycloak
-Realm:
+Realm (You MUST make a new Realm. You CAN NOT use Master, it does not work):
 1. Make a new Realm called `grafana`
 1. In the realm settings click `OpenID Endpoint Configuration` and record the URL for `authorization_endpoint`, `token_endpoint`, and `userinfo_endpoint` for use in `grafana.ini`
 
@@ -44,4 +44,21 @@ Client:
 1. Make sure the protocol is `openid-connect`
 1. Change `Access type` to `confidential`
 1. Change `Valid Redirect URIs` to `https://grafana.lab.home/login/generic_oauth`
+
+Users:
+1. Go to Federation
+1. Select LDAP
+1. Import Users = On
+1. Edit Mode = READ_ONLY
+1. Vendor = Other
+1. Username LDAP attribute = cn
+1. RDN LDAP attribute = cn
+1. UUID LDAP attribute = entryUUID
+1. User Object Classes = inetOrgPerson, organizationalPerson
+1. Connection Url = ldap://openldap.openldap.svc.cluster.local
+1. Users DN = dc=example,dc=org
+1. Search Scope = One Level
+1. Bind type = simple
+1. Bind DN = cn=admin,dc=example,dc=org
+1. Bind credential = admin
 
