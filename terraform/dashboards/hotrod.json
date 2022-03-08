@@ -21,7 +21,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 9,
+  "id": 45,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -86,7 +86,7 @@
         "x": 0,
         "y": 0
       },
-      "id": 8,
+      "id": 10,
       "options": {
         "legend": {
           "calcs": [],
@@ -94,7 +94,8 @@
           "placement": "bottom"
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "targets": [
@@ -104,13 +105,13 @@
             "uid": "zgBXVaa7k"
           },
           "exemplar": true,
-          "expr": "rate(hotrod_frontend_requests_total{endpoint=\"HTTP-GET-/dispatch\",error=\"false\"}[20s])",
+          "expr": "rate(hotrod_frontend_request_latency_sum{namespace=\"hotrod\", endpoint=\"HTTP-GET-/dispatch\"}[1m]) / rate(hotrod_frontend_request_latency_count{namespace=\"hotrod\", endpoint=\"HTTP-GET-/dispatch\"}[1m])",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
         }
       ],
-      "title": "Request Rate",
+      "title": "Latency",
       "type": "timeseries"
     },
     {
@@ -182,7 +183,8 @@
           "placement": "bottom"
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "targets": [
@@ -192,7 +194,7 @@
             "uid": "zgBXVaa7k"
           },
           "exemplar": true,
-          "expr": "histogram_quantile(0.95, rate(hotrod_frontend_request_latency_bucket{endpoint=\"HTTP-GET-/dispatch\", error=\"false\"}[$__rate_interval]))",
+          "expr": "histogram_quantile(0.95, rate(hotrod_frontend_request_latency_bucket{endpoint=\"HTTP-GET-/dispatch\", error=\"false\", namespace=\"hotrod\"}[1m]))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -200,10 +202,99 @@
       ],
       "title": "95% Latency over last minute",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "zgBXVaa7k"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "id": 8,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "zgBXVaa7k"
+          },
+          "exemplar": true,
+          "expr": "rate(hotrod_frontend_requests_total{endpoint=\"HTTP-GET-/dispatch\",error=\"false\", namespace=\"hotrod\"}[1m])",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "Request Rate",
+      "type": "timeseries"
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 34,
+  "schemaVersion": 35,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -217,6 +308,6 @@
   "timezone": "",
   "title": "HotROD Demo",
   "uid": "K1W6YG-7k",
-  "version": 10,
+  "version": 6,
   "weekStart": ""
 }
