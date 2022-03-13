@@ -14,6 +14,13 @@ grafana.ini:
     user: grafana-enterprise
     password: grafana-enterprise
     ssl_mode: false # false for MySQL, disable for PostgreSQL
+  usage_insights.export:
+    enabled: true
+    storage: loki
+  usage_insights.export.storage.loki:
+    type: http
+    url: loki.loki.svc.cluster.local:3100
+    tls: false
   auditing:
     enabled: true
     loggers: loki
@@ -48,14 +55,14 @@ grafana.ini:
     footer_links_support_text: Support
     footer_links_wiki_text: Wiki
   auth.ldap:
-    enabled: false
+    enabled: true
     config_file: /etc/grafana/ldap.toml
     allow_sign_up: true
     sync_cron: "* */10 * * * *"
     active_sync_enabled: true
   auth.generic_oauth:
     name: keycloak
-    enabled: true
+    enabled: false
     api_url: https://keycloak.lab.home/auth/realms/grafana/protocol/openid-connect/userinfo
     auth_url: https://keycloak.lab.home/auth/realms/grafana/protocol/openid-connect/auth
     token_url: https://keycloak.lab.home/auth/realms/grafana/protocol/openid-connect/token
