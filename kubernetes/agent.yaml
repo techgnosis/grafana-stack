@@ -13,6 +13,7 @@ metrics:
             - role: node
           metric_relabel_configs:
             - source_labels: [__name__]
+              action: keep
               regex: >- 
                 storage_operation_duration_seconds_bucket|
                 namespace_cpu:kube_pod_container_resource_requests:sum|
@@ -123,7 +124,6 @@ metrics:
                 kube_deployment_spec_replicas|
                 kube_horizontalpodautoscaler_status_desired_replicas|
                 kube_node_status_condition
-              action: keep
           relabel_configs:
             - replacement: kubernetes.default.svc.cluster.local:443
               target_label: __address__
@@ -143,6 +143,7 @@ metrics:
             - role: node
           metric_relabel_configs:
             - source_labels: [__name__]
+              action: keep
               regex: >- 
                 storage_operation_duration_seconds_bucket|
                 namespace_cpu:kube_pod_container_resource_requests:sum|
@@ -253,7 +254,6 @@ metrics:
                 kube_deployment_spec_replicas|
                 kube_horizontalpodautoscaler_status_desired_replicas|
                 kube_node_status_condition
-              action: keep
           relabel_configs:
             - replacement: kubernetes.default.svc.cluster.local:443
               target_label: __address__
@@ -272,6 +272,7 @@ metrics:
             - role: service
           metric_relabel_configs:
             - source_labels: [__name__]
+              action: keep
               regex: >- 
                 storage_operation_duration_seconds_bucket|
                 namespace_cpu:kube_pod_container_resource_requests:sum|
@@ -382,7 +383,6 @@ metrics:
                 kube_deployment_spec_replicas|
                 kube_horizontalpodautoscaler_status_desired_replicas|
                 kube_node_status_condition
-              action: keep
           relabel_configs:
             - action: keep
               regex: ksm-kube-state-metrics
