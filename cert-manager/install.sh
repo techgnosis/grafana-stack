@@ -2,16 +2,8 @@
 
 set -euo pipefail
 
-helm upgrade --install cert-manager cert-manager \
---repo https://charts.jetstack.io \
---version 1.2.0 \
---namespace cert-manager \
---create-namespace \
---set installCRDs=true \
---wait
-
-
-kapp deploy -a cert-manager-clusterissuer \
+kapp deploy -a cert-manager \
+-f https://github.com/cert-manager/cert-manager/releases/download/v1.7.1/cert-manager.yaml \
 -f clusterissuer.yml \
 -f <(kubectl create secret generic mkcert \
 --from-file=tls.crt="$(mkcert -CAROOT)"/rootCA.pem \
