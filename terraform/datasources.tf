@@ -10,10 +10,10 @@ resource "grafana_data_source" "Frontend" {
   url  = "https://frontend.lab"
 }
 
-resource "grafana_data_source" "Prometheus" {
+resource "grafana_data_source" "Mimir" {
   type = "prometheus"
-  name = "Prometheus"
-  url = "https://prometheus.lab.home"
+  name = "Mimir"
+  url = "https://mimir.lab.home/prometheus"
   uid = "zgBXVaa7k"
 
   json_data {

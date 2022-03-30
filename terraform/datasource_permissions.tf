@@ -16,9 +16,9 @@ resource "grafana_data_source_permission" "Frontend" {
   }
 }
 
-resource "grafana_data_source_permission" "Prometheus" {
-  depends_on = [grafana_data_source.Prometheus]
-  datasource_id = grafana_data_source.Prometheus.id
+resource "grafana_data_source_permission" "Mimir" {
+  depends_on = [grafana_data_source.Mimir]
+  datasource_id = grafana_data_source.Mimir.id
   permissions {
     team_id    = grafana_team.HotROD.id
     permission = "Query"
