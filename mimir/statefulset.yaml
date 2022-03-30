@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mimir
+  namespace: mimir
+spec:
+  replicas: 1
+  podManagementPolicy: OrderedReady
+  serviceName: mimir-headless
+  selector:
+    matchLabels:
+      app: mimir
+  template:
+    metadata:
+      labels:
+        app: mimir
+    spec:
+      volumes:
+        - name: mimir-config
+          configMap:
+            name: mimir-config
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
+      containers:
+        - name: mimir
+          image: index.docker.io/grafana/mimir:2.0.0
+          command: ['mimir']
+          env:
+            - name: JAEGER_AGENT_HOST
+              value: grafana-agent
+            - name: JAEGER_AGENT_PORT
+              value: "6831"          
+          args:
+            - "-config.file=/etc/mimir/mimir.yaml"
+          volumeMounts:
+            - name: data
+              mountPath: /tmp/mimir
+            - name: mimir-config
+              mountPath: /etc/mimir
+          ports:
+            - containerPort: 8080

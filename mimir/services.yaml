@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mimir
+  namespace: mimir
+spec:
+  type: ClusterIP
+  selector:
+    app: mimir
+  ports:
+    - name: mimir
+      protocol: TCP
+      port: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mimir-headless
+  namespace: mimir
+spec:
+  type: ClusterIP
+  clusterIP: None
+  selector:
+    app: mimir
