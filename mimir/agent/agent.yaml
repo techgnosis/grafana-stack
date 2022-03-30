@@ -3,7 +3,7 @@ logs:
   configs:
     - name: mimir
       clients:
-        - url: http://loki:3100/loki/api/v1/push
+        - url: http://loki.loki.svc.cluster.local:3100/loki/api/v1/push
       scrape_configs:
         - job_name: mimir-pods
           kubernetes_sd_configs:
@@ -37,24 +37,24 @@ metrics:
   global:
     scrape_interval: 60s
     remote_write:
-      - url: http://prometheus.prometheus.svc.cluster.local:9090/api/v1/write
+      - url: http://mimir.mimir.svc.cluster.local:8080/api/v1/push
   wal_directory: /var/lib/agent/data
   configs:
-    - name: loki
+    - name: mimir
       scrape_configs:
-        - job_name: loki-service
+        - job_name: mimir-service
           kubernetes_sd_configs:
             - role: service
               namespaces:
                 names:
-                  - loki
+                  - mimir
           relabel_configs:
             - action: keep
-              regex: "loki"
+              regex: "mimir"
               source_labels:
                 - __meta_kubernetes_service_name
             - action: keep
-              regex: loki
+              regex: mimir
               source_labels:
                 - __meta_kubernetes_service_port_name
             - action: replace

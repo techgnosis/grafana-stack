@@ -13,13 +13,13 @@ kapp deploy -a mimir \
 --namespace mimir \
 --from-file=mimir.yaml=./mimir.yaml \
 --dry-run=client \
--o yaml) #\
-#-f agent/clusterrolebinding.yaml \
-#-f agent/deployment.yaml \
-#-f agent/service.yaml \
-#-f agent/serviceaccount.yaml \
-#-f <(kubectl create configmap grafana-agent-config \
-#--namespace loki \
-#--from-file=agent/agent.yaml \
-#--dry-run=client \
-#-o yaml) \
+-o yaml) \
+-f agent/clusterrolebinding.yaml \
+-f agent/deployment.yaml \
+-f agent/service.yaml \
+-f agent/serviceaccount.yaml \
+-f <(kubectl create configmap grafana-agent-config \
+--namespace mimir \
+--from-file=agent/agent.yaml \
+--dry-run=client \
+-o yaml)
