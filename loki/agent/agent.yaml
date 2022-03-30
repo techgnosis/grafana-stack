@@ -37,7 +37,7 @@ metrics:
   global:
     scrape_interval: 60s
     remote_write:
-      - url: http://prometheus.prometheus.svc.cluster.local:9090/api/v1/write
+      - url: http://mimir.mimir.svc.cluster.local:8080/api/v1/push
   wal_directory: /var/lib/agent/data
   configs:
     - name: loki
