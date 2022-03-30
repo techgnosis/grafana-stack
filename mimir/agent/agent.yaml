@@ -1,16 +1,16 @@
 logs:
   positions_directory: /tmp/positions
   configs:
-    - name: loki
+    - name: mimir
       clients:
         - url: http://loki:3100/loki/api/v1/push
       scrape_configs:
-        - job_name: loki-pods
+        - job_name: mimir-pods
           kubernetes_sd_configs:
             - role: pod
               namespaces:
                 names:
-                  - loki
+                  - mimir
           relabel_configs:
             - action: drop
               regex: ".*grafana-agent.*"

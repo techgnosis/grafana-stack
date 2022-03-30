@@ -3,11 +3,15 @@ target: all
 multitenancy_enabled: false
 
 blocks_storage:
-  backend: filesystem
+  backend: s3
+  s3:
+    endpoint: minio.minio.svc.cluster.local:9000
+    bucket_name: mimir-data
+    access_key_id: minio
+    secret_access_key: minio123
+    insecure: true
   bucket_store:
     sync_dir: /tmp/mimir/tsdb-sync
-  filesystem:
-    dir: /tmp/mimir/data/tsdb
   tsdb:
     dir: /tmp/mimir/tsdb
 
@@ -31,13 +35,17 @@ ingester:
     replication_factor: 1
 
 ruler_storage:
-  backend: local
-  local:
-    directory: /tmp/mimir/rules
+  backend: s3
+  s3:
+    endpoint: minio.minio.svc.cluster.local:9000
+    bucket_name: mimir-ruler
+    access_key_id: minio
+    secret_access_key: minio123
+    insecure: true
 
 server:
   http_listen_port: 8080
-  log_level: error
+  log_level: info
 
 store_gateway:
   sharding_ring:
