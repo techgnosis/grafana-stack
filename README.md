@@ -1,13 +1,11 @@
 ## Paths
 
-Prometheus read - `/`
-Prometheus write - `/api/v1/write` and also requires the `--web.enable-remote-write-receiver` flag on Prometheus
+Mimir read - `/prometheus`
+Mimir write - `/api/v1/push`
 
 Loki read - `/`
 Loki write - `/loki/api/v1/push`
 
-Cortex read - `/api/prom`
-Cortex write - `/api/v1/push`
 
 # TODO
 1. Figure out histogram query
