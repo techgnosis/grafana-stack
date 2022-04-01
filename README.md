@@ -1,9 +1,11 @@
 ## Paths
 
 Mimir read - `/prometheus`
+
 Mimir write - `/api/v1/push`
 
 Loki read - `/`
+
 Loki write - `/loki/api/v1/push`
 
 
