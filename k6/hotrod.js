@@ -1,19 +1,15 @@
 import http from 'k6/http';
 
-export default function() {
+export const options = {
+    insecureSkipTLSVerify: true,
+    stages: [
+        { duration: '1s', target: 1},
+        { duration: '3m', target: 1},
+        { duration: '1s', target: 10},
+        { duration: '3m', target: 10}
+    ]
+}
 
-    var chance = Math.floor((Math.random() * 75) + 1);
-    var loops = 1
-    if (chance == 75) {
-        loops = 50
-    }
-    
-    var batch = new Array()
-
-    for (let i = 0; i < loops; i++) {
-        batch.push(['GET', 'https://hotrod.lab.home/dispatch?customer=123&nonse=' + Math.random(), null, null ])    
-    }
-
-    http.batch(batch)
-
+export default function () {
+    http.get('https://hotrod.lab.home/dispatch?customer=123&nonse=' + Math.random())
 }

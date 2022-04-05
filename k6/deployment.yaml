@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k6
+  namespace: k6
+spec:
+  selector:
+    matchLabels:
+      app: k6
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: k6
+    spec:
+      volumes:
+        - name: k6-hotrod
+          configMap:
+            name: k6-hotrod
+      containers:
+        - name: k6
+          image: docker.io/grafana/k6:0.37.0
+          imagePullPolicy: Always
+          args: ["run", "/tmp/k6/hotrod.js"]
+          volumeMounts:
+            - name: k6-hotrod
+              mountPath: /tmp/k6
