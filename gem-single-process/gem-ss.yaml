@@ -5,7 +5,7 @@ metadata:
   namespace: gem
 spec:
   podManagementPolicy: Parallel
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       name: gem
@@ -20,7 +20,7 @@ spec:
           args:
             - -config.file=/etc/gem/config.yaml
             - -target=all
-          image: grafana/metrics-enterprise:v1.7.0
+          image: grafana/metrics-enterprise:r174-ec75da97
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9000

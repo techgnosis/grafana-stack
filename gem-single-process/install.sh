@@ -19,12 +19,4 @@ kapp deploy -a gem \
 -f gem-ss.yaml \
 -f tokengen-job.yaml \
 -f certificate.yaml \
--f ingress.yaml \
--f compactor-ss.yaml \
--f compactor-service.yaml \
--f compactor-service-headless.yaml \
--f gateway-deployment.yaml \
--f gateway-service.yaml \
--f alertmanager-service.yaml \
--f alertmanager-service-headless.yaml \
--f alertmanager-ss.yaml
+-f ingress.yaml

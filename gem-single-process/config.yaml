@@ -1,0 +1,75 @@
+###############################################
+# GEM
+auth:
+  type: enterprise
+
+cluster_name: gem
+
+license:
+  path: /etc/gem/license/gem-license.jwt
+
+admin_api:
+  leader_election:
+    enabled: false
+
+admin_client:
+  storage:
+    type: s3
+    s3:
+      endpoint: minio.minio.svc.cluster.local:9000
+      bucket_name: enterprise-metrics-admin 
+      access_key_id: minio
+      secret_access_key: minio123
+      insecure: true
+
+###############################################
+# Mimir
+
+blocks_storage:
+  backend: s3
+  s3:
+    endpoint: minio.minio.svc.cluster.local:9000
+    bucket_name: enterprise-metrics-tsdb
+    access_key_id: minio
+    secret_access_key: minio123
+    insecure: true
+  bucket_store:
+    sync_dir: /data/mimir/tsdb-sync
+  tsdb:
+    dir: /data/mimir/tsdb
+
+compactor:
+  data_dir: /data/mimir/compactor
+  sharding_ring:
+    kvstore:
+      store: memberlist
+
+distributor:
+  ring:
+    instance_addr: 127.0.0.1
+    kvstore:
+      store: memberlist
+
+ingester:
+  ring:
+    instance_addr: 127.0.0.1
+    kvstore:
+      store: memberlist
+    replication_factor: 1
+
+ruler_storage:
+  backend: s3
+  s3:
+    endpoint: minio.minio.svc.cluster.local:9000
+    bucket_name: enterprise-metrics-ruler
+    access_key_id: minio
+    secret_access_key: minio123
+    insecure: true
+
+server:
+  http_listen_port: 9000
+  log_level: info
+
+store_gateway:
+  sharding_ring:
+    replication_factor: 1

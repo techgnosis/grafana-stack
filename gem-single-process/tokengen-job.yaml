@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
         - name: gem-tokengen
-          image: grafana/metrics-enterprise:v1.7.0
+          image: grafana/metrics-enterprise:r174-ec75da97
           imagePullPolicy: IfNotPresent
           args:
             - --config.file=/etc/gem/config.yaml
