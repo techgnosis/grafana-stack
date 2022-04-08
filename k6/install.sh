@@ -4,7 +4,7 @@ set -euo pipefail
 
 kapp deploy -a k6 \
 -f namespace.yaml \
--f deployment.yaml \
+-f job.yaml \
 -f <(kubectl create configmap k6-hotrod \
 --namespace k6 \
 --from-file hotrod.js \

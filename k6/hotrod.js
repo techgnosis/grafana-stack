@@ -4,9 +4,9 @@ export const options = {
     insecureSkipTLSVerify: true,
     stages: [
         { duration: '1s', target: 1},
-        { duration: '30m', target: 1},
+        { duration: '3m', target: 1},
         { duration: '1s', target: 10},
-        { duration: '30m', target: 10}
+        { duration: '3m', target: 10}
     ]
 }
 
