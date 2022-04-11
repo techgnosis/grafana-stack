@@ -73,3 +73,6 @@ server:
 store_gateway:
   sharding_ring:
     replication_factor: 1
+
+frontend:
+  log_queries_longer_than: -1s

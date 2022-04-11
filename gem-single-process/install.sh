@@ -19,4 +19,13 @@ kapp deploy -a gem \
 -f gem-ss.yaml \
 -f tokengen-job.yaml \
 -f certificate.yaml \
--f ingress.yaml
+-f ingress.yaml \
+-f agent/deployment.yaml \
+-f agent/clusterrolebinding.yaml \
+-f agent/service.yaml \
+-f agent/serviceaccount.yaml \
+-f <(kubectl create configmap grafana-agent-config \
+--namespace gem \
+--from-file agent/agent.yaml \
+--dry-run=client \
+-o yaml)
