@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mimir
+  namespace: mimir
+spec:
+  tls:
+  - hosts:
+      - mimir.lab.home
+    secretName: mimir-tls
+  rules:
+  - host: mimir.lab.home
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: mimir-nginx
+            port:
+              number: 80
