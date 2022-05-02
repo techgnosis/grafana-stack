@@ -29,10 +29,16 @@ buckets:
   - name: loki-data
     policy: none
     purge: false
+  - name: loki-ruler
+    policy: none
+    purge: false
   - name: mimir-data
     policy: none
     purge: false
   - name: mimir-ruler
+    policy: none
+    purge: false
+  - name: mimir-alertmanager
     policy: none
     purge: false
 persistence:
