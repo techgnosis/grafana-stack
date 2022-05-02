@@ -1,0 +1,10 @@
+namespace: james
+groups:
+    - name: wcs-demo
+      interval: 1m
+      rules:
+        - record: flog:requests:rate1m
+          expr: |-
+            sum(rate({namespace="flog"}[1m]))
+          labels:
+            mylabel: findme
