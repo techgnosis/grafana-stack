@@ -1,0 +1,109 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  namespace: mythical-beasts
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:12.3
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: postgres
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres
+              subPath: postgres
+        - name: pgweb
+          image: sosedoff/pgweb
+          ports:
+            - containerPort: 8081
+          env:
+            - name: DATABASE_URL
+              value: "postgres://postgres:mythical@localhost:5432"
+      volumes:
+        - name: postgres
+          persistentVolumeClaim:
+            claimName: postgres
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres
+  namespace: mythical-beasts
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mythical-database
+  namespace: mythical-beasts
+spec:
+  selector:
+    app: postgres
+  ports:
+    - name: postgres
+      protocol: TCP
+      port: 5432
+    - name: pgweb
+      protocol: TCP
+      port: 8081
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres
+  namespace: mythical-beasts
+data:
+  POSTGRES_PASSWORD: mythical
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: pgweb-tls
+  namespace: mythical-beasts
+spec:
+  dnsNames:
+  - pgweb.lab.home
+  issuerRef:
+    kind: ClusterIssuer
+    name: mkcert
+  secretName: pgweb-tls
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pgweb
+  namespace: mythical-beasts
+spec:
+  tls:
+  - hosts:
+      - pgweb.lab.home
+    secretName: pgweb-tls
+  rules:
+  - host: pgweb.lab.home
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: postgres
+            port:
+              number: 8081

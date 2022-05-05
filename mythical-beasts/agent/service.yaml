@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana-agent
+  namespace: mythical-beasts
+spec:
+  selector:
+    name: grafana-agent
+  ports:
+    - name: thrift-binary
+      port: 6832
+      targetPort: thrift-binary
+      protocol: UDP

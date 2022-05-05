@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mythical-beasts-requester
+  namespace: mythical-beasts
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mythical-beasts-requester
+  template:
+    metadata:
+      labels:
+        app: mythical-beasts-requester
+    spec:
+      volumes:
+      containers:
+        - name: mythical-beasts-requester
+          image: docker.io/techgnosis/mythical-beasts-requester:1
+          env:
+            - name: NAMESPACE
+              value: mythical-beasts
+            - name: LOGS_TARGET
+              value: "http://loki.loki.svc.cluster.local:3100/loki/api/v1/push"
+            - name: TRACING_COLLECTOR_HOST
+              value: grafana-agent
+            - name: TRACING_COLLECTOR_PORT
+              value: "6832"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mythical-beasts-server
+  namespace: mythical-beasts
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mythical-beasts-server
+  template:
+    metadata:
+      labels:
+        app: mythical-beasts-server
+    spec:
+      volumes:
+      containers:
+        - name: mythical-beasts-server
+          image: docker.io/techgnosis/mythical-beasts-server:1
+          ports:
+            - containerPort: 4000
+            - containerPort: 80
+          env:
+            - name: NAMESPACE
+              value: mythical-beasts
+            - name: LOGS_TARGET
+              value: "http://loki.loki.svc.cluster.local:3100/loki/api/v1/push"
+            - name: TRACING_COLLECTOR_HOST
+              value: grafana-agent
+            - name: TRACING_COLLECTOR_PORT
+              value: "6832"

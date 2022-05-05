@@ -1,0 +1,42 @@
+metrics:
+  global:
+    scrape_interval: 5s
+    remote_write:
+      - url: http://mimir-nginx.mimir.svc.cluster.local/api/v1/push
+  wal_directory: /var/lib/agent/data
+  configs:
+    - name: mythical-beasts
+      scrape_configs:
+        - job_name: mythical-beasts-service
+          metrics_path: "/metrics"
+          kubernetes_sd_configs:
+            - role: service
+              namespaces:
+                names:
+                  - mythical-beasts
+          relabel_configs:
+            - action: keep
+              regex: "mythical-beasts"
+              source_labels:
+                - __meta_kubernetes_service_name
+            - action: replace
+              source_labels:
+                - __meta_kubernetes_namespace
+              target_label: namespace
+            - action: replace
+              source_labels:
+                - __meta_kubernetes_service_name
+              target_label: service
+traces:
+  configs:
+    - name: mythical-beasts
+      remote_write:
+        - endpoint: http://tempo.tempo.svc.cluster.local:4318
+          protocol: http
+          insecure: true
+          format: otlp
+      receivers:
+        jaeger:
+          protocols:
+            thrift_binary:
+              endpoint: "0.0.0.0:6832"
