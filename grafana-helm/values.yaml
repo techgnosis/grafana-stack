@@ -1,6 +1,6 @@
 image:
   repository: grafana/grafana-enterprise
-  tag: "8.4.1"
+  tag: "8.5.2"
 
 replicas: 1
 
@@ -10,11 +10,6 @@ adminPassword: admin
 
 persistence:
   enabled: true
-
-#plugins:
-#  - grafana-metrics-enterprise-app
-#  - grafana-enterprise-logs-app
-#  - grafana-enterprise-traces-app
 
 ingress:
   enabled: true

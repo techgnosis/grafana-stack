@@ -6,7 +6,6 @@ kapp deploy -a grafana-enterprise \
 -f namespace.yaml \
 -f certificate.yml \
 -f ldap.toml.yaml \
--f postgres.yml \
 -f image-renderer.yaml \
 -f telegraf.yaml \
 -f mysql.yaml \
