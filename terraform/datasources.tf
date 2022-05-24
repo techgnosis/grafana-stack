@@ -1,16 +1,16 @@
-resource "grafana_data_source" "Backend" {
-  type = "prometheus"
-  name = "Backend"
+resource "grafana_data_source" "pci" {
+  type = "loki"
+  name = "PCI"
   url  = "https://backend.lab"
 }
 
-resource "grafana_data_source" "Frontend" {
-  type = "prometheus"
-  name = "Frontend"
+resource "grafana_data_source" "hipaa" {
+  type = "loki"
+  name = "HIPAA"
   url  = "https://frontend.lab"
 }
 
-resource "grafana_data_source" "Mimir" {
+resource "grafana_data_source" "mimir" {
   type = "prometheus"
   name = "Mimir"
   url = "https://mimir.lab.home/prometheus"
@@ -21,7 +21,7 @@ resource "grafana_data_source" "Mimir" {
   }
 }
 
-resource "grafana_data_source" "Loki" {
+resource "grafana_data_source" "loki" {
   type = "loki"
   name = "Loki"
   url = "https://loki.lab.home"
@@ -35,12 +35,12 @@ resource "grafana_data_source" "Loki" {
       matcher_regex = ".*(?:trace_id\":\\s*\")(.*?)(?:\"|\\s).*"
       name = "trace_id"
       url = "$${__value.raw}"
-      datasource_uid = grafana_data_source.Tempo.uid
+      datasource_uid = grafana_data_source.tempo.uid
     }
   }
 }
 
-resource "grafana_data_source" "Tempo" {
+resource "grafana_data_source" "tempo" {
   type = "tempo"
   name = "Tempo"
   url = "https://tempo.lab.home"
@@ -51,12 +51,13 @@ resource "grafana_data_source" "Tempo" {
   }
 }
 
-resource "grafana_data_source" "MySQL" {
+resource "grafana_data_source" "mysql" {
   type = "mysql"
   name = "MySQL Grafana DB"
   url = "mysql:3306"
   database_name = "grafana-enterprise"
   username = "grafana-enterprise"
+  uid = "_q642H87k"
 
   secure_json_data {
     password = "grafana-enterprise"

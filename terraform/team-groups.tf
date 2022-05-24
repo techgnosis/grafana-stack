@@ -1,14 +1,9 @@
-resource "grafana_team_external_group" "Frontend" {
-  team_id  = grafana_team.Frontend.id
+resource "grafana_team_external_group" "PCI" {
+  team_id  = grafana_team.pci.id
   groups = ["cn=Frontend,ou=Groups,dc=example,dc=org"]
 }
 
-resource "grafana_team_external_group" "Backend" {
-  team_id  = grafana_team.Backend.id
+resource "grafana_team_external_group" "HIPAA" {
+  team_id  = grafana_team.hipaa.id
   groups = ["cn=Backend,ou=Groups,dc=example,dc=org"]
-}
-
-resource "grafana_team_external_group" "Managers" {
-  team_id  = grafana_team.Managers.id
-  groups = ["cn=Managers,ou=Groups,dc=example,dc=org"]
 }

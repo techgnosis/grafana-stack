@@ -1,16 +1,7 @@
-resource "grafana_folder" "Frontend" {
-  title = "Frontend"
+resource "grafana_folder" "pci" {
+  title = "PCI"
 }
 
-resource "grafana_folder" "Backend" {
-  title = "Backend"
+resource "grafana_folder" "hipaa" {
+  title = "HIPAA"
 }
-
-resource "grafana_folder" "GrafanaHealth" {
-  title = "Grafana Health"
-}
-
-resource "grafana_folder" "HotROD" {
-  title = "HotROD"
-}
-

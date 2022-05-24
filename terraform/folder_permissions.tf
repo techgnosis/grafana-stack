@@ -1,23 +1,15 @@
-resource "grafana_folder_permission" "Frontend" {
-  folder_uid = grafana_folder.Frontend.uid
+resource "grafana_folder_permission" "pci" {
+  folder_uid = grafana_folder.pci.uid
   permissions {
-    team_id    = grafana_team.Frontend.id
+    team_id    = grafana_team.pci.id
     permission = "Admin"
   }
 }
 
-resource "grafana_folder_permission" "Backend" {
-  folder_uid = grafana_folder.Backend.uid
+resource "grafana_folder_permission" "hipaa" {
+  folder_uid = grafana_folder.hipaa.uid
   permissions {
-    team_id    = grafana_team.Backend.id
-    permission = "Admin"
-  }
-}
-
-resource "grafana_folder_permission" "HotROD" {
-  folder_uid = grafana_folder.HotROD.uid
-  permissions {
-    team_id = grafana_team.HotROD.id
+    team_id    = grafana_team.hipaa.id
     permission = "Admin"
   }
 }

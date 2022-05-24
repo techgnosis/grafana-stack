@@ -1,15 +1,7 @@
-resource "grafana_team" "Frontend" {
-  name  = "Frontend"
+resource "grafana_team" "pci" {
+  name  = "PCI"
 }
 
-resource "grafana_team" "Backend" {
-  name  = "Backend"
-}
-
-resource "grafana_team" "Managers" {
-  name  = "Managers"
-}
-
-resource "grafana_team" "HotROD" {
-  name = "HotROD"
+resource "grafana_team" "hipaa" {
+  name  = "HIPAA"
 }
