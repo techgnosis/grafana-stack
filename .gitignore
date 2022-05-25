@@ -12,4 +12,9 @@ grizzly/folders
 grizzly/datasources
 grizzly/dashboards
 
+metrics-activity.log
+
 flog/flog
+
+k6/k6
+k6/.envrc

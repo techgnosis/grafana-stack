@@ -33,3 +33,18 @@ common:
   ring:
     kvstore:
       store: inmemory
+
+ruler:
+  storage:
+    type: s3
+    s3:
+      endpoint: minio.minio.svc.cluster.local:9000
+      bucketnames: loki-ruler
+      access_key_id: minio
+      secret_access_key: minio123
+      s3forcepathstyle: true
+      insecure: true
+  remote_write:
+    enabled: true
+    client:
+      url: http://mimir-nginx.mimir.svc.cluster.local/api/v1/push

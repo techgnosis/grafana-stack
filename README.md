@@ -10,8 +10,7 @@ Loki write - `/loki/api/v1/push`
 
 
 # TODO
-1. Figure out histogram query
-1. Make an alert on the histogram
+1. Make an alert for HotROD
 
 
 ## Image Rendering

@@ -9,7 +9,7 @@ kapp deploy -a mimir \
 
 helm upgrade --install mimir mimir-distributed \
 --repo https://grafana.github.io/helm-charts \
---version 2.0.2 \
+--version 2.0.14 \
 --namespace mimir \
 --values values.yaml \
 --set-file 'mimir.config=./mimir.yaml' \

@@ -42,7 +42,9 @@ metrics:
   global:
     scrape_interval: 5s
     remote_write:
-      - url: http://mimir-nginx.mimir.svc.cluster.local/api/v1/push
+      - url: https://mimir.lab.home/api/v1/push
+        tls_config:
+          insecure_skip_verify: true
   wal_directory: /var/lib/agent/data
   configs:
     - name: hotrod

@@ -24,7 +24,7 @@ spec:
             claimName: data
       containers:
         - name: loki
-          image: index.docker.io/grafana/loki:2.4.2
+          image: index.docker.io/grafana/loki:2.5.0
           command: ['loki']
           env:
             - name: JAEGER_AGENT_HOST

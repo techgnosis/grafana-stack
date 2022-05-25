@@ -20,6 +20,6 @@ kapp deploy -a loki \
 -o yaml) \
 -f <(kubectl create configmap loki-config \
 --namespace loki \
---from-file=loki.yaml=./loki-filesystem.yaml \
+--from-file=loki.yaml=./loki.yaml \
 --dry-run=client \
 -o yaml)

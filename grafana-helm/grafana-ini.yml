@@ -43,10 +43,10 @@ grafana.ini:
     server_url: http://image-renderer:8081/render
     callback_url: http://grafana-enterprise
   white_labeling:
-    login_background: url(https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/EDABA80B_2AC0_4B57_A0D6_DD0CA4ED8A5D.jpeg)
-    app_title: AMD Deep Learning
-    login_title: AMD Deep Learning
-    login_subtitle: Use your email address to login (including @amd.com)
+    login_background: url(http://www.trashedgraphics.com/wp-content/uploads/2015/02/hp_logo.jpg)
+    app_title: HP Enterprise Integrations
+    login_title: HP Enterprise Integrations
+    login_subtitle: Use your email address to login (including @hp.com)
     footer_links: support wiki
     footer_links_support_text: Support
     footer_links_wiki_text: Wiki
