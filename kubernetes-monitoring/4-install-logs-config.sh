@@ -76,6 +76,4 @@ data:
                 - __meta_kubernetes_pod_uid
                 - __meta_kubernetes_pod_container_name
               target_label: __path__
-        
-    
 EOF

@@ -74,7 +74,6 @@ data:
                 regex: kube-state-metrics
                 source_labels:
                   - __meta_kubernetes_pod_label_app_kubernetes_io_name
-        
     integrations:
       eventhandler:
         cache_path: /var/lib/agent/eventhandler.cache
@@ -94,5 +93,4 @@ data:
           filename: /tmp/positions.yaml
         target_config:
           sync_period: 10s
-    
 EOF
