@@ -32,7 +32,7 @@ kapp deploy -a grafana-enterprise \
 
 helm upgrade --install grafana-enterprise grafana \
 --repo https://grafana.github.io/helm-charts \
---version 6.19.2 \
+--version "6.31.1" \
 --namespace grafana-enterprise \
 --values values.yaml \
 --values grafana-ini.yml \

@@ -35,21 +35,22 @@ grafana.ini:
     enabled: false
   unified_alerting:
     enabled: true
+    ha_peers: grafana-enterprise-headless:9094
+  unified_alerting.screenshots:
+    capture: true
   log:
     level: info
-  plugins:
-    enable_alpha: true # this is only for Alertmanager plugin which should be GA in 9.x
   rendering:
     server_url: http://image-renderer:8081/render
     callback_url: http://grafana-enterprise
-  white_labeling:
-    login_background: url(http://www.trashedgraphics.com/wp-content/uploads/2015/02/hp_logo.jpg)
-    app_title: HP Enterprise Integrations
-    login_title: HP Enterprise Integrations
-    login_subtitle: Use your email address to login (including @hp.com)
-    footer_links: support wiki
-    footer_links_support_text: Support
-    footer_links_wiki_text: Wiki
+  #white_labeling:
+  #  login_background: url(https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fjimmytechsf.com%2Fwp-content%2Fuploads%2F2021%2F04%2FT-Mobile_New_Logo_Primary_RGB_W-on-M.jpg&f=1&nofb=1)
+  #  app_title: Redcurve
+  #  login_title: Redcurve
+  #  login_subtitle: Use your email address to login (including @twitter.com)
+  #  footer_links: support wiki
+  #  footer_links_support_text: Support
+  #  footer_links_wiki_text: Wiki
   auth.ldap:
     enabled: true
     config_file: /etc/grafana/ldap.toml

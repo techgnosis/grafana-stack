@@ -2,7 +2,7 @@ metrics:
   global:
     scrape_interval: 5s
     remote_write:
-      - url: http://mimir-nginx.mimir.svc.cluster.local/api/v1/push
+      - url: http://https://mimir.lab.home/api/v1/push
   wal_directory: /var/lib/agent/data
   configs:
     - name: mythical-beasts

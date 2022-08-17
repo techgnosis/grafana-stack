@@ -36,3 +36,16 @@ resource "grafana_role" "satest" {
     scope  = "folders:uid:UD8nUqunz"
   }
 }
+
+resource "grafana_role" "templatedashuser" {
+  name = "TemplateDashUser"
+  description = "The role lets you do a save-as on the template dash"
+  uid = "templatedashuser"
+  version = "1"
+  global = true
+
+  permissions {
+    action = "dashboards:write"
+    scope = "dashboards:uid:VNaZ8Mjnz"
+  }
+}

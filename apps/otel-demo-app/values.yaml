@@ -1,0 +1,5 @@
+observability:
+  otelcol:
+    enabled: true
+  jaeger:
+    enabled: false

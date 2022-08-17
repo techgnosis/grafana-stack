@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: opentelemetry-demo
+  namespace: opentelemetry-demo
+spec:
+  tls:
+  - hosts:
+      - opentelemetry-demo.lab.home
+    secretName: opentelemetry-demo-tls
+  rules:
+  - host: opentelemetry-demo.lab.home
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: opentelemetry-demo-frontend
+            port:
+              number: 8080
