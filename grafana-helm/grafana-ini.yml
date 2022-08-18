@@ -28,7 +28,7 @@ grafana.ini:
     url: loki.loki.svc.cluster.local:3100
     tls: false
   feature_toggles:
-    enable: tempoSearch serviceAccounts accesscontrol
+    enable: publicDashboards tempoApmTable
   tracing.jaeger:
     address: grafana-agent:6831
   alerting:
