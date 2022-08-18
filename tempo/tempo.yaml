@@ -6,17 +6,6 @@ compactor:
     compacted_block_retention: 24h
 distributor:
   receivers:
-    jaeger:
-      protocols:
-        grpc:
-          endpoint: 0.0.0.0:14250
-        thrift_binary:
-          endpoint: 0.0.0.0:6832
-        thrift_compact:
-          endpoint: 0.0.0.0:6831
-        thrift_http:
-          endpoint: 0.0.0.0:14268
-    opencensus: null
     otlp:
       protocols:
         grpc:
@@ -32,7 +21,7 @@ metrics_generator:
   storage:
     path: /data/tempo/generator-wal
     remote_write:
-      - url: http://mimir-nginx.mimir.svc.cluster.local/api/v1/push
+      - url: http://mimir.mimir.svc.cluster.local:8080/api/v1/push
         send_exemplars: true
 storage:
   trace:
