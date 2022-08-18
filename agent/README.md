@@ -1,0 +1,1 @@
+`laptop-logs` and `laptop-metrics` are for convenience if I occasionally need to run the agent quickly on my laptop. This folder is mainly about `clusterrole.yaml` which is the ClusterRole that the Grafana Agent uses everywhere in this project.
