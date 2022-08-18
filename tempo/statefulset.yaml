@@ -35,4 +35,5 @@ spec:
               mountPath: /etc/tempo
           ports:
             - containerPort: 3100
+            - containerPort: 4317
             - containerPort: 4318
