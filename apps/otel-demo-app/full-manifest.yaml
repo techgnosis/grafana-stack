@@ -19,7 +19,10 @@ data:
           grpc:
           http:
     exporters:
-      logging:
+      otlp:
+        endpoint: tempo.tempo.svc.cluster.local:4317
+        tls:
+          insecure: true
     
     processors:
       batch:
@@ -32,7 +35,7 @@ data:
           processors:
             - batch
           exporters:
-            - logging
+            - otlp
 ---
 # Source: opentelemetry-demo/templates/component.yaml
 apiVersion: v1
