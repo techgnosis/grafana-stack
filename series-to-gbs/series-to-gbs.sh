@@ -12,11 +12,11 @@ wget --quiet http://localhost:12345/metrics
 
 BYTES=$(stat --format=%s metrics)
 
-echo "BYTES: ${BYTES}"
+echo "BYTES FROM NODE_EXPORTER: ${BYTES}"
 
 SERIES=$(cat metrics | awk '!/^#/' | wc -l)
 
-echo "SERIES: ${SERIES}"
+echo "SERIES FROM NODE_EXPORTER: ${SERIES}"
 
 BYTES_PER_SERIES=$((BYTES / SERIES))
 
@@ -28,5 +28,5 @@ echo "TOTAL BYTES PER MONTH: ${TOTAL_BYTES}"
 
 TOTAL_GIBS=$((TOTAL_BYTES / 1073741824))
 
-echo "TOTAL GiBs: ${TOTAL_GIBS}"
+echo "TOTAL GiBs per month: ${TOTAL_GIBS}"
 
