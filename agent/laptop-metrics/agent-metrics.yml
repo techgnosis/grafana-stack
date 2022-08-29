@@ -5,7 +5,7 @@ metrics:
   global:
     scrape_interval: 1s
     remote_write:
-      - url: https://prometheus.lab.home/api/v1/write
+      - url: https://mimir.lab.home/api/v1/push
 integrations:
   node_exporter:
     enabled: true
