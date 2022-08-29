@@ -1,1 +1,1 @@
-I used Terraform for simple-webhook for learning purposes. Terraform seems like a compelling way to manage K8s resources
+simple-webhook just outputs to STDOUT whatever is POSTed to it. I use it to inspect Alert notification payloads.
