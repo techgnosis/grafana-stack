@@ -1,0 +1,13 @@
+minio:
+  enabled: false
+
+useExternalConfig: true
+
+configStorageType: ConfigMap
+
+externalConfigSecretName: mimir-config
+
+externalConfigVersion: lab
+
+enterprise:
+  enabled: true
