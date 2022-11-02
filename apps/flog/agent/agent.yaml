@@ -1,5 +1,3 @@
-server:
-  http_listen_port: 12345
 logs:
   positions_directory: /tmp/positions
   configs:

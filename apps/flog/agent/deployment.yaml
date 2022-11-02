@@ -23,7 +23,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: spec.nodeName
-        image: grafana/agent:latest
+        image: grafana/agent:v0.26.1
         name: agent  
         securityContext:
           privileged: true
