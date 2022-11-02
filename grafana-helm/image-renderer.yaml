@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: image-renderer
-          image: grafana/grafana-image-renderer:3.2.1
+          image: grafana/grafana-image-renderer:3.6.1
           ports:
             - containerPort: 8081
 ---

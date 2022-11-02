@@ -1,6 +1,6 @@
 image:
   repository: grafana/grafana-enterprise
-  tag: "9.1.0"
+  tag: "9.2.0-beta1"
 
 replicas: 1
 
@@ -10,6 +10,10 @@ adminPassword: admin
 
 persistence:
   enabled: true
+
+env:
+  GF_PLUGINS_ORACLE_DATASOURCE_MAX_RESPONSE_SIZE: 512
+
 
 ingress:
   enabled: true
