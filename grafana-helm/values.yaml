@@ -1,6 +1,6 @@
 image:
   repository: grafana/grafana-enterprise
-  tag: "9.2.0-beta1"
+  tag: "9.2.4-ubuntu"
 
 replicas: 1
 
@@ -13,6 +13,9 @@ persistence:
 
 env:
   GF_PLUGINS_ORACLE_DATASOURCE_MAX_RESPONSE_SIZE: 512
+  GF_DIAGNOSTICS_PROFILING_ENABLED: true
+  GF_DIAGNOSTICS_PROFILING_PORT: 8080
+  
 
 
 ingress:
