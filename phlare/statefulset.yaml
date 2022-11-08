@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: phlare
+  namespace: phlare
+spec:
+  replicas: 1
+  podManagementPolicy: OrderedReady
+  serviceName: phlare-headless
+  selector:
+    matchLabels:
+      app: phlare
+  template:
+    metadata:
+      labels:
+        app: phlare
+    spec:
+      volumes:
+        - name: phlare-config
+          configMap:
+            name: phlare-config
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
+      containers:
+        - name: phlare
+          image: index.docker.io/grafana/phlare:0.1.0
+          env:
+            - name: JAEGER_AGENT_HOST
+              value: grafana-agent
+            - name: JAEGER_AGENT_PORT
+              value: "6831"          
+          volumeMounts:
+            - name: data
+              mountPath: /tmp/phlare
+            - name: phlare-config
+              mountPath: /etc/phlare
+          ports:
+            - containerPort: 8080
+          args:
+            - "-config.file=/etc/phlare/phlare.yaml"

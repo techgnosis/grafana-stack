@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: phlare
+  namespace: phlare
+spec:
+  tls:
+  - hosts:
+      - phlare.lab.home
+    secretName: phlare-tls
+  rules:
+  - host: phlare.lab.home
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: phlare
+            port:
+              number: 8080
