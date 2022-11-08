@@ -1,0 +1,7 @@
+server:
+  http_listen_port: 4100
+  grpc_listen_port: 9095
+
+storage:
+  filesystem:
+    dir: /data
